@@ -12,7 +12,7 @@ namespace Chay
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        
+        public Point mouseLocation;
 
         public Form()
         {
@@ -22,7 +22,17 @@ namespace Chay
 
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            mouseLocation = new Point(-e.X, -e.Y);
+        }
+
+        private void pHeader_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                Point mousePose = Control.MousePosition;
+                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                this.Location = mousePose;
+            }
         }
 
         public void GraphicalComponents()
@@ -45,5 +55,7 @@ namespace Chay
         {
 
         }
+
+        
     }
 }

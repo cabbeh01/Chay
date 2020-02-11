@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1");
             this.pHeader = new System.Windows.Forms.Panel();
             this.btnMini = new System.Windows.Forms.PictureBox();
             this.btnMaxi = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@
             this.pHeader.Size = new System.Drawing.Size(800, 63);
             this.pHeader.TabIndex = 0;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
+            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
             // 
             // btnMini
             // 
@@ -117,13 +118,13 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(0, 44);
             this.treeView1.Name = "treeView1";
-            treeNode7.Name = "Node0";
-            treeNode7.Text = "Node0";
-            treeNode8.Name = "Node1";
-            treeNode8.Text = "Node1";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Node0";
+            treeNode2.Name = "Node1";
+            treeNode2.Text = "Node1";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
+            treeNode1,
+            treeNode2});
             this.treeView1.Size = new System.Drawing.Size(200, 340);
             this.treeView1.TabIndex = 1;
             // 
