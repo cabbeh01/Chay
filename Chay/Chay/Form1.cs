@@ -48,12 +48,12 @@ namespace Chay
 
         private void BtnMaxi_Click(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void BtnMini_Click(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Minimized;
         }
 
         
