@@ -13,7 +13,7 @@ namespace Chay
     public partial class Form : System.Windows.Forms.Form
     {
         public Point mouseLocation;
-
+        bool isMaxi = false;
         public Form()
         {
             InitializeComponent();
@@ -48,7 +48,17 @@ namespace Chay
 
         private void BtnMaxi_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            if (!isMaxi)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                isMaxi = true;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                isMaxi = false;
+            }
+            
         }
 
         private void BtnMini_Click(object sender, EventArgs e)
