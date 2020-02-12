@@ -1,6 +1,6 @@
 ﻿namespace Chay
 {
-    partial class Form
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,39 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode29,
-            treeNode30,
-            treeNode31});
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btnMaxi = new System.Windows.Forms.PictureBox();
             this.btnMini = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.Logo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Logo = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.NameServer = new System.Windows.Forms.Label();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.pHeader.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMini)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
@@ -75,6 +75,18 @@
             this.pHeader.TabIndex = 0;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.btnMaxi);
+            this.panel3.Controls.Add(this.btnMini);
+            this.panel3.Controls.Add(this.btnClose);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(669, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(138, 28);
+            this.panel3.TabIndex = 7;
             // 
             // btnMaxi
             // 
@@ -109,6 +121,15 @@
             this.btnClose.TabStop = false;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(133, 26);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // Logo
             // 
             this.Logo.AutoSize = true;
@@ -119,40 +140,31 @@
             this.Logo.TabIndex = 3;
             this.Logo.Text = "Chay";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // treeView1
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(0, 59);
             this.treeView1.Name = "treeView1";
-            treeNode29.Name = "Node4";
-            treeNode29.Text = "Kalle";
-            treeNode30.Name = "Node6";
-            treeNode30.Text = "Lena";
-            treeNode31.Name = "Node7";
-            treeNode31.Text = "Klas";
-            treeNode32.Name = "Node0";
-            treeNode32.Text = "Serv 1";
-            treeNode33.Name = "Node1";
-            treeNode33.Text = "Serv 2";
-            treeNode34.Name = "Node0";
-            treeNode34.Text = "Serv 3";
-            treeNode35.Name = "Node1";
-            treeNode35.Text = "Serv 4";
+            treeNode8.Name = "Node4";
+            treeNode8.Text = "Kalle";
+            treeNode9.Name = "Node6";
+            treeNode9.Text = "Lena";
+            treeNode10.Name = "Node7";
+            treeNode10.Text = "Klas";
+            treeNode11.Name = "Node0";
+            treeNode11.Text = "Serv 1";
+            treeNode12.Name = "Node1";
+            treeNode12.Text = "Serv 2";
+            treeNode13.Name = "Node0";
+            treeNode13.Text = "Serv 3";
+            treeNode14.Name = "Node1";
+            treeNode14.Text = "Serv 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35});
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14});
             this.treeView1.Size = new System.Drawing.Size(200, 328);
             this.treeView1.TabIndex = 1;
             // 
@@ -187,6 +199,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(611, 101);
             this.panel2.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(468, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(127, 25);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Uppkopplad";
             // 
             // NameServer
             // 
@@ -224,29 +246,7 @@
             this.button1.Text = "Skicka";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(468, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 25);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Uppkopplad";
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.btnMaxi);
-            this.panel3.Controls.Add(this.btnMini);
-            this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(669, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(138, 28);
-            this.panel3.TabIndex = 7;
-            // 
-            // Form
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -258,10 +258,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form";
+            this.Name = "Form1";
             this.Text = "Form1";
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMini)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
@@ -270,7 +271,6 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

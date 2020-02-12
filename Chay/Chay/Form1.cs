@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Chay
 {
-    public partial class Form : System.Windows.Forms.Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         public Point mouseLocation;
         bool isMaxi = false;
-        public Form()
+        public Form1()
         {
             InitializeComponent();
             GraphicalComponents();
