@@ -14,12 +14,50 @@ namespace Chay
     {
         public Point mouseLocation;
         bool isMaxi = false;
+
         public Form1()
         {
             InitializeComponent();
             GraphicalComponents();
+
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
+
+        //Resizeable windows form without border
+
+        private const int cGrip = 16;
+        private const int cCaption = 32;
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x84)
+            {
+                Point pos = new Point(m.LParam.ToInt32());
+                pos = this.PointToClient(pos);
+
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)3;
+                    return;
+                }
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)17;
+                    return;
+                }
+
+                if (pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)15;
+                    return;
+                }
+            }
+
+            base.WndProc(ref m);
+        }
+
+        //Moveable header
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
             mouseLocation = new Point(-e.X, -e.Y);
@@ -35,6 +73,8 @@ namespace Chay
             }
         }
 
+
+        //Logo
         public void GraphicalComponents()
         {
             Logo.Font = new Font("Ranchers", 20, FontStyle.Regular);
