@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode50,
+            treeNode51,
+            treeNode52});
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnMaxi = new System.Windows.Forms.PictureBox();
@@ -53,6 +53,8 @@
             this.NameServer = new System.Windows.Forms.Label();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
@@ -61,11 +63,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
             // 
-            this.pHeader.BackColor = System.Drawing.Color.Gray;
+            this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
             this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Controls.Add(this.Logo);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -142,35 +145,35 @@
             // 
             // treeView1
             // 
-            this.treeView1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.treeView1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(0, 59);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Node4";
-            treeNode1.Text = "Kalle";
-            treeNode2.Name = "Node6";
-            treeNode2.Text = "Lena";
-            treeNode3.Name = "Node7";
-            treeNode3.Text = "Klas";
-            treeNode4.Name = "Node0";
-            treeNode4.Text = "Serv 1";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "Serv 2";
-            treeNode6.Name = "Node0";
-            treeNode6.Text = "Serv 3";
-            treeNode7.Name = "Node1";
-            treeNode7.Text = "Serv 4";
+            treeNode50.Name = "Node4";
+            treeNode50.Text = "Kalle";
+            treeNode51.Name = "Node6";
+            treeNode51.Text = "Lena";
+            treeNode52.Name = "Node7";
+            treeNode52.Text = "Klas";
+            treeNode53.Name = "Node0";
+            treeNode53.Text = "Serv 1";
+            treeNode54.Name = "Node1";
+            treeNode54.Text = "Serv 2";
+            treeNode55.Name = "Node0";
+            treeNode55.Text = "Serv 3";
+            treeNode56.Name = "Node1";
+            treeNode56.Text = "Serv 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7});
-            this.treeView1.Size = new System.Drawing.Size(200, 328);
+            treeNode53,
+            treeNode54,
+            treeNode55,
+            treeNode56});
+            this.treeView1.Size = new System.Drawing.Size(200, 324);
             this.treeView1.TabIndex = 1;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.treeView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -191,7 +194,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Silver;
+            this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.NameServer);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -222,29 +225,49 @@
             // 
             // tbxSend
             // 
-            this.tbxSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxSend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSend.Location = new System.Drawing.Point(227, 403);
+            this.tbxSend.Location = new System.Drawing.Point(22, 14);
             this.tbxSend.Multiline = true;
             this.tbxSend.Name = "tbxSend";
-            this.tbxSend.Size = new System.Drawing.Size(487, 34);
+            this.tbxSend.Size = new System.Drawing.Size(487, 44);
             this.tbxSend.TabIndex = 4;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.DarkCyan;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(739, 403);
+            this.button1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(515, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 34);
+            this.button1.Size = new System.Drawing.Size(87, 43);
             this.button1.TabIndex = 6;
             this.button1.Text = "Skicka";
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.tbxSend);
+            this.panel4.Controls.Add(this.button1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(200, 380);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(611, 69);
+            this.panel4.TabIndex = 7;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(200, 164);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(611, 285);
+            this.panel5.TabIndex = 8;
             // 
             // Form1
             // 
@@ -252,8 +275,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(811, 449);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tbxSend);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pHeader);
@@ -271,8 +294,9 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -292,6 +316,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 

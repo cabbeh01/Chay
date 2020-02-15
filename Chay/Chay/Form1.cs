@@ -34,7 +34,7 @@ namespace Chay
             if (m.Msg == 0x84)
             {
                 Point pos = new Point(m.LParam.ToInt32());
-                pos = this.PointToClient(pos);
+                pos = this.PointToScreen(pos);
 
                 if (pos.Y < cCaption)
                 {
