@@ -106,6 +106,10 @@ namespace Chay
             this.WindowState = FormWindowState.Minimized;
         }
 
-        
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login a = new Login();
+            a.Show();
+        }
     }
 }

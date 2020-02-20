@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode50,
-            treeNode51,
-            treeNode52});
-            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnMaxi = new System.Windows.Forms.PictureBox();
@@ -55,6 +55,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
@@ -69,6 +70,7 @@
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            this.pHeader.Controls.Add(this.btnLogin);
             this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Controls.Add(this.Logo);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -149,25 +151,25 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(0, 59);
             this.treeView1.Name = "treeView1";
-            treeNode50.Name = "Node4";
-            treeNode50.Text = "Kalle";
-            treeNode51.Name = "Node6";
-            treeNode51.Text = "Lena";
-            treeNode52.Name = "Node7";
-            treeNode52.Text = "Klas";
-            treeNode53.Name = "Node0";
-            treeNode53.Text = "Serv 1";
-            treeNode54.Name = "Node1";
-            treeNode54.Text = "Serv 2";
-            treeNode55.Name = "Node0";
-            treeNode55.Text = "Serv 3";
-            treeNode56.Name = "Node1";
-            treeNode56.Text = "Serv 4";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Kalle";
+            treeNode2.Name = "Node6";
+            treeNode2.Text = "Lena";
+            treeNode3.Name = "Node7";
+            treeNode3.Text = "Klas";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Serv 1";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Serv 2";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Serv 3";
+            treeNode7.Name = "Node1";
+            treeNode7.Text = "Serv 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode53,
-            treeNode54,
-            treeNode55,
-            treeNode56});
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.treeView1.Size = new System.Drawing.Size(200, 324);
             this.treeView1.TabIndex = 1;
             // 
@@ -269,6 +271,16 @@
             this.panel5.Size = new System.Drawing.Size(611, 285);
             this.panel5.TabIndex = 8;
             // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(107, 17);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 8;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +330,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
 
