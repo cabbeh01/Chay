@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode78,
-            treeNode79,
-            treeNode80});
-            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -83,9 +83,9 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(107, 17);
+            this.btnLogin.Location = new System.Drawing.Point(107, 16);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(75, 25);
             this.btnLogin.TabIndex = 8;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -161,25 +161,25 @@
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Location = new System.Drawing.Point(3, 59);
             this.treeView1.Name = "treeView1";
-            treeNode78.Name = "Node4";
-            treeNode78.Text = "Kalle";
-            treeNode79.Name = "Node6";
-            treeNode79.Text = "Lena";
-            treeNode80.Name = "Node7";
-            treeNode80.Text = "Klas";
-            treeNode81.Name = "Node0";
-            treeNode81.Text = "Serv 1";
-            treeNode82.Name = "Node1";
-            treeNode82.Text = "Serv 2";
-            treeNode83.Name = "Node0";
-            treeNode83.Text = "Serv 3";
-            treeNode84.Name = "Node1";
-            treeNode84.Text = "Serv 4";
+            treeNode8.Name = "Node4";
+            treeNode8.Text = "Kalle";
+            treeNode9.Name = "Node6";
+            treeNode9.Text = "Lena";
+            treeNode10.Name = "Node7";
+            treeNode10.Text = "Klas";
+            treeNode11.Name = "Node0";
+            treeNode11.Text = "Serv 1";
+            treeNode12.Name = "Node1";
+            treeNode12.Text = "Serv 2";
+            treeNode13.Name = "Node0";
+            treeNode13.Text = "Serv 3";
+            treeNode14.Name = "Node1";
+            treeNode14.Text = "Serv 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode81,
-            treeNode82,
-            treeNode83,
-            treeNode84});
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14});
             this.treeView1.Size = new System.Drawing.Size(197, 324);
             this.treeView1.TabIndex = 1;
             // 
