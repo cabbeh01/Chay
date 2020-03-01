@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using chat;
 
 namespace Chay
 {
-    public partial class Form1 : System.Windows.Forms.Form
+    public partial class Form1 : Form
     {
         public Point mouseLocation;
         bool isMaxi = false;
@@ -111,5 +112,6 @@ namespace Chay
             Login a = new Login();
             a.Show();
         }
+
     }
 }
