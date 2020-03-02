@@ -160,6 +160,7 @@
             this.llblRegister.TabIndex = 3;
             this.llblRegister.TabStop = true;
             this.llblRegister.Text = "Register";
+            this.llblRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlblRegister_LinkClicked);
             // 
             // panel1
             // 

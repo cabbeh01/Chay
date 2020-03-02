@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDBLogin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace Chay
     public partial class Login : Form
     {
         public Point mouseLocation;
+        private MongoCRUD db = new MongoCRUD("dbChay");
         public Login()
         {
             InitializeComponent();
@@ -53,6 +55,13 @@ namespace Chay
             Form1 form = new Form1();
 
             form.Show();
+            this.Hide();
+        }
+
+        private void LlblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register reg = new Register();
+            reg.Show();
             this.Hide();
         }
     }
