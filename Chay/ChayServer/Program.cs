@@ -15,6 +15,7 @@ namespace ChayServer
         static List<TcpClient> tcpClients = new List<TcpClient>();
         static TcpClient client;
         static int port = 3333;
+        static bool userExist = false;
 
         static void Main(string[] args)
         {
@@ -116,9 +117,13 @@ namespace ChayServer
                 switch (dataSplice[0].ToLower())
                 {
                     case "kick":
-                        if (!String.IsNullOrEmpty(dataSplice[1]))
+                        if (!String.IsNullOrEmpty(dataSplice[1]) && userExist)
                         {
                             Console.WriteLine($"Nu kickar vi användaren {dataSplice[1]}");
+                        }
+                        else if (!String.IsNullOrEmpty(dataSplice[1]))
+                        {
+                            Console.WriteLine("Användaren finns inte");
                         }
                         else
                         {
@@ -158,11 +163,17 @@ namespace ChayServer
 
                         break;
 
+                    case "clear":
+
+                        Console.Clear();
+                        break;
+
                     case "exit":
                         Console.WriteLine("Shutting down, click to escape this window");
                         Console.Read();
                         Environment.Exit(0);
                         break;
+
 
                 }
 
