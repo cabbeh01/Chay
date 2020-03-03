@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using chat;
 
 namespace Chay
 {
     public partial class Form1 : Form
     {
+        //Forms
+        Settings s = null;
+
+
         public Point mouseLocation;
         bool isMaxi = false;
 
@@ -113,5 +116,24 @@ namespace Chay
             a.Show();
         }
 
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            if(s == null)
+            {
+                s = new Settings();
+                s.FormClosed += S_FormClosed;
+                s.Show();
+            }
+        }
+
+        private void S_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            s = null;
+        }
+
+        private void BtnServermanager_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

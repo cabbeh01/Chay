@@ -203,6 +203,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Logo);
             this.Controls.Add(this.pHeader);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(2);
