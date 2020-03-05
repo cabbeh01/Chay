@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode29,
-            treeNode30,
-            treeNode31});
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnServermanager = new System.Windows.Forms.Button();
@@ -85,7 +85,6 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.BackColor = System.Drawing.Color.SteelBlue;
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -102,7 +101,6 @@
             // 
             // btnServermanager
             // 
-            this.btnServermanager.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnServermanager.BackColor = System.Drawing.Color.SteelBlue;
             this.btnServermanager.FlatAppearance.BorderSize = 0;
             this.btnServermanager.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -185,28 +183,32 @@
             // 
             this.treeView1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView1.Location = new System.Drawing.Point(3, 59);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.treeView1.Location = new System.Drawing.Point(0, 44);
             this.treeView1.Name = "treeView1";
-            treeNode29.Name = "Node4";
-            treeNode29.Text = "Kalle";
-            treeNode30.Name = "Node6";
-            treeNode30.Text = "Lena";
-            treeNode31.Name = "Node7";
-            treeNode31.Text = "Klas";
-            treeNode32.Name = "Node0";
-            treeNode32.Text = "Serv 1";
-            treeNode33.Name = "Node1";
-            treeNode33.Text = "Serv 2";
-            treeNode34.Name = "Node0";
-            treeNode34.Text = "Serv 3";
-            treeNode35.Name = "Node1";
-            treeNode35.Text = "Serv 4";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Kalle";
+            treeNode2.Name = "Node6";
+            treeNode2.Text = "Lena";
+            treeNode3.Name = "Node7";
+            treeNode3.Text = "Klas";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Serv 1";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Serv 2";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Serv 3";
+            treeNode7.Name = "Node1";
+            treeNode7.Text = "Serv 4";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35});
-            this.treeView1.Size = new System.Drawing.Size(197, 324);
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
+            this.treeView1.ShowLines = false;
+            this.treeView1.ShowPlusMinus = false;
+            this.treeView1.ShowRootLines = false;
+            this.treeView1.Size = new System.Drawing.Size(200, 378);
             this.treeView1.TabIndex = 1;
             // 
             // panel1
@@ -224,7 +226,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Location = new System.Drawing.Point(13, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 25);
             this.label1.TabIndex = 2;
@@ -243,6 +245,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(468, 66);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chay.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace Chay
     {
         //Forms
         Settings s = null;
+        ServerManager sm = null;
 
 
         public Point mouseLocation;
@@ -131,9 +133,21 @@ namespace Chay
             s = null;
         }
 
+        private void Sm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sm = null;
+        }
+
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
-
+            if (sm == null)
+            {
+                sm = new ServerManager();
+                sm.FormClosed += Sm_FormClosed;
+                sm.Show();
+            }
         }
+
+        
     }
 }
