@@ -52,7 +52,7 @@ namespace Chay
                 {
                     if (tbxRepassword.Text == tbxPassword.Text)
                     {
-                        db.InsertOne("Users", new User { Username = tbxUsername.Text, Password = Encrypt(tbxPassword.Text) });
+                        db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
                         MessageBox.Show("Ditt konto är nu skapat");
                         this.Close();
                         Login log = new Login();

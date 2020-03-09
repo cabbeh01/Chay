@@ -21,7 +21,7 @@ namespace Chay
         public Point mouseLocation;
         bool isMaxi = false;
 
-        public Form1()
+        public Form1(User user)
         {
             InitializeComponent();
             GraphicalComponents();

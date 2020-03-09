@@ -134,6 +134,7 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Server.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="BigCheckbox.resx">
       <DependentUpon>BigCheckbox.cs</DependentUpon>

@@ -53,13 +53,14 @@ namespace Chay
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
+            
 
             try
             {
-                User found = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
-                if (found.Password == Encrypt(tbxPassword.Text))
+                User found = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
+                if (found._password == Encrypt(tbxPassword.Text))
                 {
+                    Form1 form = new Form1(found);
                     MessageBox.Show("Du är nu inloggad");
                     form.Show();
                     this.Hide();
