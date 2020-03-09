@@ -14,6 +14,7 @@ namespace Chay
     public partial class Form1 : Form
     {
         //Forms
+        User us;
         Settings s = null;
         ServerManager sm = null;
 
@@ -27,6 +28,9 @@ namespace Chay
             GraphicalComponents();
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
+            us = user;
+            //retriveServerList();
+            this.lblUser.Text = user._username;
         }
 
 
@@ -126,6 +130,10 @@ namespace Chay
                 s.FormClosed += S_FormClosed;
                 s.Show();
             }
+            else
+            {
+                s.BringToFront();
+            }
         }
 
         private void S_FormClosed(object sender, FormClosedEventArgs e)
@@ -142,12 +150,32 @@ namespace Chay
         {
             if (sm == null)
             {
-                sm = new ServerManager();
+                sm = new ServerManager(us);
                 sm.FormClosed += Sm_FormClosed;
                 sm.Show();
             }
+            else
+            {
+                sm.BringToFront();
+            }
         }
 
-        
+
+
+        private void retriveServerList()
+        {
+            try
+            {
+                foreach(Server u in us._servers)
+                {
+
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Serverna kan inte hämtas");
+            }
+            
+        }
     }
 }

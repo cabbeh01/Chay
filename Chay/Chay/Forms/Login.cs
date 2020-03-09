@@ -1,4 +1,5 @@
-﻿using MongoDBLogin;
+﻿using Chay.Forms;
+using MongoDBLogin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,15 +54,13 @@ namespace Chay
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            
-
             try
             {
                 User found = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
                 if (found._password == Encrypt(tbxPassword.Text))
                 {
                     Form1 form = new Form1(found);
-                    MessageBox.Show("Du är nu inloggad");
+                    //MessageBox.Show("Du är nu inloggad");
                     form.Show();
                     this.Hide();
                 }
@@ -74,9 +73,7 @@ namespace Chay
             catch
             {
                 MessageBox.Show("Användare eller lösenord fel");
-            }
-
-            
+            } 
         }
 
         private void LlblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -96,5 +93,6 @@ namespace Chay
                 return Convert.ToBase64String(data);
             }
         }
+
     }
 }

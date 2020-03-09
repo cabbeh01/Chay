@@ -52,11 +52,32 @@ namespace Chay
                 {
                     if (tbxRepassword.Text == tbxPassword.Text)
                     {
-                        db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
-                        MessageBox.Show("Ditt konto är nu skapat");
-                        this.Close();
-                        Login log = new Login();
-                        log.Show();
+                        try
+                        {
+                            User u = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
+                            if (!(u._name == tbxUsername.Text))
+                            {
+                                db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
+                                MessageBox.Show("Ditt konto är nu skapat");
+                                this.Close();
+                                Login log = new Login();
+                                log.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Användaren existerar redan, vänligen välj ett annat användare");
+                            }
+                        }
+                        catch
+                        {
+                            db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
+                            MessageBox.Show("Ditt konto är nu skapat");
+                            this.Close();
+                            Login log = new Login();
+                            log.Show();
+                        }
+                        
+                        
                     }
                 }
                 else

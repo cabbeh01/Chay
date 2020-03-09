@@ -33,19 +33,19 @@
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbxOut = new System.Windows.Forms.ListBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tbxUsername = new System.Windows.Forms.TextBox();
+            this.tbxIp = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbxPort = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tbxServername = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -64,6 +64,8 @@
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(636, 63);
             this.pHeader.TabIndex = 2;
+            this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
+            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
             // 
             // panel3
             // 
@@ -84,6 +86,7 @@
             this.btnClose.Size = new System.Drawing.Size(45, 26);
             this.btnClose.TabIndex = 4;
             this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // pictureBox1
             // 
@@ -105,13 +108,13 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Serverhanterare";
             // 
-            // listBox1
+            // lbxOut
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(36, 107);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(181, 277);
-            this.listBox1.TabIndex = 8;
+            this.lbxOut.FormattingEnabled = true;
+            this.lbxOut.Location = new System.Drawing.Point(36, 107);
+            this.lbxOut.Name = "lbxOut";
+            this.lbxOut.Size = new System.Drawing.Size(181, 277);
+            this.lbxOut.TabIndex = 8;
             // 
             // btnLogin
             // 
@@ -144,38 +147,38 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.panel2.Controls.Add(this.tbxUsername);
+            this.panel2.Controls.Add(this.tbxIp);
             this.panel2.Location = new System.Drawing.Point(266, 172);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 33);
             this.panel2.TabIndex = 12;
             // 
-            // tbxUsername
+            // tbxIp
             // 
-            this.tbxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxUsername.Location = new System.Drawing.Point(20, 8);
-            this.tbxUsername.Name = "tbxUsername";
-            this.tbxUsername.Size = new System.Drawing.Size(159, 15);
-            this.tbxUsername.TabIndex = 1;
+            this.tbxIp.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbxIp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxIp.Location = new System.Drawing.Point(20, 8);
+            this.tbxIp.Name = "tbxIp";
+            this.tbxIp.Size = new System.Drawing.Size(159, 15);
+            this.tbxIp.TabIndex = 1;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.tbxPort);
             this.panel1.Location = new System.Drawing.Point(475, 172);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(96, 33);
             this.panel1.TabIndex = 13;
             // 
-            // textBox1
+            // tbxPort
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(20, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(55, 15);
-            this.textBox1.TabIndex = 1;
+            this.tbxPort.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbxPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPort.Location = new System.Drawing.Point(20, 8);
+            this.tbxPort.Name = "tbxPort";
+            this.tbxPort.Size = new System.Drawing.Size(55, 15);
+            this.tbxPort.TabIndex = 1;
             // 
             // label1
             // 
@@ -213,34 +216,35 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Window;
-            this.panel4.Controls.Add(this.textBox2);
+            this.panel4.Controls.Add(this.tbxServername);
             this.panel4.Location = new System.Drawing.Point(266, 107);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 33);
             this.panel4.TabIndex = 15;
             // 
-            // textBox2
+            // tbxServername
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(20, 8);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(159, 15);
-            this.textBox2.TabIndex = 1;
+            this.tbxServername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbxServername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxServername.Location = new System.Drawing.Point(20, 8);
+            this.tbxServername.Name = "tbxServername";
+            this.tbxServername.Size = new System.Drawing.Size(159, 15);
+            this.tbxServername.TabIndex = 1;
             // 
-            // button2
+            // btnSave
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(266, 211);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 31);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Spara";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnSave.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(266, 211);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(64, 31);
+            this.btnSave.TabIndex = 17;
+            this.btnSave.Text = "Spara";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ServerManager
             // 
@@ -248,7 +252,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(636, 475);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel4);
@@ -257,7 +261,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lbxOut);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -285,18 +289,18 @@
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbxOut;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox tbxUsername;
+        private System.Windows.Forms.TextBox tbxIp;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbxPort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox tbxServername;
+        private System.Windows.Forms.Button btnSave;
     }
 }

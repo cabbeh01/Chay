@@ -54,6 +54,12 @@ namespace MongoDBLogin
             collection.DeleteOne(filter);
         }
 
+        public void UpdateOne<T>(string table, ObjectId id, T item)
+        {
+            var collection = _db.GetCollection<T>(table);
+            var result = collection.ReplaceOne(new BsonDocument("_id", id), item);
+        }
+
 
         
     }

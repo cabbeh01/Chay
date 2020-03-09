@@ -64,7 +64,7 @@
             this.pHeader.Location = new System.Drawing.Point(2, 2);
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(477, 63);
-            this.pHeader.TabIndex = 2;
+            this.pHeader.TabIndex = 10;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseMove);
             // 
@@ -76,7 +76,7 @@
             this.panel3.Location = new System.Drawing.Point(415, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(58, 28);
-            this.panel3.TabIndex = 7;
+            this.panel3.TabIndex = 0;
             // 
             // btnClose
             // 
@@ -105,16 +105,17 @@
             this.panel2.Location = new System.Drawing.Point(179, 137);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 33);
-            this.panel2.TabIndex = 13;
+            this.panel2.TabIndex = 0;
             // 
             // tbxUsername
             // 
             this.tbxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUsername.Location = new System.Drawing.Point(20, 8);
+            this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(159, 15);
-            this.tbxUsername.TabIndex = 1;
+            this.tbxUsername.TabIndex = 0;
             // 
             // label2
             // 
@@ -124,7 +125,7 @@
             this.label2.Location = new System.Drawing.Point(98, 142);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 25);
-            this.label2.TabIndex = 12;
+            this.label2.TabIndex = 8;
             this.label2.Text = "Username";
             // 
             // panel1
@@ -134,7 +135,7 @@
             this.panel1.Location = new System.Drawing.Point(179, 176);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 33);
-            this.panel1.TabIndex = 13;
+            this.panel1.TabIndex = 1;
             // 
             // tbxPassword
             // 
@@ -144,7 +145,7 @@
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.PasswordChar = '•';
             this.tbxPassword.Size = new System.Drawing.Size(159, 15);
-            this.tbxPassword.TabIndex = 1;
+            this.tbxPassword.TabIndex = 0;
             this.tbxPassword.TextChanged += new System.EventHandler(this.tbxPassword_TextChanged);
             // 
             // label1
@@ -155,7 +156,7 @@
             this.label1.Location = new System.Drawing.Point(103, 179);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 25);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 7;
             this.label1.Text = "Password";
             // 
             // plRepass
@@ -165,7 +166,7 @@
             this.plRepass.Location = new System.Drawing.Point(179, 215);
             this.plRepass.Name = "plRepass";
             this.plRepass.Size = new System.Drawing.Size(200, 33);
-            this.plRepass.TabIndex = 15;
+            this.plRepass.TabIndex = 2;
             // 
             // tbxRepassword
             // 
@@ -175,7 +176,7 @@
             this.tbxRepassword.Name = "tbxRepassword";
             this.tbxRepassword.PasswordChar = '•';
             this.tbxRepassword.Size = new System.Drawing.Size(159, 15);
-            this.tbxRepassword.TabIndex = 1;
+            this.tbxRepassword.TabIndex = 0;
             this.tbxRepassword.TextChanged += new System.EventHandler(this.tbxRepassword_TextChanged);
             // 
             // label3
@@ -186,7 +187,7 @@
             this.label3.Location = new System.Drawing.Point(82, 218);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 25);
-            this.label3.TabIndex = 14;
+            this.label3.TabIndex = 6;
             this.label3.Text = "Re-Password";
             // 
             // label4
@@ -197,7 +198,7 @@
             this.label4.Location = new System.Drawing.Point(193, 89);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 38);
-            this.label4.TabIndex = 16;
+            this.label4.TabIndex = 9;
             this.label4.Text = "Register";
             // 
             // btnRegister
@@ -210,7 +211,7 @@
             this.btnRegister.Location = new System.Drawing.Point(246, 307);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 43);
-            this.btnRegister.TabIndex = 17;
+            this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -225,7 +226,7 @@
             this.btnBack.Location = new System.Drawing.Point(165, 307);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 43);
-            this.btnBack.TabIndex = 18;
+            this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -238,7 +239,7 @@
             this.label5.Location = new System.Drawing.Point(260, 253);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 25);
-            this.label5.TabIndex = 20;
+            this.label5.TabIndex = 11;
             this.label5.Text = "Visa lösenord";
             // 
             // bCbxShowPass
@@ -248,7 +249,7 @@
             this.bCbxShowPass.Location = new System.Drawing.Point(359, 254);
             this.bCbxShowPass.Name = "bCbxShowPass";
             this.bCbxShowPass.Size = new System.Drawing.Size(20, 20);
-            this.bCbxShowPass.TabIndex = 19;
+            this.bCbxShowPass.TabIndex = 3;
             this.bCbxShowPass.Click += new System.EventHandler(this.bCbxShowPass_Click);
             // 
             // Register

@@ -27,12 +27,15 @@ namespace Chay
             this._servers = servers;
             this._client = client;
         }
-
+        
         public User(string username, string password)
         {
             this._username = username;
             this._password = password;
         }
+
+
+
         public override string ToString()
         {
             return $"{_username}, {_password}";

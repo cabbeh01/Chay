@@ -95,10 +95,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigCheckbox.cs">
+    <Compile Include="Components\BigCheckbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BigCheckbox.Designer.cs">
+    <Compile Include="Components\BigCheckbox.Designer.cs">
       <DependentUpon>BigCheckbox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
@@ -136,7 +136,7 @@
     </Compile>
     <Compile Include="Server.cs" />
     <Compile Include="User.cs" />
-    <EmbeddedResource Include="BigCheckbox.resx">
+    <EmbeddedResource Include="Components\BigCheckbox.resx">
       <DependentUpon>BigCheckbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
