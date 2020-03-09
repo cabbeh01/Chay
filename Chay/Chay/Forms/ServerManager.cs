@@ -109,10 +109,23 @@ namespace Chay.Forms
 
             }
         }
+        private void RemoveServer(Server s)
+        {
 
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             AddServer();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
