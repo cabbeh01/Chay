@@ -27,8 +27,9 @@ namespace Chay.Forms
             RetrieveServers();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private async void btnClose_Click(object sender, EventArgs e)
         {
+            await UpdateStruct();
             this.Close();
         }
 
@@ -47,7 +48,7 @@ namespace Chay.Forms
             mouseLocation = new Point(-e.X, -e.Y);
         }
 
-        private void AddServer()
+        private async void AddServer()
         {
             if (!String.IsNullOrEmpty(tbxServername.Text))
             {
@@ -64,7 +65,7 @@ namespace Chay.Forms
                             }
                             us._servers.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
                             lbxOut.Items.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
-                            Updatestruct();
+                            await UpdateStruct();
                             MessageBox.Show("Server tillagd");
                         }
                         else
@@ -89,9 +90,12 @@ namespace Chay.Forms
                 MessageBox.Show("Vänligen mata in ett namn");
             }
         }
-        private void Updatestruct()
+
+        private async Task UpdateStruct()
         {
-            db.UpdateOne<User>("Users", us.Id, us);
+            await Task.Run(() => {
+                db.UpdateOne<User>("Users", us.Id, us);
+            });
         }
         private void RetrieveServers()
         {
@@ -109,8 +113,18 @@ namespace Chay.Forms
 
             }
         }
-        private void RemoveServer(Server s)
+        private async void RemoveServer(Server s)
         {
+            try
+            {
+                lbxOut.Items.Remove(s);
+                us._servers.Remove(s);
+                await UpdateStruct();
+            }
+            catch
+            {
+                MessageBox.Show("Det går inte att ta bort servern");
+            }
 
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -125,7 +139,7 @@ namespace Chay.Forms
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-
+            RemoveServer((Server)lbxOut.SelectedItem);
         }
     }
 }

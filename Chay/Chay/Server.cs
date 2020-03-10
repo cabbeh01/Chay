@@ -16,7 +16,7 @@ namespace Chay
         public int _port { get; set; }
         public string _name { get; set; }
 
-        public List<User> _servers { get; set; }
+        public List<User> _users { get; set; }
 
         private TcpClient _client;
 
@@ -25,7 +25,7 @@ namespace Chay
         {
             this._ip = ip;
             this._port = port;
-            this._servers = users;
+            this._users = users;
             this._client = client;
         }
         

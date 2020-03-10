@@ -31,6 +31,7 @@ namespace Chay
             us = user;
             //retriveServerList();
             this.lblUser.Text = user._username;
+            LogicalComponents();
         }
 
 
@@ -141,8 +142,9 @@ namespace Chay
             s = null;
         }
 
-        private void Sm_FormClosed(object sender, FormClosedEventArgs e)
+        private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            await RetriveServerList();
             sm = null;
         }
 
@@ -160,22 +162,28 @@ namespace Chay
             }
         }
 
-
-
-        private void retriveServerList()
+        private async void LogicalComponents()
         {
-            try
-            {
-                foreach(Server u in us._servers)
-                {
-
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Serverna kan inte hämtas");
-            }
-            
+            await this.RetriveServerList();
         }
+        
+        private async Task RetriveServerList()
+        {
+            await Task.Run(() => {
+                try
+                {
+                    twServers.Nodes.Clear();
+                    foreach (Server u in us._servers)
+                    {
+                        twServers.Nodes.Add(u._name);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Serverna kan inte hämtas");
+                }
+            });
+        }
+
     }
 }
