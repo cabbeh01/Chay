@@ -144,7 +144,8 @@ namespace Chay
 
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await RetriveServerList();
+            //us = sm.us;
+            await RetriveServerList(sm.us);
             sm = null;
         }
 
@@ -164,23 +165,45 @@ namespace Chay
 
         private async void LogicalComponents()
         {
-            await this.RetriveServerList();
+            await this.RetriveServerList(us);
         }
         
-        private async Task RetriveServerList()
+        private async Task RetriveServerList(User uss)
         {
+            
             await Task.Run(() => {
-                try
+                if (InvokeRequired)
                 {
-                    twServers.Nodes.Clear();
-                    foreach (Server u in us._servers)
+                    this.Invoke(new MethodInvoker(delegate
                     {
-                        twServers.Nodes.Add(u._name);
-                    }
+                        try
+                        {
+                            twServers.Nodes.Clear();
+                            foreach (Server u in uss._servers)
+                            {
+                                twServers.Nodes.Add(u._name);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show("Serverna kan inte hämtas\n" + err);
+                        }
+                    }));
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Serverna kan inte hämtas");
+                    try
+                    {
+                        twServers.Nodes.Clear();
+                        foreach (Server u in uss._servers)
+                        {
+                            twServers.Nodes.Add(u._name);
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show("Serverna kan inte hämtas\n" + err);
+                    }
                 }
             });
         }

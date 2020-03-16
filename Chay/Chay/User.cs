@@ -38,7 +38,7 @@ namespace Chay
 
         public override string ToString()
         {
-            return $"{_username}, {_password}";
+            return $"{_servers}";
         }
     }
 }
