@@ -44,14 +44,15 @@ namespace ChayServer
             try
             {
                 client = await listener.AcceptTcpClientAsync();
+                StartReading(client);
+                Console.WriteLine(client);
+                tcpClients.Add(client);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            StartReading(client);
-            Console.WriteLine(client);
-            tcpClients.Add(client);
+            
         }
 
         static async void StartReading(TcpClient k)

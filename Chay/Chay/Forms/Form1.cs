@@ -224,7 +224,7 @@ namespace Chay
                 if (us._client.Connected)
                 {
                     StartCommunication(tbxSend.Text);
-                    us._client.Close();
+                    //us._client.Close();
                 }
                 else
                 {
