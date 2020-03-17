@@ -17,7 +17,7 @@ namespace Chay
 
         public List<Server> _servers { get; set; }
 
-        private TcpClient _client;
+        internal TcpClient _client;
 
 
         public User(string username, string name, List<Server> servers, TcpClient client)

@@ -96,9 +96,16 @@ namespace ChayServer
 
         static void Broadcast(byte[] data)
         {
-            foreach (TcpClient c in tcpClients)
+            try
             {
-                c.GetStream().Write(data, 0, data.Length);
+                foreach (TcpClient c in tcpClients)
+                {
+                    c.GetStream().Write(data, 0, data.Length);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Går inte att broadcasta");
             }
         }
 
@@ -166,6 +173,13 @@ namespace ChayServer
                     case "clear":
 
                         Console.Clear();
+                        break;
+
+
+                    case "help":
+                        Console.WriteLine("Dessa kommandona finns tillgängliga");
+                        Console.Read();
+                        Environment.Exit(0);
                         break;
 
                     case "exit":

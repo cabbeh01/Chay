@@ -54,9 +54,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.NameServer = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tbxClient = new System.Windows.Forms.TextBox();
+            this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
+            this.lblUser = new System.Windows.Forms.Label();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
@@ -210,6 +211,7 @@
             this.twServers.ShowRootLines = false;
             this.twServers.Size = new System.Drawing.Size(200, 378);
             this.twServers.TabIndex = 1;
+            this.twServers.DoubleClick += new System.EventHandler(this.twServers_DoubleClick);
             // 
             // panel1
             // 
@@ -266,14 +268,52 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Control;
-            this.panel5.Controls.Add(this.button1);
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel5.Controls.Add(this.tbxClient);
+            this.panel5.Controls.Add(this.btnSend);
             this.panel5.Controls.Add(this.tbxSend);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(202, 166);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(618, 321);
             this.panel5.TabIndex = 8;
+            // 
+            // tbxClient
+            // 
+            this.tbxClient.Location = new System.Drawing.Point(6, 3);
+            this.tbxClient.Multiline = true;
+            this.tbxClient.Name = "tbxClient";
+            this.tbxClient.ReadOnly = true;
+            this.tbxClient.Size = new System.Drawing.Size(603, 251);
+            this.tbxClient.TabIndex = 7;
+            // 
+            // btnSend
+            // 
+            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSend.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnSend.FlatAppearance.BorderSize = 0;
+            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSend.Location = new System.Drawing.Point(522, 261);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(87, 43);
+            this.btnSend.TabIndex = 6;
+            this.btnSend.Text = "Skicka";
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // tbxSend
+            // 
+            this.tbxSend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSend.Location = new System.Drawing.Point(6, 260);
+            this.tbxSend.Multiline = true;
+            this.tbxSend.Name = "tbxSend";
+            this.tbxSend.Size = new System.Drawing.Size(508, 44);
+            this.tbxSend.TabIndex = 4;
             // 
             // lblUser
             // 
@@ -289,33 +329,6 @@
             this.lblUser.TabIndex = 5;
             this.lblUser.Text = "userdsadasdsadasdassd";
             this.lblUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(522, 261);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 43);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Skicka";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // tbxSend
-            // 
-            this.tbxSend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSend.Location = new System.Drawing.Point(27, 260);
-            this.tbxSend.Multiline = true;
-            this.tbxSend.Name = "tbxSend";
-            this.tbxSend.Size = new System.Drawing.Size(487, 44);
-            this.tbxSend.TabIndex = 4;
             // 
             // Form1
             // 
@@ -369,8 +382,9 @@
         private System.Windows.Forms.Button btnServermanager;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblUser;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox tbxSend;
+        private System.Windows.Forms.TextBox tbxClient;
     }
 }
 

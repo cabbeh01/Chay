@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +31,12 @@ namespace Chay
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             us = user;
+
+            //Setting up Client
+            us._client = new TcpClient();
+            us._client.NoDelay = true;
+
+
             //retriveServerList();
             this.lblUser.Text = user._username;
             LogicalComponents();
@@ -85,9 +93,10 @@ namespace Chay
         }
 
 
-        //Logo
+        
         public void GraphicalComponents()
         {
+            //Logo
             Logo.Font = new Font("Ranchers", 20, FontStyle.Regular);
             Logo.ForeColor = Color.White;
         }
@@ -144,8 +153,8 @@ namespace Chay
 
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //us = sm.us;
-            await RetriveServerList(sm.us);
+            us._servers = sm.us._servers;
+            await RetriveServerList();
             sm = null;
         }
 
@@ -165,10 +174,10 @@ namespace Chay
 
         private async void LogicalComponents()
         {
-            await this.RetriveServerList(us);
+            await this.RetriveServerList();
         }
         
-        private async Task RetriveServerList(User uss)
+        private async Task RetriveServerList()
         {
             
             await Task.Run(() => {
@@ -179,14 +188,14 @@ namespace Chay
                         try
                         {
                             twServers.Nodes.Clear();
-                            foreach (Server u in uss._servers)
+                            foreach (Server s in us._servers)
                             {
-                                twServers.Nodes.Add(u._name);
+                                twServers.Nodes.Add(s._name);
                             }
                         }
-                        catch (Exception err)
+                        catch
                         {
-                            MessageBox.Show("Serverna kan inte hämtas\n" + err);
+                            MessageBox.Show("Serverna kan inte hämtas");
                         }
                     }));
                 }
@@ -195,18 +204,87 @@ namespace Chay
                     try
                     {
                         twServers.Nodes.Clear();
-                        foreach (Server u in uss._servers)
+                        foreach (Server s in us._servers)
                         {
-                            twServers.Nodes.Add(u._name);
+                            twServers.Nodes.Add(s._name);
                         }
                     }
-                    catch (Exception err)
+                    catch
                     {
-                        MessageBox.Show("Serverna kan inte hämtas\n" + err);
+                        MessageBox.Show("Serverna kan inte hämtas");
                     }
                 }
             });
         }
 
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (us._client.Connected)
+                {
+                    StartCommunication(tbxSend.Text);
+                    us._client.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Du måste vara uppkopplad mot någon server");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Det går inte skicka meddelandet");
+            }
+        }
+
+        private void twServers_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                MessageBox.Show(twServers.SelectedNode.Text);
+                foreach (Server s in us._servers)
+                {
+                    if (twServers.SelectedNode.Text == s._name)
+                    {
+                        if (!us._client.Connected)
+                        {
+                            StartHandshake(s._ip, s._port);
+                            MessageBox.Show($"Du connectar till {s._name}");
+                        }
+                        //us._client.Connect(s._ip, s._port);
+                        
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Kan inte ansluta till servern");
+            }
+        }
+
+        public async void StartHandshake(IPAddress address, int port)
+        {
+            try
+            {
+                await us._client.ConnectAsync(address, port);
+            }
+            catch
+            {
+                MessageBox.Show("Går inte uppräta en anslutning");
+            }
+        }
+
+        public async void StartCommunication(string message)
+        {
+            byte[] outData = Encoding.Unicode.GetBytes(message); // Detta ska bytas ut om en klass som man ska skicka
+            try
+            {
+                await us._client.GetStream().WriteAsync(outData, 0, outData.Length);
+            }
+            catch
+            {
+                MessageBox.Show("Det går inte skicka meddelandet");
+            }
+        }
     }
 }
