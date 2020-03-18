@@ -57,7 +57,7 @@ namespace Chay
                             User u = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
                             if (!(u._name == tbxUsername.Text))
                             {
-                                db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
+                                db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
                                 MessageBox.Show("Ditt konto är nu skapat");
                                 this.Close();
                                 Login log = new Login();
@@ -70,7 +70,7 @@ namespace Chay
                         }
                         catch
                         {
-                            db.InsertOne("Users", new User(tbxUsername.Text, Encrypt(tbxPassword.Text)));
+                            db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
                             MessageBox.Show("Ditt konto är nu skapat");
                             this.Close();
                             Login log = new Login();
@@ -158,16 +158,6 @@ namespace Chay
                 return false;
             }
 
-        }
-
-        static string Encrypt(string value)
-        {
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                UTF8Encoding utf8 = new UTF8Encoding();
-                byte[] data = md5.ComputeHash(utf8.GetBytes(value));
-                return Convert.ToBase64String(data);
-            }
         }
 
         private void bCbxShowPass_Click(object sender, EventArgs e)

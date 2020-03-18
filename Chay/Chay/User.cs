@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Chay
         public string _username { get; set; }
         public string _password { get; set; }
         public string _name { get; set; }
+
+        public Image _image { get; set; }
 
         public List<Server> _servers { get; set; }
 
@@ -33,8 +36,6 @@ namespace Chay
             this._username = username;
             this._password = password;
         }
-
-
 
         public override string ToString()
         {

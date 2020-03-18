@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode29,
+            treeNode30,
+            treeNode31});
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
+            this.btnProfile = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnServermanager = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -58,6 +59,7 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
@@ -67,11 +69,14 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            this.pHeader.Controls.Add(this.lblUser);
+            this.pHeader.Controls.Add(this.btnProfile);
             this.pHeader.Controls.Add(this.btnSettings);
             this.pHeader.Controls.Add(this.btnServermanager);
             this.pHeader.Controls.Add(this.panel3);
@@ -84,6 +89,21 @@
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
             // 
+            // btnProfile
+            // 
+            this.btnProfile.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnProfile.FlatAppearance.BorderSize = 0;
+            this.btnProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfile.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProfile.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnProfile.Location = new System.Drawing.Point(310, 7);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(110, 56);
+            this.btnProfile.TabIndex = 9;
+            this.btnProfile.Text = "Profil";
+            this.btnProfile.UseVisualStyleBackColor = false;
+            // 
             // btnSettings
             // 
             this.btnSettings.BackColor = System.Drawing.Color.SteelBlue;
@@ -92,9 +112,9 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSettings.Location = new System.Drawing.Point(174, 13);
+            this.btnSettings.Location = new System.Drawing.Point(200, 7);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(109, 53);
+            this.btnSettings.Size = new System.Drawing.Size(110, 56);
             this.btnSettings.TabIndex = 8;
             this.btnSettings.Text = "Inställningar";
             this.btnSettings.UseVisualStyleBackColor = false;
@@ -108,9 +128,9 @@
             this.btnServermanager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnServermanager.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnServermanager.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnServermanager.Location = new System.Drawing.Point(86, 13);
+            this.btnServermanager.Location = new System.Drawing.Point(90, 7);
             this.btnServermanager.Name = "btnServermanager";
-            this.btnServermanager.Size = new System.Drawing.Size(87, 53);
+            this.btnServermanager.Size = new System.Drawing.Size(110, 56);
             this.btnServermanager.TabIndex = 7;
             this.btnServermanager.Text = "Server Hanterare";
             this.btnServermanager.UseVisualStyleBackColor = false;
@@ -131,9 +151,10 @@
             // btnMaxi
             // 
             this.btnMaxi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaxi.BackColor = System.Drawing.Color.Tomato;
+            this.btnMaxi.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnMaxi.Location = new System.Drawing.Point(45, 0);
             this.btnMaxi.Name = "btnMaxi";
+            this.btnMaxi.Padding = new System.Windows.Forms.Padding(2);
             this.btnMaxi.Size = new System.Drawing.Size(45, 26);
             this.btnMaxi.TabIndex = 5;
             this.btnMaxi.TabStop = false;
@@ -142,7 +163,7 @@
             // btnMini
             // 
             this.btnMini.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMini.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnMini.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnMini.Location = new System.Drawing.Point(0, 0);
             this.btnMini.Name = "btnMini";
             this.btnMini.Size = new System.Drawing.Size(45, 26);
@@ -153,7 +174,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.Maroon;
+            this.btnClose.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnClose.Location = new System.Drawing.Point(88, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(45, 26);
@@ -163,7 +184,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBox1.BackColor = System.Drawing.Color.DarkGray;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(133, 26);
@@ -187,25 +208,25 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.twServers.Location = new System.Drawing.Point(0, 44);
             this.twServers.Name = "twServers";
-            treeNode1.Name = "Node4";
-            treeNode1.Text = "Kalle";
-            treeNode2.Name = "Node6";
-            treeNode2.Text = "Lena";
-            treeNode3.Name = "Node7";
-            treeNode3.Text = "Klas";
-            treeNode4.Name = "Node0";
-            treeNode4.Text = "Serv 1";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "Serv 2";
-            treeNode6.Name = "Node0";
-            treeNode6.Text = "Serv 3";
-            treeNode7.Name = "Node1";
-            treeNode7.Text = "Serv 4";
+            treeNode29.Name = "Node4";
+            treeNode29.Text = "Kalle";
+            treeNode30.Name = "Node6";
+            treeNode30.Text = "Lena";
+            treeNode31.Name = "Node7";
+            treeNode31.Text = "Klas";
+            treeNode32.Name = "Node0";
+            treeNode32.Text = "Serv 1";
+            treeNode33.Name = "Node1";
+            treeNode33.Text = "Serv 2";
+            treeNode34.Name = "Node0";
+            treeNode34.Text = "Serv 3";
+            treeNode35.Name = "Node1";
+            treeNode35.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            treeNode32,
+            treeNode33,
+            treeNode34,
+            treeNode35});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
@@ -270,8 +291,6 @@
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel5.Controls.Add(this.tbxClient);
-            this.panel5.Controls.Add(this.btnSend);
-            this.panel5.Controls.Add(this.tbxSend);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(202, 166);
             this.panel5.Name = "panel5";
@@ -280,11 +299,12 @@
             // 
             // tbxClient
             // 
-            this.tbxClient.Location = new System.Drawing.Point(6, 3);
+            this.tbxClient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxClient.Location = new System.Drawing.Point(0, 0);
             this.tbxClient.Multiline = true;
             this.tbxClient.Name = "tbxClient";
             this.tbxClient.ReadOnly = true;
-            this.tbxClient.Size = new System.Drawing.Size(603, 251);
+            this.tbxClient.Size = new System.Drawing.Size(618, 321);
             this.tbxClient.TabIndex = 7;
             // 
             // btnSend
@@ -296,9 +316,9 @@
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSend.Location = new System.Drawing.Point(522, 261);
+            this.btnSend.Location = new System.Drawing.Point(501, 13);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(87, 43);
+            this.btnSend.Size = new System.Drawing.Size(107, 43);
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "Skicka";
             this.btnSend.UseVisualStyleBackColor = false;
@@ -309,10 +329,10 @@
             this.tbxSend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSend.Location = new System.Drawing.Point(6, 260);
+            this.tbxSend.Location = new System.Drawing.Point(27, 12);
             this.tbxSend.Multiline = true;
             this.tbxSend.Name = "tbxSend";
-            this.tbxSend.Size = new System.Drawing.Size(508, 44);
+            this.tbxSend.Size = new System.Drawing.Size(452, 44);
             this.tbxSend.TabIndex = 4;
             // 
             // lblUser
@@ -322,13 +342,24 @@
             this.lblUser.BackColor = System.Drawing.Color.SteelBlue;
             this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblUser.Location = new System.Drawing.Point(528, 2);
+            this.lblUser.Location = new System.Drawing.Point(639, 0);
             this.lblUser.Name = "lblUser";
             this.lblUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblUser.Size = new System.Drawing.Size(144, 15);
+            this.lblUser.Size = new System.Drawing.Size(31, 15);
             this.lblUser.TabIndex = 5;
-            this.lblUser.Text = "userdsadasdsadasdassd";
+            this.lblUser.Text = "user";
             this.lblUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.tbxSend);
+            this.panel4.Controls.Add(this.btnSend);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(202, 413);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(618, 74);
+            this.panel4.TabIndex = 5;
             // 
             // Form1
             // 
@@ -336,7 +367,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(822, 489);
-            this.Controls.Add(this.lblUser);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -359,8 +390,9 @@
             this.panel2.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -385,6 +417,8 @@
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox tbxSend;
         private System.Windows.Forms.TextBox tbxClient;
+        private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 

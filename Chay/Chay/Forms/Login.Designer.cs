@@ -154,6 +154,7 @@
             this.tbxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxUsername.Location = new System.Drawing.Point(20, 8);
+            this.tbxUsername.MaxLength = 30;
             this.tbxUsername.Name = "tbxUsername";
             this.tbxUsername.Size = new System.Drawing.Size(159, 15);
             this.tbxUsername.TabIndex = 0;

@@ -14,7 +14,7 @@ namespace ChayServer
 
         static List<TcpClient> tcpClients = new List<TcpClient>();
         static TcpClient client;
-        static int port = 3333;
+        //static int port = 3333;
         static bool userExist = false;
 
         static void Main(string[] args)
@@ -27,9 +27,11 @@ namespace ChayServer
         {
             try
             {
+                Console.Write("Vänligen välj en port:");
+                int port = int.Parse(Console.ReadLine());
                 listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
-                Console.WriteLine("Server started at 127.0.0.1:3333");
+                Console.WriteLine($"Server started at 127.0.0.1:{port}");
             }
             catch (Exception ex)
             {

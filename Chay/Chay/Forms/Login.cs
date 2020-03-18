@@ -39,7 +39,6 @@ namespace Chay
             }
         }
 
-
         //Logo
         public void GraphicalComponents()
         {
@@ -57,7 +56,7 @@ namespace Chay
             try
             {
                 User found = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
-                if (found._password == Encrypt(tbxPassword.Text))
+                if (found._password == MongoCRUD.Encrypt(tbxPassword.Text))
                 {
                     Form1 form = new Form1(found);
                     //MessageBox.Show("Du är nu inloggad");
@@ -81,17 +80,6 @@ namespace Chay
             Register reg = new Register();
             reg.Show();
             this.Hide();
-        }
-
-        //Hashar med en md5
-        static string Encrypt(string value)
-        {
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                UTF8Encoding utf8 = new UTF8Encoding();
-                byte[] data = md5.ComputeHash(utf8.GetBytes(value));
-                return Convert.ToBase64String(data);
-            }
         }
 
     }

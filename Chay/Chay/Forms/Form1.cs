@@ -27,7 +27,7 @@ namespace Chay
         public Form1(User user)
         {
             InitializeComponent();
-            GraphicalComponents();
+            
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             us = user;
@@ -39,6 +39,7 @@ namespace Chay
 
             //retriveServerList();
             this.lblUser.Text = user._username;
+            GraphicalComponents();
             LogicalComponents();
         }
 
@@ -48,7 +49,7 @@ namespace Chay
         private const int cGrip = 16;
         private const int cCaption = 32;
 
-        protected override void WndProc(ref Message m)
+        protected override void WndProc(ref System.Windows.Forms.Message m)
         {
             if (m.Msg == 0x84)
             {
@@ -99,6 +100,8 @@ namespace Chay
             //Logo
             Logo.Font = new Font("Ranchers", 20, FontStyle.Regular);
             Logo.ForeColor = Color.White;
+
+            lblUser.Location = new Point(639 - (us._username.Length * 7) ,0);
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -188,9 +191,12 @@ namespace Chay
                         try
                         {
                             twServers.Nodes.Clear();
-                            foreach (Server s in us._servers)
+                            if(us._servers != null)
                             {
-                                twServers.Nodes.Add(s._name);
+                                foreach (Server s in us._servers)
+                                {
+                                    twServers.Nodes.Add(s._name);
+                                }
                             }
                         }
                         catch
@@ -204,9 +210,12 @@ namespace Chay
                     try
                     {
                         twServers.Nodes.Clear();
-                        foreach (Server s in us._servers)
+                        if (us._servers != null)
                         {
-                            twServers.Nodes.Add(s._name);
+                            foreach (Server s in us._servers)
+                            {
+                                twServers.Nodes.Add(s._name);
+                            }
                         }
                     }
                     catch
@@ -270,6 +279,7 @@ namespace Chay
             }
             catch
             {
+                us._client.Dispose();
                 MessageBox.Show("Går inte uppräta en anslutning");
             }
         }
