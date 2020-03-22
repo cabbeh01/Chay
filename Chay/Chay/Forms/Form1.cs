@@ -17,8 +17,11 @@ namespace Chay
     {
         //Forms
         User us;
-        Settings s = null;
-        ServerManager sm = null;
+        Settings setting = null;
+        ServerManager servermang = null;
+        Profile profile = null;
+
+
 
 
         public Point mouseLocation;
@@ -137,41 +140,41 @@ namespace Chay
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            if(s == null)
+            if(setting == null)
             {
-                s = new Settings();
-                s.FormClosed += S_FormClosed;
-                s.Show();
+                setting = new Settings();
+                setting.FormClosed += S_FormClosed;
+                setting.Show();
             }
             else
             {
-                s.BringToFront();
+                setting.BringToFront();
             }
         }
 
         private void S_FormClosed(object sender, FormClosedEventArgs e)
         {
-            s = null;
+            setting = null;
         }
 
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            us._servers = sm.us._servers;
+            us._servers = servermang.us._servers;
             await RetriveServerList();
-            sm = null;
+            servermang = null;
         }
 
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
-            if (sm == null)
+            if (servermang == null)
             {
-                sm = new ServerManager(us);
-                sm.FormClosed += Sm_FormClosed;
-                sm.Show();
+                servermang = new ServerManager(us);
+                servermang.FormClosed += Sm_FormClosed;
+                servermang.Show();
             }
             else
             {
-                sm.BringToFront();
+                servermang.BringToFront();
             }
         }
 
@@ -246,22 +249,53 @@ namespace Chay
             }
         }
 
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+
+            if (profile == null)
+            {
+                profile = new Profile(us);
+                profile.FormClosed += Profile_FormClosed;
+                profile.Show();
+            }
+            else
+            {
+                profile.BringToFront();
+            }
+        }
+
+        private void Profile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            profile = null;
+        }
+
+
+
+        //Connection when choosing a connection to join
         private void twServers_DoubleClick(object sender, EventArgs e)
         {
             try
             {
-                MessageBox.Show(twServers.SelectedNode.Text);
+                //us._client.Close();
+                //MessageBox.Show(twServers.SelectedNode.Text);
                 foreach (Server s in us._servers)
                 {
                     if (twServers.SelectedNode.Text == s._name)
                     {
-                        if (!us._client.Connected)
+                        if (us._client.Connected)
+                        {
+                            us._client.Client.Close();
+                            StartHandshake(s._ip, s._port);
+                            MessageBox.Show($"Du connectar till {s._name}");
+                        }
+                        else
                         {
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
                         }
-                        //us._client.Connect(s._ip, s._port);
                         
+                        //us._client.Connect(s._ip, s._port);
+
                     }
                 }
             }
@@ -296,5 +330,7 @@ namespace Chay
                 MessageBox.Show("Det går inte skicka meddelandet");
             }
         }
+
+        
     }
 }

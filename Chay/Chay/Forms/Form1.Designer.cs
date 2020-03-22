@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode29,
-            treeNode30,
-            treeNode31});
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
+            this.lblUser = new System.Windows.Forms.Label();
             this.btnProfile = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnServermanager = new System.Windows.Forms.Button();
@@ -58,7 +59,6 @@
             this.tbxClient = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
-            this.lblUser = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -89,6 +89,21 @@
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
             // 
+            // lblUser
+            // 
+            this.lblUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUser.AutoSize = true;
+            this.lblUser.BackColor = System.Drawing.Color.SteelBlue;
+            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblUser.Location = new System.Drawing.Point(639, 0);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblUser.Size = new System.Drawing.Size(31, 15);
+            this.lblUser.TabIndex = 5;
+            this.lblUser.Text = "user";
+            this.lblUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // btnProfile
             // 
             this.btnProfile.BackColor = System.Drawing.Color.SteelBlue;
@@ -103,6 +118,7 @@
             this.btnProfile.TabIndex = 9;
             this.btnProfile.Text = "Profil";
             this.btnProfile.UseVisualStyleBackColor = false;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // btnSettings
             // 
@@ -208,25 +224,25 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.twServers.Location = new System.Drawing.Point(0, 44);
             this.twServers.Name = "twServers";
-            treeNode29.Name = "Node4";
-            treeNode29.Text = "Kalle";
-            treeNode30.Name = "Node6";
-            treeNode30.Text = "Lena";
-            treeNode31.Name = "Node7";
-            treeNode31.Text = "Klas";
-            treeNode32.Name = "Node0";
-            treeNode32.Text = "Serv 1";
-            treeNode33.Name = "Node1";
-            treeNode33.Text = "Serv 2";
-            treeNode34.Name = "Node0";
-            treeNode34.Text = "Serv 3";
-            treeNode35.Name = "Node1";
-            treeNode35.Text = "Serv 4";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Kalle";
+            treeNode2.Name = "Node6";
+            treeNode2.Text = "Lena";
+            treeNode3.Name = "Node7";
+            treeNode3.Text = "Klas";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Serv 1";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Serv 2";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Serv 3";
+            treeNode7.Name = "Node1";
+            treeNode7.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35});
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
@@ -334,21 +350,6 @@
             this.tbxSend.Name = "tbxSend";
             this.tbxSend.Size = new System.Drawing.Size(452, 44);
             this.tbxSend.TabIndex = 4;
-            // 
-            // lblUser
-            // 
-            this.lblUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUser.AutoSize = true;
-            this.lblUser.BackColor = System.Drawing.Color.SteelBlue;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblUser.Location = new System.Drawing.Point(639, 0);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblUser.Size = new System.Drawing.Size(31, 15);
-            this.lblUser.TabIndex = 5;
-            this.lblUser.Text = "user";
-            this.lblUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // panel4
             // 
