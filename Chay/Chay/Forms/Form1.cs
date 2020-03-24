@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Chay
 {
@@ -20,6 +23,9 @@ namespace Chay
         Settings setting = null;
         ServerManager servermang = null;
         Profile profile = null;
+
+        
+
 
         public Point mouseLocation;
         bool isMaxi = false;
@@ -95,8 +101,12 @@ namespace Chay
         
         public void GraphicalComponents()
         {
-            //Logo
-            Logo.Font = new Font("Ranchers", 20, FontStyle.Regular);
+            // -----    Logo    -----
+
+            //      Includes font
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(Application.StartupPath + "\\Font\\Ranchers-Regular.ttf");
+            Logo.Font = new Font(pfc.Families[0], 20, FontStyle.Regular);
             Logo.ForeColor = Color.White;
 
             lblUser.Location = new Point(639 - (us._username.Length * 7) ,0);
