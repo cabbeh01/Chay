@@ -21,16 +21,12 @@ namespace Chay
         ServerManager servermang = null;
         Profile profile = null;
 
-
-
-
         public Point mouseLocation;
         bool isMaxi = false;
 
         public Form1(User user)
         {
             InitializeComponent();
-            
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             us = user;
@@ -38,7 +34,6 @@ namespace Chay
             //Setting up Client
             us._client = new TcpClient();
             us._client.NoDelay = true;
-
 
             //retriveServerList();
             this.lblUser.Text = user._username;
@@ -285,11 +280,14 @@ namespace Chay
                         if (us._client.Connected)
                         {
                             us._client.Client.Close();
+                            cDConnected.UpdateStatus(true);
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
                         }
                         else
                         {
+                            cDConnected.UpdateStatus(true);
+                            lblNameServer.Text = twServers.SelectedNode.Text;
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
                         }
@@ -301,6 +299,7 @@ namespace Chay
             }
             catch
             {
+                cDConnected.UpdateStatus(false);
                 MessageBox.Show("Kan inte ansluta till servern");
             }
         }

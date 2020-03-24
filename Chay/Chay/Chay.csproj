@@ -101,6 +101,15 @@
     <Compile Include="Components\BigCheckbox.Designer.cs">
       <DependentUpon>BigCheckbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ConnectionDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ConnectionDisplay.Designer.cs">
+      <DependentUpon>ConnectionDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\RoundPicturebox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +154,9 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Components\BigCheckbox.resx">
       <DependentUpon>BigCheckbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\ConnectionDisplay.resx">
+      <DependentUpon>ConnectionDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

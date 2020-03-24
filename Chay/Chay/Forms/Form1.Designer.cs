@@ -53,13 +53,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.NameServer = new System.Windows.Forms.Label();
+            this.lblNameServer = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tbxClient = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
@@ -274,34 +274,23 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.NameServer);
+            this.panel2.Controls.Add(this.cDConnected);
+            this.panel2.Controls.Add(this.lblNameServer);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(202, 65);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(618, 101);
             this.panel2.TabIndex = 3;
             // 
-            // label2
+            // lblNameServer
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(468, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 25);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Uppkopplad";
-            // 
-            // NameServer
-            // 
-            this.NameServer.AutoSize = true;
-            this.NameServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameServer.Location = new System.Drawing.Point(22, 16);
-            this.NameServer.Name = "NameServer";
-            this.NameServer.Size = new System.Drawing.Size(74, 25);
-            this.NameServer.TabIndex = 3;
-            this.NameServer.Text = "Serv 1";
+            this.lblNameServer.AutoSize = true;
+            this.lblNameServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameServer.Location = new System.Drawing.Point(22, 16);
+            this.lblNameServer.Name = "lblNameServer";
+            this.lblNameServer.Size = new System.Drawing.Size(63, 25);
+            this.lblNameServer.TabIndex = 3;
+            this.lblNameServer.Text = "None";
             // 
             // panel5
             // 
@@ -362,6 +351,14 @@
             this.panel4.Size = new System.Drawing.Size(618, 74);
             this.panel4.TabIndex = 5;
             // 
+            // cDConnected
+            // 
+            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cDConnected.Location = new System.Drawing.Point(458, 53);
+            this.cDConnected.Name = "cDConnected";
+            this.cDConnected.Size = new System.Drawing.Size(172, 45);
+            this.cDConnected.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,8 +405,7 @@
         private System.Windows.Forms.PictureBox btnMaxi;
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label NameServer;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblNameServer;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnServermanager;
@@ -420,6 +416,7 @@
         private System.Windows.Forms.TextBox tbxClient;
         private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.Panel panel4;
+        private Components.ConnectionDisplay cDConnected;
     }
 }
 
