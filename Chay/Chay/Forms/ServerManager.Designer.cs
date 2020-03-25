@@ -32,7 +32,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.lbxOut = new System.Windows.Forms.ListBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -46,6 +45,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.tbxServername = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.gbxPickServer = new System.Windows.Forms.GroupBox();
+            this.gbxServerlist = new System.Windows.Forms.GroupBox();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -53,11 +55,14 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.gbxPickServer.SuspendLayout();
+            this.gbxServerlist.SuspendLayout();
             this.SuspendLayout();
             // 
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            this.pHeader.Controls.Add(this.label5);
             this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(2, 2);
@@ -97,24 +102,16 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(32, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 32);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Serverhanterare";
-            // 
             // lbxOut
             // 
+            this.lbxOut.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxOut.FormattingEnabled = true;
-            this.lbxOut.Location = new System.Drawing.Point(36, 107);
+            this.lbxOut.ItemHeight = 15;
+            this.lbxOut.Location = new System.Drawing.Point(20, 42);
             this.lbxOut.Name = "lbxOut";
-            this.lbxOut.Size = new System.Drawing.Size(181, 277);
+            this.lbxOut.Size = new System.Drawing.Size(217, 274);
             this.lbxOut.TabIndex = 8;
+            this.lbxOut.SelectedIndexChanged += new System.EventHandler(this.lbxOut_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -123,7 +120,8 @@
             this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(36, 387);
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.btnAdd.Location = new System.Drawing.Point(20, 322);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(30, 24);
             this.btnAdd.TabIndex = 9;
@@ -138,7 +136,8 @@
             this.btnRemove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(72, 387);
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.btnRemove.Location = new System.Drawing.Point(56, 322);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(30, 24);
             this.btnRemove.TabIndex = 10;
@@ -150,7 +149,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Controls.Add(this.tbxIp);
-            this.panel2.Location = new System.Drawing.Point(266, 172);
+            this.panel2.Location = new System.Drawing.Point(20, 133);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 33);
             this.panel2.TabIndex = 12;
@@ -168,7 +167,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.Controls.Add(this.tbxPort);
-            this.panel1.Location = new System.Drawing.Point(475, 172);
+            this.panel1.Location = new System.Drawing.Point(229, 133);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(96, 33);
             this.panel1.TabIndex = 13;
@@ -187,7 +186,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(263, 146);
+            this.label1.Location = new System.Drawing.Point(17, 107);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 25);
             this.label1.TabIndex = 14;
@@ -198,7 +197,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(472, 146);
+            this.label3.Location = new System.Drawing.Point(226, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 25);
             this.label3.TabIndex = 15;
@@ -209,7 +208,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(263, 81);
+            this.label4.Location = new System.Drawing.Point(17, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 25);
             this.label4.TabIndex = 16;
@@ -219,7 +218,7 @@
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Window;
             this.panel4.Controls.Add(this.tbxServername);
-            this.panel4.Location = new System.Drawing.Point(266, 107);
+            this.panel4.Location = new System.Drawing.Point(20, 68);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 33);
             this.panel4.TabIndex = 15;
@@ -240,7 +239,8 @@
             this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(266, 211);
+            this.btnSave.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.btnSave.Location = new System.Drawing.Point(20, 172);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(64, 31);
             this.btnSave.TabIndex = 17;
@@ -248,29 +248,69 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(229, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(183, 40);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Serverhanterare";
+            // 
+            // gbxPickServer
+            // 
+            this.gbxPickServer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbxPickServer.Controls.Add(this.label4);
+            this.gbxPickServer.Controls.Add(this.btnSave);
+            this.gbxPickServer.Controls.Add(this.panel2);
+            this.gbxPickServer.Controls.Add(this.panel1);
+            this.gbxPickServer.Controls.Add(this.label3);
+            this.gbxPickServer.Controls.Add(this.label1);
+            this.gbxPickServer.Controls.Add(this.panel4);
+            this.gbxPickServer.Enabled = false;
+            this.gbxPickServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxPickServer.Font = new System.Drawing.Font("Myriad Pro Cond", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxPickServer.ForeColor = System.Drawing.SystemColors.Window;
+            this.gbxPickServer.Location = new System.Drawing.Point(290, 71);
+            this.gbxPickServer.Name = "gbxPickServer";
+            this.gbxPickServer.Size = new System.Drawing.Size(335, 224);
+            this.gbxPickServer.TabIndex = 18;
+            this.gbxPickServer.TabStop = false;
+            this.gbxPickServer.Text = "Vald server";
+            // 
+            // gbxServerlist
+            // 
+            this.gbxServerlist.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbxServerlist.Controls.Add(this.lbxOut);
+            this.gbxServerlist.Controls.Add(this.btnRemove);
+            this.gbxServerlist.Controls.Add(this.btnAdd);
+            this.gbxServerlist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxServerlist.Font = new System.Drawing.Font("Myriad Pro Cond", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxServerlist.ForeColor = System.Drawing.SystemColors.Window;
+            this.gbxServerlist.Location = new System.Drawing.Point(19, 71);
+            this.gbxServerlist.Name = "gbxServerlist";
+            this.gbxServerlist.Size = new System.Drawing.Size(265, 373);
+            this.gbxServerlist.TabIndex = 19;
+            this.gbxServerlist.TabStop = false;
+            this.gbxServerlist.Text = "Serverar";
+            // 
             // ServerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(636, 475);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.lbxOut);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.gbxServerlist);
+            this.Controls.Add(this.gbxPickServer);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ServerManager";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.Text = "ServerManager";
             this.pHeader.ResumeLayout(false);
+            this.pHeader.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -280,8 +320,10 @@
             this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.gbxPickServer.ResumeLayout(false);
+            this.gbxPickServer.PerformLayout();
+            this.gbxServerlist.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -291,7 +333,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbxOut;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
@@ -305,5 +346,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox tbxServername;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox gbxPickServer;
+        private System.Windows.Forms.GroupBox gbxServerlist;
     }
 }

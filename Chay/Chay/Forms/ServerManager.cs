@@ -102,15 +102,24 @@ namespace Chay.Forms
             try
             {
                 lbxOut.Items.Clear();
-                us = db.FindById<User>("Users", us.Id);
+                try
+                {
+                    us = db.FindById<User>("Users", us.Id);
+                }
+                catch
+                {
+                    MessageBox.Show("Kan inte nå serven");
+                }
                 foreach (Server a in us._servers)
                 {
                     lbxOut.Items.Add(a);
                 }
+                lbxOut.SelectedIndex = 0;
+                LoadPickedServer();
             }
             catch
             {
-
+                
             }
         }
         private async void RemoveServer(Server s)
@@ -120,6 +129,10 @@ namespace Chay.Forms
                 lbxOut.Items.Remove(s);
                 us._servers.Remove(s);
                 await UpdateStruct();
+                if (lbxOut.Items.Count == 0)
+                {
+                    btnRemove.Enabled = false;
+                }
             }
             catch
             {
@@ -134,12 +147,46 @@ namespace Chay.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            lbxOut.Items.Add(new Server("new1",IPAddress.Parse("127.0.0.1"),2000));
+            btnRemove.Enabled = true;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
             RemoveServer((Server)lbxOut.SelectedItem);
+            tbxIp.Clear();
+            tbxServername.Clear();
+            tbxPort.Clear();
+        }
+
+        private void lbxOut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadPickedServer();
+        }
+
+        private void LoadPickedServer()
+        {
+            if(!(lbxOut.SelectedItem == null))
+            {
+                try
+                {
+                    gbxPickServer.Enabled = true;
+                    Server a = (Server)lbxOut.SelectedItem;
+
+                    tbxServername.Text = a._name;
+                    tbxIp.Text = a._ip.ToString();
+                    tbxPort.Text = a._port.ToString();
+                }
+                catch
+                {
+
+                }
+            }
+            else
+            {
+                gbxPickServer.Enabled = false;
+            }
+
         }
     }
 }

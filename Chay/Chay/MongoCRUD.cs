@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Windows.Forms;
 
 namespace MongoDBLogin
 {
@@ -15,21 +16,44 @@ namespace MongoDBLogin
 
         public MongoCRUD(string database)
         {
-            var client = new MongoClient("mongodb+srv://dbAdmin:Hej123@cluster-v0iz1.mongodb.net/test?retryWrites=true&w=majority");
-            _db = client.GetDatabase(database);
+            try
+            {
+                var client = new MongoClient("mongodb+srv://dbAdmin:Hej123@cluster-v0iz1.mongodb.net/test?retryWrites=true&w=majority");
+                _db = client.GetDatabase(database);
+            }
+            catch
+            {
+                MessageBox.Show("Kan inte ansluta till databasen");
+            }
         }
 
         public async void InsertOne<T>(string table, T data)
         {
-            var collection = _db.GetCollection<T>(table);
-            await collection.InsertOneAsync(data);
+            try
+            {
+                var collection = _db.GetCollection<T>(table);
+                await collection.InsertOneAsync(data);
+            }
+            catch
+            {
+                MessageBox.Show("Går inte att lagra data");
+            }
+            
         }
 
         public List<T> GetAll<T>(string table)
         {
-            var collection = _db.GetCollection<T>(table);
+            try
+            {
+                var collection = _db.GetCollection<T>(table);
+
+                return collection.Find(new BsonDocument()).ToList();
+            }
+            catch
+            {
+                return new List<T>();
+            }
             
-            return collection.Find(new BsonDocument()).ToList();
         }
 
         public T FindById<T>(string table,ObjectId id)
@@ -38,6 +62,7 @@ namespace MongoDBLogin
             var filter = Builders<T>.Filter.Eq("Id", id);
 
             return collection.Find(filter).First();
+
         }
 
         public T FindByParameter<T>(string table,string findstring, string tofind)
@@ -50,27 +75,50 @@ namespace MongoDBLogin
 
         public void RemoveOne<T>(string table, ObjectId id)
         {
-            var collection = _db.GetCollection<T>(table);
-            var filter = Builders<T>.Filter.Eq("Id", id);
-            collection.DeleteOne(filter);
+            try
+            {
+                var collection = _db.GetCollection<T>(table);
+                var filter = Builders<T>.Filter.Eq("Id", id);
+                collection.DeleteOne(filter);
+            }
+            catch
+            {
+                MessageBox.Show("Går inte att ta bort");
+            }
         }
 
         public void UpdateOne<T>(string table, ObjectId id, T item)
         {
-            var collection = _db.GetCollection<T>(table);
-            var result = collection.ReplaceOne(new BsonDocument("_id", id), item);
+            try
+            {
+                var collection = _db.GetCollection<T>(table);
+                var result = collection.ReplaceOne(new BsonDocument("_id", id), item);
+            }
+            catch
+            {
+                MessageBox.Show("Går inte att updatera");
+            }
         }
 
 
         //Hashar med en md5
         static public string Encrypt(string value)
         {
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            try
             {
-                UTF8Encoding utf8 = new UTF8Encoding();
-                byte[] data = md5.ComputeHash(utf8.GetBytes(value));
-                return Convert.ToBase64String(data);
+                using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+                {
+                    UTF8Encoding utf8 = new UTF8Encoding();
+                    byte[] data = md5.ComputeHash(utf8.GetBytes(value));
+                    return Convert.ToBase64String(data);
+                }
             }
+            catch
+            {
+                MessageBox.Show("Går inte att Encrypta");
+                return "";
+            }
+            
         }
 
     }

@@ -40,6 +40,7 @@
             this.tbxChatName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             pHeader = new System.Windows.Forms.Panel();
             pHeader2 = new System.Windows.Forms.Panel();
             pHeader.SuspendLayout();
@@ -64,6 +65,7 @@
             // pHeader2
             // 
             pHeader2.BackColor = System.Drawing.Color.SteelBlue;
+            pHeader2.Controls.Add(this.label1);
             pHeader2.Controls.Add(this.panel3);
             pHeader2.Dock = System.Windows.Forms.DockStyle.Top;
             pHeader2.Location = new System.Drawing.Point(0, 0);
@@ -184,6 +186,17 @@
             this.button2.Text = "Spara";
             this.button2.UseVisualStyleBackColor = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(157, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 40);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Profil";
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +216,7 @@
             this.Text = "Profile";
             pHeader.ResumeLayout(false);
             pHeader2.ResumeLayout(false);
+            pHeader2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -226,5 +240,6 @@
         private System.Windows.Forms.TextBox tbxChatName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
     }
 }
