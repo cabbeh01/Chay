@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode22,
+            treeNode23,
+            treeNode24});
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnProfile = new System.Windows.Forms.Button();
@@ -225,25 +225,25 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Left;
             this.twServers.Location = new System.Drawing.Point(10, 35);
             this.twServers.Name = "twServers";
-            treeNode15.Name = "Node4";
-            treeNode15.Text = "Kalle";
-            treeNode16.Name = "Node6";
-            treeNode16.Text = "Lena";
-            treeNode17.Name = "Node7";
-            treeNode17.Text = "Klas";
-            treeNode18.Name = "Node0";
-            treeNode18.Text = "Serv 1";
-            treeNode19.Name = "Node1";
-            treeNode19.Text = "Serv 2";
-            treeNode20.Name = "Node0";
-            treeNode20.Text = "Serv 3";
-            treeNode21.Name = "Node1";
-            treeNode21.Text = "Serv 4";
+            treeNode22.Name = "Node4";
+            treeNode22.Text = "Kalle";
+            treeNode23.Name = "Node6";
+            treeNode23.Text = "Lena";
+            treeNode24.Name = "Node7";
+            treeNode24.Text = "Klas";
+            treeNode25.Name = "Node0";
+            treeNode25.Text = "Serv 1";
+            treeNode26.Name = "Node1";
+            treeNode26.Text = "Serv 2";
+            treeNode27.Name = "Node0";
+            treeNode27.Text = "Serv 3";
+            treeNode28.Name = "Node1";
+            treeNode28.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21});
+            treeNode25,
+            treeNode26,
+            treeNode27,
+            treeNode28});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
@@ -360,7 +360,7 @@
             // conversationCtrl
             // 
             this.conversationCtrl.BackColor = System.Drawing.Color.Transparent;
-            this.conversationCtrl.BalloonBackColor = System.Drawing.Color.Orange;
+            this.conversationCtrl.BalloonBackColor = System.Drawing.Color.SteelBlue;
             this.conversationCtrl.BalloonTextPadding = new System.Windows.Forms.Padding(10);
             this.conversationCtrl.DataSource = null;
             this.conversationCtrl.DateColumnName = "";

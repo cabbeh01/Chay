@@ -13,7 +13,8 @@ namespace Chay
 {
     public partial class Settings : Form
     {
-        public Point mouseLocation;
+        private Point _mouseLocation;
+        public static string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\Settings.sett";
         public enum ChatColor
         {
             Blå,
@@ -30,9 +31,59 @@ namespace Chay
             Hmm
         }
 
-        public Settings(ChatColor c, TimeFormat tf)
+        public Settings(ref ChatColor c, ref TimeFormat tf)
         {
             InitializeComponent();
+            InsertDataCombobox();
+
+            cbxChatColor.SelectedItem = c;
+            cbxTimeFormat.SelectedItem = tf;
+        }
+
+        private void InsertDataCombobox()
+        {
+            try
+            {
+                foreach (ChatColor cColor in (ChatColor[])Enum.GetValues(typeof(ChatColor)))
+                {
+                    cbxChatColor.Items.Add(cColor);
+                }
+                foreach (TimeFormat tFormat in (TimeFormat[])Enum.GetValues(typeof(TimeFormat)))
+                {
+                    cbxTimeFormat.Items.Add(tFormat);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel uppstod så att inte värdena kunde hämtas");
+            }
+        }
+
+        private void SaveSettings()
+        {
+            try
+            {
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\"))
+                {
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\");
+                }
+
+                FileStream stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+                StreamWriter writer = new StreamWriter(stream);
+
+                //Default settings
+                writer.WriteLine(cbxChatColor.SelectedItem);
+                writer.WriteLine(cbxTimeFormat.SelectedItem);
+
+                writer.Dispose();
+                MessageBox.Show("Inställningarna har sparats");
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Går inte spara");
+            }
+            
         }
 
         private void PHeader_MouseMove(object sender, MouseEventArgs e)
@@ -40,31 +91,24 @@ namespace Chay
             if (e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
 
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseLocation = new Point(-e.X, -e.Y);
-        }
-
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            _mouseLocation = new Point(-e.X, -e.Y);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            SaveSettings();
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
-
-        
     }
 }

@@ -25,7 +25,7 @@ namespace Chay
         Profile profile             = null;
 
         //Settings
-        Settings.ChatColor S_cColor     = Settings.ChatColor.Orange;
+        Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
         Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
 
@@ -150,7 +150,7 @@ namespace Chay
         {
             if(setting == null)
             {
-                setting = new Settings(S_cColor, S_tFormat);
+                setting = new Settings(ref S_cColor, ref S_tFormat);
                 setting.FormClosed += S_FormClosed;
                 setting.Show();
             }
@@ -163,6 +163,8 @@ namespace Chay
         private void S_FormClosed(object sender, FormClosedEventArgs e)
         {
             setting = null;
+            RetriveSettings();
+            conversationCtrl.Rebind();
         }
 
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
@@ -377,13 +379,12 @@ namespace Chay
 
         private void RetriveSettings()
         {
-            var fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\Settings.sett";
 
             try
             {
                 if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+ "\\Chay\\"))
                 {
-                    FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    FileStream stream = new FileStream(Settings.fileName, FileMode.Open, FileAccess.Read);
                     StreamReader reader = new StreamReader(stream);
 
                    
@@ -400,19 +401,24 @@ namespace Chay
                     {
                         case "Blå":
                             conversationCtrl.BalloonBackColor = Color.SteelBlue;
+                            S_cColor = Settings.ChatColor.Blå;
                             break;
                         case "Grön":
-                            conversationCtrl.BalloonBackColor = Color.ForestGreen; // Bra färg
+                            conversationCtrl.BalloonBackColor = Color.ForestGreen;
+                            S_cColor = Settings.ChatColor.Grön;
                             break;
                         case "Orange":
                             conversationCtrl.BalloonBackColor = Color.Orange;
+                            S_cColor = Settings.ChatColor.Orange;
                             break;
                         case "Röd":
                             conversationCtrl.BalloonBackColor = Color.Firebrick;
+                            S_cColor = Settings.ChatColor.Röd;
                             break;
 
                         case "Lila":
                             conversationCtrl.BalloonBackColor = Color.DarkOrchid;
+                            S_cColor = Settings.ChatColor.Lila;
                             break;
                     }
 
@@ -420,6 +426,7 @@ namespace Chay
                     switch (timeFormat)
                     {
                         case "Hmm":
+                            
                             S_tFormat = Settings.TimeFormat.Hmm;
                             break;
                         case "HHmmss":
@@ -430,29 +437,11 @@ namespace Chay
                             S_tFormat = Settings.TimeFormat.HHmm;
                             break;
                     }
-
-                    
-                    MessageBox.Show($"{colorMessage}, {timeFormat}");
                 }
 
             }
             catch
             {
-                try
-                {
-                    FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-                    StreamWriter writer = new StreamWriter(stream);
-
-                    //Default settings
-                    writer.WriteLine(S_cColor);
-                    writer.WriteLine(S_tFormat);
-
-                    writer.Dispose();
-                }
-                catch
-                {
-                    
-                }
                 
             }
         }
