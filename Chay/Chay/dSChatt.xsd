@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dSChatt" targetNamespace="http://tempuri.org/dSChatt.xsd" xmlns:mstns="http://tempuri.org/dSChatt.xsd" xmlns="http://tempuri.org/dSChatt.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dSChatt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dSChatt" msprop:Generator_UserDSName="dSChatt">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ConversationMessages" msprop:Generator_TableClassName="ConversationMessagesDataTable" msprop:Generator_TableVarName="tableConversationMessages" msprop:Generator_TablePropName="ConversationMessages" msprop:Generator_RowDeletingName="ConversationMessagesRowDeleting" msprop:Generator_RowChangingName="ConversationMessagesRowChanging" msprop:Generator_RowEvHandlerName="ConversationMessagesRowChangeEventHandler" msprop:Generator_RowDeletedName="ConversationMessagesRowDeleted" msprop:Generator_UserTableName="ConversationMessages" msprop:Generator_RowChangedName="ConversationMessagesRowChanged" msprop:Generator_RowEvArgName="ConversationMessagesRowChangeEvent" msprop:Generator_RowClassName="ConversationMessagesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="text" msprop:nullValue="" msprop:Generator_ColumnPropNameInRow="text" msprop:Generator_ColumnVarNameInTable="columntext" msprop:Generator_ColumnPropNameInTable="textColumn" msprop:Generator_UserColumnName="text" type="xs:string" />
+              <xs:element name="time" msprop:Generator_ColumnVarNameInTable="columntime" msprop:Generator_ColumnPropNameInRow="time" msprop:Generator_ColumnPropNameInTable="timeColumn" msprop:Generator_UserColumnName="time" type="xs:dateTime" />
+              <xs:element name="incoming" msprop:Generator_ColumnVarNameInTable="columnincoming" msprop:Generator_ColumnPropNameInRow="incoming" msprop:Generator_ColumnPropNameInTable="incomingColumn" msprop:Generator_UserColumnName="incoming" type="xs:boolean" default="false" />
+              <xs:element name="id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="ConversationMessagesKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ConversationMessages" />
+      <xs:field xpath="mstns:id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

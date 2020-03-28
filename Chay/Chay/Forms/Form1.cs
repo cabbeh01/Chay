@@ -20,11 +20,13 @@ namespace Chay
     {
         //Forms
         User us;
-        Settings setting = null;
-        ServerManager servermang = null;
-        Profile profile = null;
+        Settings setting            = null;
+        ServerManager servermang    = null;
+        Profile profile             = null;
 
-        
+        //Settings
+        Settings.ChatColor S_cColor     = Settings.ChatColor.Orange;
+        Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
 
         public Point mouseLocation;
@@ -44,6 +46,7 @@ namespace Chay
             //retriveServerList();
             this.lblUser.Text = user._username;
             GraphicalComponents();
+            RetriveSettings();
             LogicalComponents();
         }
 
@@ -147,7 +150,7 @@ namespace Chay
         {
             if(setting == null)
             {
-                setting = new Settings();
+                setting = new Settings(S_cColor, S_tFormat);
                 setting.FormClosed += S_FormClosed;
                 setting.Show();
             }
@@ -238,19 +241,50 @@ namespace Chay
         {
             try
             {
+                /*
                 if (us._client.Connected)
                 {
                     StartCommunication(tbxSend.Text);
                     //us._client.Close();
+
+                    
                 }
                 else
                 {
                     MessageBox.Show("Du måste vara uppkopplad mot någon server");
-                }
+                }*/
+
+                dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
+                dSChatt.ConversationMessagesRow newRow = table.NewConversationMessagesRow();
+
+                newRow.time = DateTime.Now;
+                newRow.text = "Hejsan";
+                newRow.incoming = true;
+                table.AddConversationMessagesRow(newRow);
+
+                newRow = table.NewConversationMessagesRow();
+                newRow.time = DateTime.Now;
+                newRow.text = "Tjena =)";
+                newRow.incoming = false;
+                table.AddConversationMessagesRow(newRow);
+
+                newRow = table.NewConversationMessagesRow();
+                newRow.time = DateTime.Now;
+                newRow.text = "Hur mår du? hdsfajkdlhaskjdh ksahdkasj hdkajshd jkashd jkashkjdhas jkhd asjkhdjk ashdjkas ";
+                newRow.incoming = true;
+                table.AddConversationMessagesRow(newRow);
+
+                conversationCtrl.DataSource = table;
+                conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
+                conversationCtrl.IdColumnName = table.idColumn.ColumnName;
+                conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
+                conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
+
+                conversationCtrl.Rebind();
             }
-            catch
+            catch (Exception err)
             {
-                MessageBox.Show("Det går inte skicka meddelandet");
+                MessageBox.Show(err.ToString());
             }
         }
 
@@ -323,6 +357,7 @@ namespace Chay
             catch
             {
                 us._client.Dispose();
+                cDConnected.UpdateStatus(false);
                 MessageBox.Show("Går inte uppräta en anslutning");
             }
         }
@@ -340,6 +375,86 @@ namespace Chay
             }
         }
 
-        
+        private void RetriveSettings()
+        {
+            var fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\Settings.sett";
+
+            try
+            {
+                if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+ "\\Chay\\"))
+                {
+                    FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    StreamReader reader = new StreamReader(stream);
+
+                   
+                    string colorMessage = reader.ReadLine();
+                    string timeFormat = reader.ReadLine();
+                    if(String.IsNullOrEmpty(colorMessage) && String.IsNullOrEmpty(timeFormat))
+                    {
+                        throw new System.ArgumentException("Värdena är ogiltliga", "Ogiltliga värden");
+                    }
+
+                    reader.Dispose();
+
+                    switch (colorMessage)
+                    {
+                        case "Blå":
+                            conversationCtrl.BalloonBackColor = Color.SteelBlue;
+                            break;
+                        case "Grön":
+                            conversationCtrl.BalloonBackColor = Color.ForestGreen; // Bra färg
+                            break;
+                        case "Orange":
+                            conversationCtrl.BalloonBackColor = Color.Orange;
+                            break;
+                        case "Röd":
+                            conversationCtrl.BalloonBackColor = Color.Firebrick;
+                            break;
+
+                        case "Lila":
+                            conversationCtrl.BalloonBackColor = Color.DarkOrchid;
+                            break;
+                    }
+
+
+                    switch (timeFormat)
+                    {
+                        case "Hmm":
+                            S_tFormat = Settings.TimeFormat.Hmm;
+                            break;
+                        case "HHmmss":
+                            S_tFormat = Settings.TimeFormat.HHmmss;
+                            break;
+
+                        case "HHmm":
+                            S_tFormat = Settings.TimeFormat.HHmm;
+                            break;
+                    }
+
+                    
+                    MessageBox.Show($"{colorMessage}, {timeFormat}");
+                }
+
+            }
+            catch
+            {
+                try
+                {
+                    FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                    StreamWriter writer = new StreamWriter(stream);
+
+                    //Default settings
+                    writer.WriteLine(S_cColor);
+                    writer.WriteLine(S_tFormat);
+
+                    writer.Dispose();
+                }
+                catch
+                {
+                    
+                }
+                
+            }
+        }
     }
 }

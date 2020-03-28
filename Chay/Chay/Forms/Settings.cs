@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,23 @@ namespace Chay
     public partial class Settings : Form
     {
         public Point mouseLocation;
-        public Settings()
+        public enum ChatColor
+        {
+            Blå,
+            Grön,
+            Orange,
+            Röd,
+            Lila
+        }
+
+        public enum TimeFormat
+        {
+            HHmmss,
+            HHmm,
+            Hmm
+        }
+
+        public Settings(ChatColor c, TimeFormat tf)
         {
             InitializeComponent();
         }
@@ -37,5 +54,17 @@ namespace Chay
         {
             this.Close();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

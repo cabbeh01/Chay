@@ -107,8 +107,19 @@
     <Compile Include="Components\ConnectionDisplay.Designer.cs">
       <DependentUpon>ConnectionDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ConversationCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ConversationCtrl.designer.cs">
+      <DependentUpon>ConversationCtrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\RoundPicturebox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dSChatt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dSChatt.xsd</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -158,6 +169,9 @@
     <EmbeddedResource Include="Components\ConnectionDisplay.resx">
       <DependentUpon>ConnectionDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\ConversationCtrl.resx">
+      <DependentUpon>ConversationCtrl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +199,17 @@
     <EmbeddedResource Include="Forms\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="dSChatt.xsc">
+      <DependentUpon>dSChatt.xsd</DependentUpon>
+    </None>
+    <None Include="dSChatt.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dSChatt.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dSChatt.xss">
+      <DependentUpon>dSChatt.xsd</DependentUpon>
+    </None>
     <None Include="Font\Ranchers-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
