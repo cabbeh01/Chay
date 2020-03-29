@@ -29,7 +29,7 @@ namespace Chay
         Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
 
-        public Point mouseLocation;
+        private Point _mouseLocation;
         bool isMaxi = false;
 
         public Form1(User user)
@@ -87,7 +87,7 @@ namespace Chay
         //Moveable header
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseLocation = new Point(-e.X, -e.Y);
+            _mouseLocation = new Point(-e.X, -e.Y);
         }
 
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
@@ -95,7 +95,7 @@ namespace Chay
             if(e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
@@ -243,38 +243,27 @@ namespace Chay
         {
             try
             {
-                /*
+                dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
+                dSChatt.ConversationMessagesRow newRow = table.NewConversationMessagesRow();
                 if (us._client.Connected)
                 {
                     StartCommunication(tbxSend.Text);
                     //us._client.Close();
 
-                    
+                    newRow = table.NewConversationMessagesRow();
+                    newRow.time = DateTime.Now;
+                    newRow.text = tbxSend.Text;
+                    newRow.incoming = false;
+                    table.AddConversationMessagesRow(newRow);
+
+
+                    conversationCtrl.Rebind();
                 }
                 else
                 {
                     MessageBox.Show("Du måste vara uppkopplad mot någon server");
-                }*/
+                }
 
-                dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
-                dSChatt.ConversationMessagesRow newRow = table.NewConversationMessagesRow();
-
-                newRow.time = DateTime.Now;
-                newRow.text = "Hejsan";
-                newRow.incoming = true;
-                table.AddConversationMessagesRow(newRow);
-
-                newRow = table.NewConversationMessagesRow();
-                newRow.time = DateTime.Now;
-                newRow.text = "Tjena =)";
-                newRow.incoming = false;
-                table.AddConversationMessagesRow(newRow);
-
-                newRow = table.NewConversationMessagesRow();
-                newRow.time = DateTime.Now;
-                newRow.text = "Hur mår du? hdsfajkdlhaskjdh ksahdkasj hdkajshd jkashd jkashkjdhas jkhd asjkhdjk ashdjkas ";
-                newRow.incoming = true;
-                table.AddConversationMessagesRow(newRow);
 
                 conversationCtrl.DataSource = table;
                 conversationCtrl.MessageColumnName = table.textColumn.ColumnName;

@@ -14,7 +14,6 @@ namespace ChayServer
 
         static List<TcpClient> tcpClients = new List<TcpClient>();
         static TcpClient client;
-        //static int port = 3333;
         static bool userExist = false;
 
         static void Main(string[] args)
@@ -33,9 +32,13 @@ namespace ChayServer
                 listener.Start();
                 Console.WriteLine($"Server started at 127.0.0.1:{port}");
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Vänligen mata in en korrekt port");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                StartServer();
             }
 
             StartHandshake();
@@ -180,13 +183,19 @@ namespace ChayServer
 
 
                     case "help":
+                        Console.Clear();
                         Console.WriteLine("Dessa kommandona finns tillgängliga");
-                        Console.Read();
-                        Environment.Exit(0);
+                        Console.WriteLine("___________________________________________________");
+                        Console.WriteLine("help - Visar de kommandon som finns tillgänliga");
+                        Console.WriteLine("kick XX- Stänger ner en uppkoppling mellan servern och en användare");
+                        Console.WriteLine("ls - Visar de användare som är uppkopplade mot servern");
+                        Console.WriteLine("stop - Stoppar servern");
+                        Console.WriteLine("start - Startar servern");
+                        Console.WriteLine("exit - Stänger ner programmet");
                         break;
 
                     case "exit":
-                        Console.WriteLine("Shutting down, click to escape this window");
+                        Console.WriteLine("Stänger ned, klicka på valfritangent för att stänga fönstret!");
                         Console.Read();
                         Environment.Exit(0);
                         break;
