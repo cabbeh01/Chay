@@ -14,8 +14,9 @@ namespace Chay.Forms
 {
     public partial class ServerManager : Form
     {
-        MongoCRUD db = new MongoCRUD("dbChay");
-        public Point mouseLocation;
+        private MongoCRUD _db = new MongoCRUD("dbChay");
+        private Point _mouseLocation;
+
         public User us;
         public ServerManager(User u)
         {
@@ -38,17 +39,17 @@ namespace Chay.Forms
             if (e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
 
         private void pHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseLocation = new Point(-e.X, -e.Y);
+            _mouseLocation = new Point(-e.X, -e.Y);
         }
 
-        private async void AddServer()
+        private async void UpdateServer()
         {
             if (!String.IsNullOrEmpty(tbxServername.Text))
             {
@@ -63,10 +64,11 @@ namespace Chay.Forms
                             {
                                 us.Servers = new List<Server>();
                             }
-                            us.Servers.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
-                            lbxOut.Items.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
+                            lbxOut.Items.Insert(lbxOut.SelectedIndex,new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
+                            lbxOut.Items.RemoveAt(lbxOut.SelectedIndex);
                             await UpdateStruct();
-                            MessageBox.Show("Server tillagd");
+                            ClearTextboxes();
+                            MessageBox.Show("Server uppdaterad");
                         }
                         else
                         {
@@ -94,7 +96,8 @@ namespace Chay.Forms
         private async Task UpdateStruct()
         {
             await Task.Run(() => {
-                db.UpdateOne<User>("Users", us.Id, us);
+                us.Servers = lbxOut.Items.Cast<Server>().ToList();
+                _db.UpdateOne<User>("Users", us.Id, us);
             });
         }
         private void RetrieveServers()
@@ -104,7 +107,7 @@ namespace Chay.Forms
                 lbxOut.Items.Clear();
                 try
                 {
-                    us = db.FindById<User>("Users", us.Id);
+                    us = _db.FindById<User>("Users", us.Id);
                 }
                 catch
                 {
@@ -127,7 +130,6 @@ namespace Chay.Forms
             try
             {
                 lbxOut.Items.Remove(s);
-                us.Servers.Remove(s);
                 await UpdateStruct();
                 if (lbxOut.Items.Count == 0)
                 {
@@ -142,7 +144,7 @@ namespace Chay.Forms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            AddServer();
+            UpdateServer();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -154,11 +156,15 @@ namespace Chay.Forms
         private void btnRemove_Click(object sender, EventArgs e)
         {
             RemoveServer((Server)lbxOut.SelectedItem);
+            ClearTextboxes();
+        }
+
+        private void ClearTextboxes()
+        {
             tbxIp.Clear();
             tbxServername.Clear();
             tbxPort.Clear();
         }
-
         private void lbxOut_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadPickedServer();
@@ -187,6 +193,50 @@ namespace Chay.Forms
                 gbxPickServer.Enabled = false;
             }
 
+        }
+
+        private void btnServerUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // only if the first item isn't the current one
+                if (lbxOut.SelectedIndex > 0)
+                {
+                    // add a duplicate item up in the listbox
+                    lbxOut.Items.Insert(lbxOut.SelectedIndex - 1, lbxOut.SelectedItem);
+                    // make it the current item
+                    lbxOut.SelectedIndex = (lbxOut.SelectedIndex - 2);
+                    // delete the old occurrence of this item
+                    lbxOut.Items.RemoveAt(lbxOut.SelectedIndex + 2);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Går inte att flytta objektet");
+            }
+            
+        }
+
+        private void btnServerDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // only if the last item isn't the current one
+                if ((lbxOut.SelectedIndex != -1) && (lbxOut.SelectedIndex < lbxOut.Items.Count - 1))
+                {
+                    // add a duplicate item down in the listbox
+                    lbxOut.Items.Insert(lbxOut.SelectedIndex + 2, lbxOut.SelectedItem);
+                    // make it the current item
+                    lbxOut.SelectedIndex = lbxOut.SelectedIndex + 2;
+                    // delete the old occurrence of this item
+                    lbxOut.Items.RemoveAt(lbxOut.SelectedIndex - 2);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Går inte att flytta objektet");
+            }
+            
         }
     }
 }

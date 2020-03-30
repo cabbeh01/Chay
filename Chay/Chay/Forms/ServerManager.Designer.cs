@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pHeader = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -45,9 +46,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.tbxServername = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.gbxPickServer = new System.Windows.Forms.GroupBox();
             this.gbxServerlist = new System.Windows.Forms.GroupBox();
+            this.btnServerDown = new System.Windows.Forms.Button();
+            this.btnServerUp = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -71,6 +73,17 @@
             this.pHeader.TabIndex = 2;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(229, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(183, 40);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Serverhanterare";
             // 
             // panel3
             // 
@@ -248,17 +261,6 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(229, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 40);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Serverhanterare";
-            // 
             // gbxPickServer
             // 
             this.gbxPickServer.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -283,6 +285,8 @@
             // gbxServerlist
             // 
             this.gbxServerlist.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbxServerlist.Controls.Add(this.btnServerUp);
+            this.gbxServerlist.Controls.Add(this.btnServerDown);
             this.gbxServerlist.Controls.Add(this.lbxOut);
             this.gbxServerlist.Controls.Add(this.btnRemove);
             this.gbxServerlist.Controls.Add(this.btnAdd);
@@ -295,6 +299,38 @@
             this.gbxServerlist.TabIndex = 19;
             this.gbxServerlist.TabStop = false;
             this.gbxServerlist.Text = "Serverar";
+            // 
+            // btnServerDown
+            // 
+            this.btnServerDown.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnServerDown.FlatAppearance.BorderSize = 0;
+            this.btnServerDown.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnServerDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnServerDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServerDown.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.btnServerDown.Location = new System.Drawing.Point(207, 322);
+            this.btnServerDown.Name = "btnServerDown";
+            this.btnServerDown.Size = new System.Drawing.Size(30, 24);
+            this.btnServerDown.TabIndex = 11;
+            this.btnServerDown.Text = "↓";
+            this.btnServerDown.UseVisualStyleBackColor = false;
+            this.btnServerDown.Click += new System.EventHandler(this.btnServerDown_Click);
+            // 
+            // btnServerUp
+            // 
+            this.btnServerUp.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnServerUp.FlatAppearance.BorderSize = 0;
+            this.btnServerUp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnServerUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnServerUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServerUp.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.btnServerUp.Location = new System.Drawing.Point(171, 322);
+            this.btnServerUp.Name = "btnServerUp";
+            this.btnServerUp.Size = new System.Drawing.Size(30, 24);
+            this.btnServerUp.TabIndex = 12;
+            this.btnServerUp.Text = "↑";
+            this.btnServerUp.UseVisualStyleBackColor = false;
+            this.btnServerUp.Click += new System.EventHandler(this.btnServerUp_Click);
             // 
             // ServerManager
             // 
@@ -349,5 +385,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox gbxPickServer;
         private System.Windows.Forms.GroupBox gbxServerlist;
+        private System.Windows.Forms.Button btnServerUp;
+        private System.Windows.Forms.Button btnServerDown;
     }
 }
