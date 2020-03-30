@@ -40,11 +40,11 @@ namespace Chay
             us = user;
 
             //Setting up Client
-            us._client = new TcpClient();
-            us._client.NoDelay = true;
+            us.Client = new TcpClient();
+            us.Client.NoDelay = true;
 
             //retriveServerList();
-            this.lblUser.Text = user._username;
+            this.lblUser.Text = user.Username;
             GraphicalComponents();
             RetriveSettings();
             LogicalComponents();
@@ -112,7 +112,7 @@ namespace Chay
             Logo.Font = new Font(pfc.Families[0], 20, FontStyle.Regular);
             Logo.ForeColor = Color.White;
 
-            lblUser.Location = new Point(639 - (us._username.Length * 7) ,0);
+            lblUser.Location = new Point(639 - (us.Username.Length * 7) ,0);
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace Chay
 
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            us._servers = servermang.us._servers;
+            us.Servers = servermang.us.Servers;
             await RetriveServerList();
             servermang = null;
         }
@@ -204,9 +204,9 @@ namespace Chay
                         try
                         {
                             twServers.Nodes.Clear();
-                            if(us._servers != null)
+                            if(us.Servers != null)
                             {
-                                foreach (Server s in us._servers)
+                                foreach (Server s in us.Servers)
                                 {
                                     twServers.Nodes.Add(s._name);
                                 }
@@ -223,9 +223,9 @@ namespace Chay
                     try
                     {
                         twServers.Nodes.Clear();
-                        if (us._servers != null)
+                        if (us.Servers != null)
                         {
-                            foreach (Server s in us._servers)
+                            foreach (Server s in us.Servers)
                             {
                                 twServers.Nodes.Add(s._name);
                             }
@@ -245,7 +245,7 @@ namespace Chay
             {
                 dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
                 dSChatt.ConversationMessagesRow newRow = table.NewConversationMessagesRow();
-                if (us._client.Connected)
+                if (us.Client.Connected)
                 {
                     StartCommunication(tbxSend.Text);
                     //us._client.Close();
@@ -308,13 +308,13 @@ namespace Chay
             {
                 //us._client.Close();
                 //MessageBox.Show(twServers.SelectedNode.Text);
-                foreach (Server s in us._servers)
+                foreach (Server s in us.Servers)
                 {
                     if (twServers.SelectedNode.Text == s._name)
                     {
-                        if (us._client.Connected)
+                        if (us.Client.Connected)
                         {
-                            us._client.Client.Close();
+                            us.Client.Client.Close();
                             cDConnected.UpdateStatus(true);
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
@@ -343,11 +343,11 @@ namespace Chay
         {
             try
             {
-                await us._client.ConnectAsync(address, port);
+                await us.Client.ConnectAsync(address, port);
             }
             catch
             {
-                us._client.Dispose();
+                us.Client.Dispose();
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Går inte uppräta en anslutning");
             }
@@ -358,7 +358,7 @@ namespace Chay
             byte[] outData = Encoding.Unicode.GetBytes(message); // Detta ska bytas ut om en klass som man ska skicka
             try
             {
-                await us._client.GetStream().WriteAsync(outData, 0, outData.Length);
+                await us.Client.GetStream().WriteAsync(outData, 0, outData.Length);
             }
             catch
             {

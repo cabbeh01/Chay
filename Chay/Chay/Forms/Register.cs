@@ -54,8 +54,8 @@ namespace Chay
                     {
                         try
                         {
-                            User u = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
-                            if (!(u._name == tbxUsername.Text))
+                            User u = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+                            if (!(u.Name == tbxUsername.Text))
                             {
                                 db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
                                 MessageBox.Show("Ditt konto är nu skapat");

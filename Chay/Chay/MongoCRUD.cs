@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Windows.Forms;
+using MongoDB.Bson.Serialization;
+using Chay;
 
 namespace MongoDBLogin
 {
@@ -58,6 +60,7 @@ namespace MongoDBLogin
 
         public T FindById<T>(string table,ObjectId id)
         {
+
             var collection = _db.GetCollection<T>(table);
             var filter = Builders<T>.Filter.Eq("Id", id);
 

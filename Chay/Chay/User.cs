@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,34 +13,37 @@ namespace Chay
     public class User
     {
         public ObjectId Id { get; set; }
-        public string _username { get; set; }
-        public string _password { get; set; }
-        public string _name { get; set; }
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public string Name { get; set; }
 
-        public Image _image { get; set; }
+        public Image Image { get; set; }
 
-        public List<Server> _servers { get; set; }
+        public List<Server> Servers { get; set; }
 
-        internal TcpClient _client;
+        internal TcpClient Client;
 
 
         public User(string username, string name, List<Server> servers, TcpClient client)
         {
-            this._username = username;
-            this._name = name;
-            this._servers = servers;
-            this._client = client;
+            this.Username = username;
+            this.Name = name;
+            this.Servers = servers;
+            this.Client = client;
         }
-        
+
         public User(string username, string password)
         {
-            this._username = username;
-            this._password = password;
+            this.Username = username;
+            this.Password = password;
         }
+
+        
 
         public override string ToString()
         {
-            return $"{_servers}";
+            return $"{Servers}";
         }
     }
+
 }

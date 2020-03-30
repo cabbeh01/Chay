@@ -55,8 +55,8 @@ namespace Chay
         {
             try
             {
-                User found = db.FindByParameter<User>("Users", "_username", tbxUsername.Text);
-                if (found._password == MongoCRUD.Encrypt(tbxPassword.Text))
+                User found = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+                if (found.Password == MongoCRUD.Encrypt(tbxPassword.Text))
                 {
                     Form1 form = new Form1(found);
                     //MessageBox.Show("Du är nu inloggad");

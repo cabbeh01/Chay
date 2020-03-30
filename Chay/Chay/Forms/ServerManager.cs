@@ -59,11 +59,11 @@ namespace Chay.Forms
                     {
                         if(int.Parse(tbxPort.Text) > 0 && int.Parse(tbxPort.Text) < 65536) 
                         {
-                            if(us._servers == null)
+                            if(us.Servers == null)
                             {
-                                us._servers = new List<Server>();
+                                us.Servers = new List<Server>();
                             }
-                            us._servers.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
+                            us.Servers.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
                             lbxOut.Items.Add(new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
                             await UpdateStruct();
                             MessageBox.Show("Server tillagd");
@@ -110,7 +110,7 @@ namespace Chay.Forms
                 {
                     MessageBox.Show("Kan inte nå serven");
                 }
-                foreach (Server a in us._servers)
+                foreach (Server a in us.Servers)
                 {
                     lbxOut.Items.Add(a);
                 }
@@ -127,7 +127,7 @@ namespace Chay.Forms
             try
             {
                 lbxOut.Items.Remove(s);
-                us._servers.Remove(s);
+                us.Servers.Remove(s);
                 await UpdateStruct();
                 if (lbxOut.Items.Count == 0)
                 {

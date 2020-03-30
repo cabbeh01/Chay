@@ -58,7 +58,7 @@ namespace Chay
 
         public override string ToString()
         {
-            return $"{this._auther._name}: {this._text}";
+            return $"{this._auther.Name}: {this._text}";
         }
     }
 }
