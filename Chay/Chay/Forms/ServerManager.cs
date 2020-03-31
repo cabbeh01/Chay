@@ -17,13 +17,13 @@ namespace Chay.Forms
         private MongoCRUD _db = new MongoCRUD("dbChay");
         private Point _mouseLocation;
 
-        public User us;
+        internal User _us;
         public ServerManager(User u)
         {
             InitializeComponent();
 
             //Defining Logged in user
-            us = u;
+            _us = u;
 
             RetrieveServers();
         }
@@ -60,9 +60,9 @@ namespace Chay.Forms
                     {
                         if(int.Parse(tbxPort.Text) > 0 && int.Parse(tbxPort.Text) < 65536) 
                         {
-                            if(us.Servers == null)
+                            if(_us.Servers == null)
                             {
-                                us.Servers = new List<Server>();
+                                _us.Servers = new List<Server>();
                             }
                             lbxOut.Items.Insert(lbxOut.SelectedIndex,new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
                             lbxOut.Items.RemoveAt(lbxOut.SelectedIndex);
@@ -96,8 +96,8 @@ namespace Chay.Forms
         private async Task UpdateStruct()
         {
             await Task.Run(() => {
-                us.Servers = lbxOut.Items.Cast<Server>().ToList();
-                _db.UpdateOne<User>("Users", us.Id, us);
+                _us.Servers = lbxOut.Items.Cast<Server>().ToList();
+                _db.UpdateOne<User>("Users", _us.Id, _us);
             });
         }
         private void RetrieveServers()
@@ -107,13 +107,13 @@ namespace Chay.Forms
                 lbxOut.Items.Clear();
                 try
                 {
-                    us = _db.FindById<User>("Users", us.Id);
+                    _us = _db.FindById<User>("Users", _us.Id);
                 }
                 catch
                 {
                     MessageBox.Show("Kan inte nå serven");
                 }
-                foreach (Server a in us.Servers)
+                foreach (Server a in _us.Servers)
                 {
                     lbxOut.Items.Add(a);
                 }

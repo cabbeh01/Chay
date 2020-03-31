@@ -110,7 +110,6 @@
             this.tbxChatName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxChatName.Location = new System.Drawing.Point(20, 8);
             this.tbxChatName.Name = "tbxChatName";
-            this.tbxChatName.PasswordChar = '•';
             this.tbxChatName.Size = new System.Drawing.Size(159, 15);
             this.tbxChatName.TabIndex = 0;
             // 
@@ -136,7 +135,7 @@
             this.btnCancleProf.Name = "btnCancleProf";
             this.btnCancleProf.Size = new System.Drawing.Size(64, 31);
             this.btnCancleProf.TabIndex = 23;
-            this.btnCancleProf.Text = "Cancle";
+            this.btnCancleProf.Text = "Avbryt";
             this.btnCancleProf.UseVisualStyleBackColor = false;
             this.btnCancleProf.Click += new System.EventHandler(this.btnCancleProf_Click);
             // 

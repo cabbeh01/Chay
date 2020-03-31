@@ -168,7 +168,7 @@
             // btnMaxi
             // 
             this.btnMaxi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaxi.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnMaxi.BackColor = System.Drawing.Color.Gray;
             this.btnMaxi.Location = new System.Drawing.Point(45, 0);
             this.btnMaxi.Name = "btnMaxi";
             this.btnMaxi.Padding = new System.Windows.Forms.Padding(2);
@@ -191,7 +191,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnClose.BackColor = System.Drawing.Color.DarkGray;
             this.btnClose.Location = new System.Drawing.Point(88, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(45, 26);
@@ -404,6 +404,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pHeader);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(650, 390);
             this.Name = "Form1";

@@ -16,9 +16,11 @@ namespace Chay
     {
         public Point mouseLocation;
         MongoCRUD db = new MongoCRUD("dbChay");
+
         public Register()
         {
             InitializeComponent();
+
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -55,9 +57,11 @@ namespace Chay
                         try
                         {
                             User u = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
-                            if (!(u.Name == tbxUsername.Text))
+                            if (!(u.Username == tbxUsername.Text))
                             {
-                                db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
+                                User n = new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text));
+                                n.Name = tbxUsername.Text;
+                                db.InsertOne("Users", n);
                                 MessageBox.Show("Ditt konto är nu skapat");
                                 this.Close();
                                 Login log = new Login();

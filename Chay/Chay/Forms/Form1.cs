@@ -140,12 +140,6 @@ namespace Chay
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            Login a = new Login();
-            a.Show();
-        }
-
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             if(setting == null)
@@ -166,10 +160,10 @@ namespace Chay
             RetriveSettings();
             conversationCtrl.Rebind();
         }
-
+        
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            us.Servers = servermang.us.Servers;
+            us.Servers = servermang._us.Servers;
             await RetriveServerList();
             servermang = null;
         }
@@ -186,6 +180,25 @@ namespace Chay
             {
                 servermang.BringToFront();
             }
+        }
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+
+            if (profile == null)
+            {
+                profile = new Profile(us);
+                profile.FormClosed += Profile_FormClosed;
+                profile.Show();
+            }
+            else
+            {
+                profile.BringToFront();
+            }
+        }
+
+        private void Profile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            profile = null;
         }
 
         private async void LogicalComponents()
@@ -279,25 +292,7 @@ namespace Chay
             }
         }
 
-        private void btnProfile_Click(object sender, EventArgs e)
-        {
-
-            if (profile == null)
-            {
-                profile = new Profile(us);
-                profile.FormClosed += Profile_FormClosed;
-                profile.Show();
-            }
-            else
-            {
-                profile.BringToFront();
-            }
-        }
-
-        private void Profile_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            profile = null;
-        }
+        
 
 
 

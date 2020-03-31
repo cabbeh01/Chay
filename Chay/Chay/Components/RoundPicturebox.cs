@@ -16,6 +16,7 @@ namespace Chay.Components
 
             grpath.AddEllipse(0, 0, ClientSize.Width, ClientSize.Height);
             this.Region = new System.Drawing.Region(grpath);
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
             base.OnPaint(pe);
         }
     }
