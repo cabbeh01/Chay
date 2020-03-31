@@ -17,7 +17,7 @@ namespace Chay
         public string Password { get; private set; }
         public string Name { get; set; }
 
-        public Image Image { get; set; }
+        public Image Image { get; private set; }
 
         public List<Server> Servers { get; set; }
 

@@ -30,26 +30,21 @@
         {
             System.Windows.Forms.Panel pHeader;
             System.Windows.Forms.Panel pHeader2;
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbxChatName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancleProf = new System.Windows.Forms.Button();
+            this.btnSaveProf = new System.Windows.Forms.Button();
+            this.dlgOpenImage = new System.Windows.Forms.OpenFileDialog();
+            this.rpbxImage = new Chay.Components.RoundPicturebox();
             pHeader = new System.Windows.Forms.Panel();
             pHeader2 = new System.Windows.Forms.Panel();
             pHeader.SuspendLayout();
             pHeader2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rpbxImage)).BeginInit();
             this.SuspendLayout();
             // 
             // pHeader
@@ -66,7 +61,6 @@
             // 
             pHeader2.BackColor = System.Drawing.Color.SteelBlue;
             pHeader2.Controls.Add(this.label1);
-            pHeader2.Controls.Add(this.panel3);
             pHeader2.Dock = System.Windows.Forms.DockStyle.Top;
             pHeader2.Location = new System.Drawing.Point(0, 0);
             pHeader2.Name = "pHeader2";
@@ -75,78 +69,37 @@
             pHeader2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseDown);
             pHeader2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseMove);
             // 
-            // panel3
+            // label1
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(331, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(58, 28);
-            this.panel3.TabIndex = 8;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(164, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 40);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Profil";
             // 
-            // btnClose
+            // btnUpload
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnClose.Location = new System.Drawing.Point(10, -1);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(45, 26);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBox1.Location = new System.Drawing.Point(88, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(12, 69);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(121, 113);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(12, 189);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(64, 21);
-            this.btnSave.TabIndex = 18;
-            this.btnSave.Text = "Spara";
-            this.btnSave.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(320, 407);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 31);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Spara";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnUpload.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnUpload.FlatAppearance.BorderSize = 0;
+            this.btnUpload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpload.Location = new System.Drawing.Point(167, 190);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(64, 21);
+            this.btnUpload.TabIndex = 18;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = false;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Controls.Add(this.tbxChatName);
-            this.panel2.Location = new System.Drawing.Point(153, 104);
+            this.panel2.Location = new System.Drawing.Point(94, 261);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 33);
             this.panel2.TabIndex = 20;
@@ -166,49 +119,67 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(149, 71);
+            this.label2.Location = new System.Drawing.Point(90, 226);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 32);
             this.label2.TabIndex = 8;
             this.label2.Text = "Chatt namn";
             // 
-            // button2
+            // btnCancleProf
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(12, 407);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 31);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Spara";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCancleProf.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnCancleProf.FlatAppearance.BorderSize = 0;
+            this.btnCancleProf.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnCancleProf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancleProf.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancleProf.Location = new System.Drawing.Point(135, 344);
+            this.btnCancleProf.Name = "btnCancleProf";
+            this.btnCancleProf.Size = new System.Drawing.Size(64, 31);
+            this.btnCancleProf.TabIndex = 23;
+            this.btnCancleProf.Text = "Cancle";
+            this.btnCancleProf.UseVisualStyleBackColor = false;
+            this.btnCancleProf.Click += new System.EventHandler(this.btnCancleProf_Click);
             // 
-            // label1
+            // btnSaveProf
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(157, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 40);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Profil";
+            this.btnSaveProf.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnSaveProf.FlatAppearance.BorderSize = 0;
+            this.btnSaveProf.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnSaveProf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveProf.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveProf.Location = new System.Drawing.Point(205, 344);
+            this.btnSaveProf.Name = "btnSaveProf";
+            this.btnSaveProf.Size = new System.Drawing.Size(64, 31);
+            this.btnSaveProf.TabIndex = 24;
+            this.btnSaveProf.Text = "Spara";
+            this.btnSaveProf.UseVisualStyleBackColor = false;
+            this.btnSaveProf.Click += new System.EventHandler(this.btnSaveProf_Click);
+            // 
+            // dlgOpenImage
+            // 
+            this.dlgOpenImage.FileName = "openFileDialog1";
+            // 
+            // rpbxImage
+            // 
+            this.rpbxImage.BackColor = System.Drawing.Color.AliceBlue;
+            this.rpbxImage.Location = new System.Drawing.Point(152, 71);
+            this.rpbxImage.Name = "rpbxImage";
+            this.rpbxImage.Size = new System.Drawing.Size(100, 100);
+            this.rpbxImage.TabIndex = 25;
+            this.rpbxImage.TabStop = false;
             // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(396, 450);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(396, 387);
+            this.Controls.Add(this.rpbxImage);
+            this.Controls.Add(this.btnSaveProf);
+            this.Controls.Add(this.btnCancleProf);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.btnUpload);
             this.Controls.Add(pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Profile";
@@ -217,29 +188,23 @@
             pHeader.ResumeLayout(false);
             pHeader2.ResumeLayout(false);
             pHeader2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rpbxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox btnClose;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbxChatName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancleProf;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnSaveProf;
+        private Components.RoundPicturebox rpbxImage;
+        private System.Windows.Forms.OpenFileDialog dlgOpenImage;
     }
 }

@@ -48,8 +48,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.gbxPickServer = new System.Windows.Forms.GroupBox();
             this.gbxServerlist = new System.Windows.Forms.GroupBox();
-            this.btnServerDown = new System.Windows.Forms.Button();
             this.btnServerUp = new System.Windows.Forms.Button();
+            this.btnServerDown = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -300,22 +300,6 @@
             this.gbxServerlist.TabStop = false;
             this.gbxServerlist.Text = "Serverar";
             // 
-            // btnServerDown
-            // 
-            this.btnServerDown.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnServerDown.FlatAppearance.BorderSize = 0;
-            this.btnServerDown.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnServerDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnServerDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnServerDown.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnServerDown.Location = new System.Drawing.Point(207, 322);
-            this.btnServerDown.Name = "btnServerDown";
-            this.btnServerDown.Size = new System.Drawing.Size(30, 24);
-            this.btnServerDown.TabIndex = 11;
-            this.btnServerDown.Text = "↓";
-            this.btnServerDown.UseVisualStyleBackColor = false;
-            this.btnServerDown.Click += new System.EventHandler(this.btnServerDown_Click);
-            // 
             // btnServerUp
             // 
             this.btnServerUp.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -331,6 +315,22 @@
             this.btnServerUp.Text = "↑";
             this.btnServerUp.UseVisualStyleBackColor = false;
             this.btnServerUp.Click += new System.EventHandler(this.btnServerUp_Click);
+            // 
+            // btnServerDown
+            // 
+            this.btnServerDown.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnServerDown.FlatAppearance.BorderSize = 0;
+            this.btnServerDown.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnServerDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnServerDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServerDown.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.btnServerDown.Location = new System.Drawing.Point(207, 322);
+            this.btnServerDown.Name = "btnServerDown";
+            this.btnServerDown.Size = new System.Drawing.Size(30, 24);
+            this.btnServerDown.TabIndex = 11;
+            this.btnServerDown.Text = "↓";
+            this.btnServerDown.UseVisualStyleBackColor = false;
+            this.btnServerDown.Click += new System.EventHandler(this.btnServerDown_Click);
             // 
             // ServerManager
             // 

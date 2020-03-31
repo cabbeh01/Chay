@@ -30,7 +30,7 @@ namespace Chay
 
 
         private Point _mouseLocation;
-        bool isMaxi = false;
+        private bool _isMaxi = false;
 
         public Form1(User user)
         {
@@ -122,15 +122,15 @@ namespace Chay
 
         private void BtnMaxi_Click(object sender, EventArgs e)
         {
-            if (!isMaxi)
+            if (!_isMaxi)
             {
                 this.WindowState = FormWindowState.Maximized;
-                isMaxi = true;
+                _isMaxi = true;
             }
             else
             {
                 this.WindowState = FormWindowState.Normal;
-                isMaxi = false;
+                _isMaxi = false;
             }
             
         }

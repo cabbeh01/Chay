@@ -59,6 +59,7 @@ namespace Chay
                 if (found.Password == MongoCRUD.Encrypt(tbxPassword.Text))
                 {
                     Form1 form = new Form1(found);
+                    
                     //MessageBox.Show("Du är nu inloggad");
                     form.Show();
                     this.Hide();
