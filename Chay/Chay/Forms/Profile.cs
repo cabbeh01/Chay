@@ -14,16 +14,18 @@ namespace Chay.Forms
 {
     public partial class Profile : Form
     {
-        private MongoCRUD _db = new MongoCRUD("dbChay");
+        private MongoCRUD _db;
 
         private Point _mouseLocation;
         private string _base64String;
-        internal User _us;
-        
-        public Profile(User us)
+        private User _us; 
+        //internal MongoCRUD _db;
+
+        public Profile(User us, MongoCRUD db)
         {
             InitializeComponent();
             _us = us;
+            _db = db;
             RetrieveData();
         }
 

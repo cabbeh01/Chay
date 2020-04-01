@@ -15,7 +15,7 @@ namespace Chay
 {
     public partial class Login : Form
     {
-        public Point mouseLocation;
+        private Point _mouseLocation;
         MongoCRUD db = new MongoCRUD("dbChay");
         public Login()
         {
@@ -26,7 +26,7 @@ namespace Chay
         //Moveable header
         private void pHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseLocation = new Point(-e.X, -e.Y);
+            _mouseLocation = new Point(-e.X, -e.Y);
         }
 
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
@@ -34,7 +34,7 @@ namespace Chay
             if (e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
@@ -62,6 +62,7 @@ namespace Chay
                     
                     //MessageBox.Show("Du är nu inloggad");
                     form.Show();
+                    //this.Dispose();
                     this.Hide();
                 }
                 else

@@ -14,17 +14,18 @@ namespace Chay.Forms
 {
     public partial class ServerManager : Form
     {
-        private MongoCRUD _db = new MongoCRUD("dbChay");
+        private MongoCRUD _db;
         private Point _mouseLocation;
 
         internal User _us;
-        public ServerManager(User u)
+        public ServerManager(User u, MongoCRUD db)
         {
             InitializeComponent();
 
             //Defining Logged in user
             _us = u;
-
+            _db = db;
+            
             RetrieveServers();
         }
 

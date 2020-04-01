@@ -1,4 +1,5 @@
 ﻿using Chay.Forms;
+using MongoDBLogin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,10 +20,12 @@ namespace Chay
     public partial class Form1 : Form
     {
         //Forms
-        User us;
-        Settings setting            = null;
-        ServerManager servermang    = null;
-        Profile profile             = null;
+        private User us;
+        private Settings setting            = null;
+        private ServerManager servermang    = null;
+        private Profile profile             = null;
+
+        private MongoCRUD _db = new MongoCRUD("dbChay");
 
         //Settings
         Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
@@ -159,6 +162,7 @@ namespace Chay
             setting = null;
             RetriveSettings();
             conversationCtrl.Rebind();
+            //GC.Collect();
         }
         
         private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
@@ -166,13 +170,14 @@ namespace Chay
             us.Servers = servermang._us.Servers;
             await RetriveServerList();
             servermang = null;
+            //GC.Collect();
         }
 
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
             if (servermang == null)
             {
-                servermang = new ServerManager(us);
+                servermang = new ServerManager(us,_db);
                 servermang.FormClosed += Sm_FormClosed;
                 servermang.Show();
             }
@@ -183,10 +188,10 @@ namespace Chay
         }
         private void btnProfile_Click(object sender, EventArgs e)
         {
-
+            
             if (profile == null)
             {
-                profile = new Profile(us);
+                profile = new Profile(us,_db);
                 profile.FormClosed += Profile_FormClosed;
                 profile.Show();
             }
@@ -199,6 +204,7 @@ namespace Chay
         private void Profile_FormClosed(object sender, FormClosedEventArgs e)
         {
             profile = null;
+            //GC.Collect();
         }
 
         private async void LogicalComponents()

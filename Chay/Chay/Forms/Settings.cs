@@ -14,7 +14,7 @@ namespace Chay
     public partial class Settings : Form
     {
         private Point _mouseLocation;
-        public static string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\Settings.sett";
+        internal static string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Chay\\Settings.sett";
         public enum ChatColor
         {
             Blå,
