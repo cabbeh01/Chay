@@ -22,8 +22,8 @@ namespace Chay
         //Forms
         private User us;
         private Settings setting            = null;
-        private ServerManager servermang    = null;
-        private Profile profile             = null;
+        private ServerManager servermang;
+        private Profile profile;
 
         private MongoCRUD _db = new MongoCRUD("dbChay");
 
@@ -41,7 +41,8 @@ namespace Chay
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             us = user;
-
+            servermang = new ServerManager();
+            profile = new Profile();
             //Setting up Client
             us.Client = new TcpClient();
             us.Client.NoDelay = true;
@@ -164,21 +165,17 @@ namespace Chay
             conversationCtrl.Rebind();
             //GC.Collect();
         }
-        
-        private async void Sm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            us.Servers = servermang._us.Servers;
-            await RetriveServerList();
-            servermang = null;
-            //GC.Collect();
-        }
+       
 
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
-            if (servermang == null)
+            if (!servermang.Visible)
             {
-                servermang = new ServerManager(us,_db);
-                servermang.FormClosed += Sm_FormClosed;
+                servermang._us = us;
+                servermang._db = _db;
+                
+                servermang.VisibleChanged += Servermang_VisibleChanged;
+                servermang.RetrieveServers();
                 servermang.Show();
             }
             else
@@ -186,25 +183,32 @@ namespace Chay
                 servermang.BringToFront();
             }
         }
+
+        private async void Servermang_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!servermang.Visible)
+            {
+                us.Servers = servermang.GetServers();
+                await RetriveServerList();
+                servermang.VisibleChanged -= Servermang_VisibleChanged;
+            }
+        }
+
         private void btnProfile_Click(object sender, EventArgs e)
         {
             
-            if (profile == null)
+            if (!servermang.Visible)
             {
-                profile = new Profile(us,_db);
-                profile.FormClosed += Profile_FormClosed;
+                profile._us = us;
+                profile._db = _db;
+
+                profile.RetrieveData();
                 profile.Show();
             }
             else
             {
                 profile.BringToFront();
             }
-        }
-
-        private void Profile_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            profile = null;
-            //GC.Collect();
         }
 
         private async void LogicalComponents()

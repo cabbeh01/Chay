@@ -14,19 +14,19 @@ namespace Chay.Forms
 {
     public partial class Profile : Form
     {
-        private MongoCRUD _db;
-
         private Point _mouseLocation;
         private string _base64String;
-        private User _us; 
+        private bool _pictureuploaded;
+
+        internal User _us;
+        internal MongoCRUD _db;
+        
         //internal MongoCRUD _db;
 
-        public Profile(User us, MongoCRUD db)
+        public Profile()
         {
             InitializeComponent();
-            _us = us;
-            _db = db;
-            RetrieveData();
+            _pictureuploaded = false;
         }
 
         private void pHeader2_MouseMove(object sender, MouseEventArgs e)
@@ -72,12 +72,13 @@ namespace Chay.Forms
                         //MessageBox.Show(_base64String);
                         stream.Dispose();
                         ms.Dispose();
-                        
+                        _pictureuploaded = true;
                     }
                     else
                     {
                         MessageBox.Show("Bilden är för stor eller i fel format");
                     }
+                    img.Dispose();
                 }
             }
             catch
@@ -91,13 +92,16 @@ namespace Chay.Forms
         private async Task UpdateStruct()
         {
             await Task.Run(() => {
-                _us.Image = _base64String;
+                if (_pictureuploaded)
+                {
+                    _us.Image = _base64String;
+                }
                 _us.Name = tbxChatName.Text;
                 //Add the line of code to update certain things in user
                 _db.UpdateOne<User>("Users", _us.Id, _us);
             });
         }
-        private void RetrieveData()
+        public void RetrieveData()
         {
             try
             {
@@ -158,12 +162,12 @@ namespace Chay.Forms
         {
             await UpdateStruct();
             MessageBox.Show("Dina ändringar har sparats");
-            this.Close();
+            this.Hide();
         }
 
         private void btnCancleProf_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
     }
 }

@@ -14,25 +14,28 @@ namespace Chay.Forms
 {
     public partial class ServerManager : Form
     {
-        private MongoCRUD _db;
+        //private MongoCRUD _db;
         private Point _mouseLocation;
+        private Server _def = new Server("new1", IPAddress.Parse("127.0.0.1"), 2000);
 
         internal User _us;
-        public ServerManager(User u, MongoCRUD db)
+        internal MongoCRUD _db;
+
+        public ServerManager()
         {
             InitializeComponent();
-
-            //Defining Logged in user
-            _us = u;
-            _db = db;
-            
-            RetrieveServers();
         }
 
         private async void btnClose_Click(object sender, EventArgs e)
         {
             await UpdateStruct();
-            this.Close();
+            
+            this.Hide();
+        }
+
+        public List<Server> GetServers()
+        {
+            return _us.Servers;
         }
 
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
@@ -101,7 +104,7 @@ namespace Chay.Forms
                 _db.UpdateOne<User>("Users", _us.Id, _us);
             });
         }
-        private void RetrieveServers()
+        public void RetrieveServers()
         {
             try
             {
@@ -150,7 +153,7 @@ namespace Chay.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            lbxOut.Items.Add(new Server("new1",IPAddress.Parse("127.0.0.1"),2000));
+            lbxOut.Items.Add(_def);
             btnRemove.Enabled = true;
         }
 
