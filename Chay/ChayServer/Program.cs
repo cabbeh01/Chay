@@ -35,7 +35,7 @@ namespace ChayServer
         {
             try
             {
-                Console.Write("Vänligen välj en port:");
+                Console.Write("Vänligen välj en port: ");
                 int port = int.Parse(Console.ReadLine());
                 listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
@@ -56,21 +56,7 @@ namespace ChayServer
             StartHandshake();
         }
 
-        static async void StartHandshake()
-        {
-            try
-            {
-                client = await listener.AcceptTcpClientAsync();
-                StartReading(client);
-                Console.WriteLine(client);
-                tcpClients.Add(client);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-        }
+        
         static void CheckDatabase()
         {
             try
@@ -84,8 +70,9 @@ namespace ChayServer
                         if (serv.Id == GetSetting())
                         {
                             s = serv;
+                            Console.Write("Databas  |   ");
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Uppkoppling databas");
+                            Console.Write("fungerar");
                             Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine("\n\n");
                         }
@@ -114,11 +101,24 @@ namespace ChayServer
                 //Default settings
                 writer.Write(s.Id);
                 writer.Dispose();
-                _db.InsertOne("Servers", s);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Uppkoppling databas");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("\n\n");
+                try
+                {
+                    _db.InsertOne("Servers", s);
+                    Console.Write("Databas  |   ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("fungerar");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("\n\n");
+                }
+                catch
+                {
+                    Console.Write("Databas  |   ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("misslyckades");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("\n\n");
+                }
+                
             }
             catch
             {
@@ -145,36 +145,60 @@ namespace ChayServer
             }
 
         }
+
+        static async void StartHandshake()
+        {
+            try
+            {
+                client = await listener.AcceptTcpClientAsync();
+                StartReading(client);
+                Console.WriteLine(client);
+                tcpClients.Add(client);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            StartHandshake();
+        }
         static async void StartReading(TcpClient k)
         {
-            if (k.Connected)
+            try
             {
-                byte[] buffert = new byte[1024];
-
-                int n = 0;
-                try
+                if (k.Connected)
                 {
-                    n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                    byte[] buffert = new byte[1024];
+
+                    int n = 0;
+                    try
+                    {
+                        n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    //Sending data on server screen
+                    SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
+
+                    Broadcast(buffert);
+                    StartReading(k);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
-
-
+                    k.Dispose();
+                    tcpClients.Remove(client);
+                    UserInput();
                 }
-
-                //Sending data on server screen
-                SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-
-                Broadcast(buffert);
-                StartReading(k);
             }
-            else
+            catch
             {
                 k.Dispose();
                 tcpClients.Remove(client);
                 UserInput();
             }
+            
 
 
         }
