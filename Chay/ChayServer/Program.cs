@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Chay;
+using MongoDBLogin;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,14 +13,20 @@ namespace ChayServer
 {
     class Program
     {
+        static MongoCRUD _db = new MongoCRUD("dbChay");
+
         static TcpListener listener;
 
         static List<TcpClient> tcpClients = new List<TcpClient>();
         static TcpClient client;
+
+        static Server s = new Server();
         static bool userExist = false;
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Servern kopplar upp sig");
+            CheckDatabase();
             StartServer();
             UserInput();
         }
@@ -30,7 +39,10 @@ namespace ChayServer
                 int port = int.Parse(Console.ReadLine());
                 listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
+                s = new Server(port);
+                Console.Clear();
                 Console.WriteLine($"Server started at 127.0.0.1:{port}");
+                
             }
             catch
             {
@@ -59,7 +71,80 @@ namespace ChayServer
             }
             
         }
+        static void CheckDatabase()
+        {
+            try
+            {
+                if (File.Exists("env"))
+                {
+                    List<Server> ls = _db.GetAll<Server>("Servers");
+                    MongoDB.Bson.ObjectId objID = GetSetting();
+                    foreach (Server serv in ls)
+                    {
+                        if (serv.Id == GetSetting())
+                        {
+                            s = serv;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Uppkoppling databas");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            Console.WriteLine("\n\n");
+                        }
+                    }
+                }
+                else
+                {
+                    SetSetting();
+                }
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
 
+        }
+        static void SetSetting()
+        {
+            try
+            {
+                
+                FileStream stream = new FileStream("env", FileMode.OpenOrCreate, FileAccess.Write);
+                StreamWriter writer = new StreamWriter(stream);
+
+                s.Id = _db.GenID();
+                //Default settings
+                writer.Write(s.Id);
+                writer.Dispose();
+                _db.InsertOne("Servers", s);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Uppkoppling databas");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("\n\n");
+            }
+            catch
+            {
+                Console.WriteLine("Går inte spara");
+            }
+
+        }
+        static MongoDB.Bson.ObjectId GetSetting()
+        {
+            try
+            {
+                FileStream stream = new FileStream("env", FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(stream);
+
+                //Default settings
+                MongoDB.Bson.ObjectId a = MongoDB.Bson.ObjectId.Parse(reader.ReadLine());
+
+                reader.Dispose();
+                return a;
+            }
+            catch
+            {
+                return MongoDB.Bson.ObjectId.Empty;
+            }
+
+        }
         static async void StartReading(TcpClient k)
         {
             if (k.Connected)

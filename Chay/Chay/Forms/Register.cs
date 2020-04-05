@@ -14,8 +14,8 @@ namespace Chay
 {
     public partial class Register : Form
     {
-        public Point mouseLocation;
-        MongoCRUD db = new MongoCRUD("dbChay");
+        private Point _mouseLocation;
+        private MongoCRUD _db = new MongoCRUD("dbChay");
 
         public Register()
         {
@@ -36,14 +36,14 @@ namespace Chay
             if (e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
-                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
 
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseLocation = new Point(-e.X, -e.Y);
+            _mouseLocation = new Point(-e.X, -e.Y);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -56,12 +56,12 @@ namespace Chay
                     {
                         try
                         {
-                            User u = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+                            User u = _db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
                             if (!(u.Username == tbxUsername.Text))
                             {
                                 User n = new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text));
                                 n.Name = tbxUsername.Text;
-                                db.InsertOne("Users", n);
+                                _db.InsertOne("Users", n);
                                 MessageBox.Show("Ditt konto är nu skapat");
                                 this.Close();
                                 Login log = new Login();
@@ -74,7 +74,7 @@ namespace Chay
                         }
                         catch
                         {
-                            db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
+                            _db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
                             MessageBox.Show("Ditt konto är nu skapat");
                             this.Close();
                             Login log = new Login();

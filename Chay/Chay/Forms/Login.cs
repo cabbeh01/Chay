@@ -16,7 +16,7 @@ namespace Chay
     public partial class Login : Form
     {
         private Point _mouseLocation;
-        MongoCRUD db = new MongoCRUD("dbChay");
+        private MongoCRUD _db = new MongoCRUD("dbChay");
         public Login()
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace Chay
         {
             try
             {
-                User found = db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+                User found = _db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
                 if (found.Password == MongoCRUD.Encrypt(tbxPassword.Text))
                 {
                     Form1 form = new Form1(found);

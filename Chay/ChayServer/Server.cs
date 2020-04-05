@@ -36,6 +36,18 @@ namespace Chay
             this._port = port;
             this._name = name;
         }
+
+        public Server(int port)
+        {
+            //this._ip = ip;
+            this._port = port;
+        }
+
+        public Server()
+        {
+
+        }
+
         public override string ToString()
         {
             return $"{_name}| {_ip}: {_port}";
