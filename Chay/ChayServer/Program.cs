@@ -3,11 +3,9 @@ using MongoDBLogin;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ChayServer
 {
@@ -18,6 +16,7 @@ namespace ChayServer
         static TcpListener listener;
 
         static List<TcpClient> tcpClients = new List<TcpClient>();
+        static List<User> users = new List<User>();
         static TcpClient client;
 
         static Server s = new Server();
@@ -152,7 +151,6 @@ namespace ChayServer
             {
                 client = await listener.AcceptTcpClientAsync();
                 StartReading(client);
-                Console.WriteLine(client);
                 tcpClients.Add(client);
             }
             catch (Exception ex)
@@ -181,7 +179,7 @@ namespace ChayServer
 
                     //Sending data on server screen
                     SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-
+                    Console.WriteLine("> ");
                     Broadcast(buffert);
                     StartReading(k);
                 }
@@ -198,9 +196,9 @@ namespace ChayServer
                 tcpClients.Remove(client);
                 UserInput();
             }
-            
 
 
+          
         }
 
         static void SendMessage(string text)
@@ -228,7 +226,7 @@ namespace ChayServer
         {
             try
             {
-                Console.Write(">");
+                Console.Write("> ");
                 string data = Console.ReadLine();
                 if (string.IsNullOrEmpty(data))
                 {
@@ -242,6 +240,8 @@ namespace ChayServer
                         if (!String.IsNullOrEmpty(dataSplice[1]) && userExist)
                         {
                             Console.WriteLine($"Nu kickar vi användaren {dataSplice[1]}");
+                            KickUser(dataSplice[1]);
+                            
                         }
                         else if (!String.IsNullOrEmpty(dataSplice[1]))
                         {
@@ -319,6 +319,18 @@ namespace ChayServer
             }
 
             UserInput();
+        }
+
+
+        static void KickUser(string us)
+        {
+            foreach(User u in users)
+            {
+                if (u.Username == us)
+                {
+                    u.Client.Close();
+                }
+            }
         }
     }
 

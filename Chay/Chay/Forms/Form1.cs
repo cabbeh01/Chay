@@ -45,6 +45,7 @@ namespace Chay
             profile = new Profile();
             //Setting up Client
             us.Client = new TcpClient();
+            
             us.Client.NoDelay = true;
 
             //retriveServerList();
@@ -317,21 +318,22 @@ namespace Chay
                 {
                     if (twServers.SelectedNode.Text == s._name)
                     {
-                        if (us.Client.Connected)
+                        if (!us.Client.Connected)
                         {
-                            us.Client.Client.Close();
-                            cDConnected.UpdateStatus(true);
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
                         }
                         else
                         {
-                            cDConnected.UpdateStatus(true);
-                            lblNameServer.Text = twServers.SelectedNode.Text;
+                            us.Client.Client.Disconnect(true);
                             StartHandshake(s._ip, s._port);
                             MessageBox.Show($"Du connectar till {s._name}");
                         }
-                        
+
+                        cDConnected.UpdateStatus(true);
+                        lblNameServer.Text = twServers.SelectedNode.Text;
+
+                        //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
 
                     }
@@ -339,6 +341,7 @@ namespace Chay
             }
             catch
             {
+                
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Kan inte ansluta till servern");
             }
@@ -352,9 +355,10 @@ namespace Chay
             }
             catch
             {
-                us.Client.Dispose();
+                
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Går inte uppräta en anslutning");
+                return;
             }
         }
 
