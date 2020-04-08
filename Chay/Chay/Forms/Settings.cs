@@ -45,7 +45,7 @@ namespace Chay
             try
             {
                 //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
-                Font text = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+                Font text = new Font(Login.pfc.Families[0], 20.25f, FontStyle.Regular);
                 lblMessagecolor.Font = text;
                 lblTimestamp.Font = text;
                 lblInstallningar.Font = new Font(Login.pfc.Families[0], 25.25f, FontStyle.Regular);

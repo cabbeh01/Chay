@@ -35,7 +35,7 @@ namespace Chay.Forms
             {
                 //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
                 lblProfil.Font = new Font(Login.pfc.Families[0], 25.25f, FontStyle.Regular);
-                lblChattnamn.Font = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+                lblChattnamn.Font = new Font(Login.pfc.Families[0], 20.25f, FontStyle.Regular);
             }
             catch
             {
