@@ -35,11 +35,27 @@ namespace Chay
         {
             InitializeComponent();
             InsertDataCombobox();
+            GraphicalComponents();
 
             cbxChatColor.SelectedItem = c;
             cbxTimeFormat.SelectedItem = tf;
         }
+        public void GraphicalComponents()
+        {
+            try
+            {
+                //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
+                Font text = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+                lblMessagecolor.Font = text;
+                lblTimestamp.Font = text;
+                lblInstallningar.Font = new Font(Login.pfc.Families[0], 25.25f, FontStyle.Regular);
+            }
+            catch
+            {
+                MessageBox.Show("Typsnitten kunde ej laddas in");
 
+            }
+        }
         private void InsertDataCombobox()
         {
             try

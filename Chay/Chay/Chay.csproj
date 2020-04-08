@@ -220,6 +220,9 @@
     <None Include="dSChatt.xss">
       <DependentUpon>dSChatt.xsd</DependentUpon>
     </None>
+    <None Include="Font\Myriad-Pro-Condensed.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Font\Ranchers-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

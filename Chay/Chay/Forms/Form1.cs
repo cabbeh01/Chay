@@ -29,6 +29,7 @@ namespace Chay
 
         private MongoCRUD _db = new MongoCRUD("dbChay");
 
+        public static PrivateFontCollection pfc = new PrivateFontCollection();
         //Settings
         Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
         Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;

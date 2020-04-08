@@ -1,13 +1,7 @@
 ﻿using MongoDBLogin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Chay
@@ -20,9 +14,26 @@ namespace Chay
         public Register()
         {
             InitializeComponent();
-
+            GraphicalComponents();
         }
 
+        public void GraphicalComponents()
+        {
+            try
+            {
+                lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
+                Font text = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+                lblPass.Font = text;
+                lblRegPassre.Font = text;
+                lblRUser.Font = text;
+                lblShpass.Font = text;
+            }
+            catch
+            {
+                MessageBox.Show("Typsnitten kunde ej laddas in");
+                
+            }
+        }
         private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pHeader = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblServerhanterare = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -40,9 +40,9 @@
             this.tbxIp = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbxPort = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblIP = new System.Windows.Forms.Label();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tbxServername = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.pHeader.Controls.Add(this.label5);
+            this.pHeader.Controls.Add(this.lblServerhanterare);
             this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(2, 2);
@@ -74,16 +74,16 @@
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
             // 
-            // label5
+            // lblServerhanterare
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(229, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 40);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Serverhanterare";
+            this.lblServerhanterare.AutoSize = true;
+            this.lblServerhanterare.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServerhanterare.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblServerhanterare.Location = new System.Drawing.Point(229, 10);
+            this.lblServerhanterare.Name = "lblServerhanterare";
+            this.lblServerhanterare.Size = new System.Drawing.Size(183, 40);
+            this.lblServerhanterare.TabIndex = 18;
+            this.lblServerhanterare.Text = "Serverhanterare";
             // 
             // panel3
             // 
@@ -194,38 +194,38 @@
             this.tbxPort.Size = new System.Drawing.Size(55, 15);
             this.tbxPort.TabIndex = 1;
             // 
-            // label1
+            // lblIP
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(17, 107);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 25);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "IP-Adress";
+            this.lblIP.AutoSize = true;
+            this.lblIP.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIP.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblIP.Location = new System.Drawing.Point(17, 107);
+            this.lblIP.Name = "lblIP";
+            this.lblIP.Size = new System.Drawing.Size(72, 25);
+            this.lblIP.TabIndex = 14;
+            this.lblIP.Text = "IP-Adress";
             // 
-            // label3
+            // lblPort
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(226, 107);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 25);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Port";
+            this.lblPort.AutoSize = true;
+            this.lblPort.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPort.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPort.Location = new System.Drawing.Point(226, 107);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(38, 25);
+            this.lblPort.TabIndex = 15;
+            this.lblPort.Text = "Port";
             // 
-            // label4
+            // lblServer
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(17, 42);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 25);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Servernamn";
+            this.lblServer.AutoSize = true;
+            this.lblServer.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServer.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblServer.Location = new System.Drawing.Point(17, 42);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(93, 25);
+            this.lblServer.TabIndex = 16;
+            this.lblServer.Text = "Servernamn";
             // 
             // panel4
             // 
@@ -264,12 +264,12 @@
             // gbxPickServer
             // 
             this.gbxPickServer.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gbxPickServer.Controls.Add(this.label4);
+            this.gbxPickServer.Controls.Add(this.lblServer);
             this.gbxPickServer.Controls.Add(this.btnSave);
             this.gbxPickServer.Controls.Add(this.panel2);
             this.gbxPickServer.Controls.Add(this.panel1);
-            this.gbxPickServer.Controls.Add(this.label3);
-            this.gbxPickServer.Controls.Add(this.label1);
+            this.gbxPickServer.Controls.Add(this.lblPort);
+            this.gbxPickServer.Controls.Add(this.lblIP);
             this.gbxPickServer.Controls.Add(this.panel4);
             this.gbxPickServer.Enabled = false;
             this.gbxPickServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -376,13 +376,13 @@
         private System.Windows.Forms.TextBox tbxIp;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbxPort;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblIP;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.Label lblServer;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox tbxServername;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblServerhanterare;
         private System.Windows.Forms.GroupBox gbxPickServer;
         private System.Windows.Forms.GroupBox gbxServerlist;
         private System.Windows.Forms.Button btnServerUp;

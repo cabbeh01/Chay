@@ -30,11 +30,11 @@
         {
             System.Windows.Forms.Panel pHeader;
             this.Logo = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.tbxPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.llblRegister = new System.Windows.Forms.LinkLabel();
+            this.lblRegister = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbxUsername = new System.Windows.Forms.TextBox();
@@ -71,27 +71,27 @@
             this.Logo.Text = "Chay";
             this.Logo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // lblUser
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(97, 176);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 25);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Username";
+            this.lblUser.AutoSize = true;
+            this.lblUser.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblUser.Location = new System.Drawing.Point(97, 176);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(79, 25);
+            this.lblUser.TabIndex = 5;
+            this.lblUser.Text = "Username";
             // 
-            // label3
+            // lblPass
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(104, 214);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Password";
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPass.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPass.Location = new System.Drawing.Point(104, 214);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(72, 25);
+            this.lblPass.TabIndex = 4;
+            this.lblPass.Text = "Password";
             // 
             // tbxPassword
             // 
@@ -118,18 +118,18 @@
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // llblRegister
+            // lblRegister
             // 
-            this.llblRegister.AutoSize = true;
-            this.llblRegister.Font = new System.Drawing.Font("Myriad Pro Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llblRegister.LinkColor = System.Drawing.SystemColors.WindowFrame;
-            this.llblRegister.Location = new System.Drawing.Point(332, 249);
-            this.llblRegister.Name = "llblRegister";
-            this.llblRegister.Size = new System.Drawing.Size(50, 19);
-            this.llblRegister.TabIndex = 2;
-            this.llblRegister.TabStop = true;
-            this.llblRegister.Text = "Register";
-            this.llblRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlblRegister_LinkClicked);
+            this.lblRegister.AutoSize = true;
+            this.lblRegister.Font = new System.Drawing.Font("Myriad Pro Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegister.LinkColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblRegister.Location = new System.Drawing.Point(332, 249);
+            this.lblRegister.Name = "lblRegister";
+            this.lblRegister.Size = new System.Drawing.Size(50, 19);
+            this.lblRegister.TabIndex = 2;
+            this.lblRegister.TabStop = true;
+            this.lblRegister.Text = "Register";
+            this.lblRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlblRegister_LinkClicked);
             // 
             // panel1
             // 
@@ -199,11 +199,11 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(pHeader);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.llblRegister);
+            this.Controls.Add(this.lblRegister);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblPass);
+            this.Controls.Add(this.lblUser);
             this.Controls.Add(this.Logo);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -224,11 +224,11 @@
 
         #endregion
         private System.Windows.Forms.Label Logo;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.TextBox tbxPassword;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.LinkLabel llblRegister;
+        private System.Windows.Forms.LinkLabel lblRegister;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbxUsername;

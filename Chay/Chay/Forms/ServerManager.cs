@@ -24,6 +24,28 @@ namespace Chay.Forms
         public ServerManager()
         {
             InitializeComponent();
+            GraphicalComponents();
+        }
+
+        public void GraphicalComponents()
+        {
+            try
+            {
+                //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
+                Font text = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+                Font gbxtext = new Font(Login.pfc.Families[0], 26.25f, FontStyle.Regular);
+                gbxServerlist.Font = gbxtext;
+                gbxPickServer.Font = gbxtext;
+                lblServerhanterare.Font = new Font(Login.pfc.Families[0], 25.25f, FontStyle.Regular);
+                lblIP.Font = text;
+                lblPort.Font = text;
+                lblServer.Font = text;
+            }
+            catch
+            {
+                MessageBox.Show("Typsnitten kunde ej laddas in");
+
+            }
         }
 
         private async void btnClose_Click(object sender, EventArgs e)

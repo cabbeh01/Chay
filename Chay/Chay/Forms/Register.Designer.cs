@@ -35,17 +35,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbxUsername = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblRUser = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbxPassword = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.plRepass = new System.Windows.Forms.Panel();
             this.tbxRepassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblRegPassre = new System.Windows.Forms.Label();
+            this.lblRegister = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblShpass = new System.Windows.Forms.Label();
             this.bCbxShowPass = new Chay.BigCheckbox();
             this.pHeader.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -117,16 +117,16 @@
             this.tbxUsername.Size = new System.Drawing.Size(159, 15);
             this.tbxUsername.TabIndex = 0;
             // 
-            // label2
+            // lblRUser
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(98, 142);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 25);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Username";
+            this.lblRUser.AutoSize = true;
+            this.lblRUser.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRUser.Location = new System.Drawing.Point(98, 142);
+            this.lblRUser.Name = "lblRUser";
+            this.lblRUser.Size = new System.Drawing.Size(79, 25);
+            this.lblRUser.TabIndex = 8;
+            this.lblRUser.Text = "Username";
             // 
             // panel1
             // 
@@ -148,16 +148,16 @@
             this.tbxPassword.TabIndex = 0;
             this.tbxPassword.TextChanged += new System.EventHandler(this.tbxPassword_TextChanged);
             // 
-            // label1
+            // lblPass
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(103, 179);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Password";
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPass.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPass.Location = new System.Drawing.Point(103, 179);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(72, 25);
+            this.lblPass.TabIndex = 7;
+            this.lblPass.Text = "Password";
             // 
             // plRepass
             // 
@@ -179,27 +179,27 @@
             this.tbxRepassword.TabIndex = 0;
             this.tbxRepassword.TextChanged += new System.EventHandler(this.tbxRepassword_TextChanged);
             // 
-            // label3
+            // lblRegPassre
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(82, 218);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 25);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Re-Password";
+            this.lblRegPassre.AutoSize = true;
+            this.lblRegPassre.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegPassre.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRegPassre.Location = new System.Drawing.Point(82, 218);
+            this.lblRegPassre.Name = "lblRegPassre";
+            this.lblRegPassre.Size = new System.Drawing.Size(95, 25);
+            this.lblRegPassre.TabIndex = 6;
+            this.lblRegPassre.Text = "Re-Password";
             // 
-            // label4
+            // lblRegister
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Myriad Pro Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(193, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 38);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Register";
+            this.lblRegister.AutoSize = true;
+            this.lblRegister.Font = new System.Drawing.Font("Myriad Pro Cond", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegister.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRegister.Location = new System.Drawing.Point(193, 89);
+            this.lblRegister.Name = "lblRegister";
+            this.lblRegister.Size = new System.Drawing.Size(98, 38);
+            this.lblRegister.TabIndex = 9;
+            this.lblRegister.Text = "Register";
             // 
             // btnRegister
             // 
@@ -231,16 +231,16 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // label5
+            // lblShpass
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(260, 253);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 25);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Visa lösenord";
+            this.lblShpass.AutoSize = true;
+            this.lblShpass.Font = new System.Drawing.Font("Myriad Pro Cond", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShpass.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblShpass.Location = new System.Drawing.Point(260, 253);
+            this.lblShpass.Name = "lblShpass";
+            this.lblShpass.Size = new System.Drawing.Size(97, 25);
+            this.lblShpass.TabIndex = 11;
+            this.lblShpass.Text = "Visa lösenord";
             // 
             // bCbxShowPass
             // 
@@ -258,17 +258,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(481, 377);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblShpass);
             this.Controls.Add(this.bCbxShowPass);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblRegister);
             this.Controls.Add(this.plRepass);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblRegPassre);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPass);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblRUser);
             this.Controls.Add(this.pHeader);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -299,17 +299,17 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbxUsername;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRUser;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbxPassword;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.Panel plRepass;
         private System.Windows.Forms.TextBox tbxRepassword;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblRegPassre;
+        private System.Windows.Forms.Label lblRegister;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnBack;
         private BigCheckbox bCbxShowPass;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblShpass;
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Chay
     {
         private Point _mouseLocation;
         private MongoCRUD _db = new MongoCRUD("dbChay");
+        public static PrivateFontCollection pfc = new PrivateFontCollection();
+        
         public Login()
         {
             InitializeComponent();
@@ -42,7 +45,22 @@ namespace Chay
         //Logo
         public void GraphicalComponents()
         {
-            Logo.Font = new Font("Ranchers", 56, FontStyle.Regular);
+            try
+            {
+                pfc.AddFontFile("Font//Myriad-Pro-Condensed.ttf");
+                pfc.AddFontFile("Font//Ranchers-Regular.ttf");
+                Logo.Font = new Font(pfc.Families[1], 56, FontStyle.Regular);
+                Font text = new Font(pfc.Families[0], 15.75f, FontStyle.Regular);
+                lblPass.Font = text;
+                lblPass.Font = text;
+                lblRegister.Font = new Font(pfc.Families[0], 12, FontStyle.Regular);
+            }
+            catch
+            {
+                MessageBox.Show("Typsnitten kunde ej laddas in");
+                Logo.Font = new Font("Arial", 56, FontStyle.Regular);
+            }
+            
             Logo.ForeColor = Color.White;
         }
 

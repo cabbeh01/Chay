@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.pHeader = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblInstallningar = new System.Windows.Forms.Label();
+            this.lblMessagecolor = new System.Windows.Forms.Label();
             this.cbxChatColor = new System.Windows.Forms.ComboBox();
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblTimestamp = new System.Windows.Forms.Label();
             this.cbxTimeFormat = new System.Windows.Forms.ComboBox();
             this.pHeader.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
-            this.pHeader.Controls.Add(this.label1);
+            this.pHeader.Controls.Add(this.lblInstallningar);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(2, 2);
             this.pHeader.Name = "pHeader";
@@ -51,27 +51,27 @@
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseMove);
             // 
-            // label1
+            // lblInstallningar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(130, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 40);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Inställningar";
+            this.lblInstallningar.AutoSize = true;
+            this.lblInstallningar.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInstallningar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblInstallningar.Location = new System.Drawing.Point(130, 10);
+            this.lblInstallningar.Name = "lblInstallningar";
+            this.lblInstallningar.Size = new System.Drawing.Size(149, 40);
+            this.lblInstallningar.TabIndex = 8;
+            this.lblInstallningar.Text = "Inställningar";
             // 
-            // label2
+            // lblMessagecolor
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(133, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 32);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Meddelandefärg";
+            this.lblMessagecolor.AutoSize = true;
+            this.lblMessagecolor.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessagecolor.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblMessagecolor.Location = new System.Drawing.Point(133, 97);
+            this.lblMessagecolor.Name = "lblMessagecolor";
+            this.lblMessagecolor.Size = new System.Drawing.Size(154, 32);
+            this.lblMessagecolor.TabIndex = 6;
+            this.lblMessagecolor.Text = "Meddelandefärg";
             // 
             // cbxChatColor
             // 
@@ -113,16 +113,16 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label4
+            // lblTimestamp
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(133, 187);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 32);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Tidsformat";
+            this.lblTimestamp.AutoSize = true;
+            this.lblTimestamp.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimestamp.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTimestamp.Location = new System.Drawing.Point(133, 187);
+            this.lblTimestamp.Name = "lblTimestamp";
+            this.lblTimestamp.Size = new System.Drawing.Size(106, 32);
+            this.lblTimestamp.TabIndex = 12;
+            this.lblTimestamp.Text = "Tidsformat";
             // 
             // cbxTimeFormat
             // 
@@ -141,11 +141,11 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(409, 403);
             this.Controls.Add(this.cbxTimeFormat);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblTimestamp);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.cbxChatColor);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblMessagecolor);
             this.Controls.Add(this.pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Settings";
@@ -161,12 +161,12 @@
         #endregion
 
         private System.Windows.Forms.Panel pHeader;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMessagecolor;
         private System.Windows.Forms.ComboBox cbxChatColor;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblInstallningar;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTimestamp;
         private System.Windows.Forms.ComboBox cbxTimeFormat;
     }
 }

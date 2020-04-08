@@ -30,14 +30,15 @@
         {
             System.Windows.Forms.Panel pHeader;
             System.Windows.Forms.Panel pHeader2;
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblProfil = new System.Windows.Forms.Label();
             this.btnUpload = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbxChatName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblChattnamn = new System.Windows.Forms.Label();
             this.btnCancleProf = new System.Windows.Forms.Button();
             this.btnSaveProf = new System.Windows.Forms.Button();
             this.dlgOpenImage = new System.Windows.Forms.OpenFileDialog();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.rpbxImage = new Chay.Components.RoundPicturebox();
             pHeader = new System.Windows.Forms.Panel();
             pHeader2 = new System.Windows.Forms.Panel();
@@ -60,7 +61,7 @@
             // pHeader2
             // 
             pHeader2.BackColor = System.Drawing.Color.SteelBlue;
-            pHeader2.Controls.Add(this.label1);
+            pHeader2.Controls.Add(this.lblProfil);
             pHeader2.Dock = System.Windows.Forms.DockStyle.Top;
             pHeader2.Location = new System.Drawing.Point(0, 0);
             pHeader2.Name = "pHeader2";
@@ -69,16 +70,16 @@
             pHeader2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseDown);
             pHeader2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseMove);
             // 
-            // label1
+            // lblProfil
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(164, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 40);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Profil";
+            this.lblProfil.AutoSize = true;
+            this.lblProfil.Font = new System.Drawing.Font("Myriad Pro Cond", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfil.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblProfil.Location = new System.Drawing.Point(164, 10);
+            this.lblProfil.Name = "lblProfil";
+            this.lblProfil.Size = new System.Drawing.Size(72, 40);
+            this.lblProfil.TabIndex = 24;
+            this.lblProfil.Text = "Profil";
             // 
             // btnUpload
             // 
@@ -113,16 +114,16 @@
             this.tbxChatName.Size = new System.Drawing.Size(159, 15);
             this.tbxChatName.TabIndex = 0;
             // 
-            // label2
+            // lblChattnamn
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(90, 226);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 32);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Chatt namn";
+            this.lblChattnamn.AutoSize = true;
+            this.lblChattnamn.Font = new System.Drawing.Font("Myriad Pro Cond", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChattnamn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblChattnamn.Location = new System.Drawing.Point(90, 226);
+            this.lblChattnamn.Name = "lblChattnamn";
+            this.lblChattnamn.Size = new System.Drawing.Size(113, 32);
+            this.lblChattnamn.TabIndex = 8;
+            this.lblChattnamn.Text = "Chatt namn";
             // 
             // btnCancleProf
             // 
@@ -158,12 +159,29 @@
             // 
             this.dlgOpenImage.FileName = "openFileDialog1";
             // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnLogout.Location = new System.Drawing.Point(319, 71);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(72, 21);
+            this.btnLogout.TabIndex = 26;
+            this.btnLogout.Text = "Logga ut";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // rpbxImage
             // 
             this.rpbxImage.BackColor = System.Drawing.Color.AliceBlue;
             this.rpbxImage.Location = new System.Drawing.Point(152, 71);
             this.rpbxImage.Name = "rpbxImage";
             this.rpbxImage.Size = new System.Drawing.Size(100, 100);
+            this.rpbxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.rpbxImage.TabIndex = 25;
             this.rpbxImage.TabStop = false;
             // 
@@ -173,10 +191,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(396, 387);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.rpbxImage);
             this.Controls.Add(this.btnSaveProf);
             this.Controls.Add(this.btnCancleProf);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblChattnamn);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(pHeader);
@@ -199,11 +218,12 @@
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbxChatName;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblChattnamn;
         private System.Windows.Forms.Button btnCancleProf;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblProfil;
         private System.Windows.Forms.Button btnSaveProf;
         private Components.RoundPicturebox rpbxImage;
         private System.Windows.Forms.OpenFileDialog dlgOpenImage;
+        private System.Windows.Forms.Button btnLogout;
     }
 }

@@ -26,9 +26,23 @@ namespace Chay.Forms
         public Profile()
         {
             InitializeComponent();
+            GraphicalComponents();
             _pictureuploaded = false;
         }
+        public void GraphicalComponents()
+        {
+            try
+            {
+                //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
+                lblProfil.Font = new Font(Login.pfc.Families[0], 25.25f, FontStyle.Regular);
+                lblChattnamn.Font = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
+            }
+            catch
+            {
+                MessageBox.Show("Typsnitten kunde ej laddas in");
 
+            }
+        }
         private void pHeader2_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -168,6 +182,11 @@ namespace Chay.Forms
         private void btnCancleProf_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
