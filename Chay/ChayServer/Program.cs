@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace ChayServer
@@ -159,13 +161,18 @@ namespace ChayServer
             }
             StartHandshake();
         }
-        static async void StartReading(TcpClient k)
+        static void StartReading(TcpClient k)
         {
             try
             {
                 if (k.Connected)
                 {
-                    byte[] buffert = new byte[1024];
+                    IFormatter formatter = new BinaryFormatter();
+                    Stream str = k.GetStream();
+                    Message msg = (Message)formatter.Deserialize(str);
+
+                    Console.WriteLine(msg.Auther.Name + ":  " + msg.Text);
+                    /*byte[] buffert = new byte[1024];
 
                     int n = 0;
                     try
@@ -180,7 +187,7 @@ namespace ChayServer
                     //Sending data on server screen
                     SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
                     Console.WriteLine("> ");
-                    Broadcast(buffert);
+                    Broadcast(buffert);*/
                     StartReading(k);
                 }
                 else
@@ -222,6 +229,7 @@ namespace ChayServer
             }
         }
 
+        
         static void UserInput()
         {
             try
@@ -239,9 +247,9 @@ namespace ChayServer
                     case "kick":
                         if (!String.IsNullOrEmpty(dataSplice[1]) && userExist)
                         {
-                            Console.WriteLine($"Nu kickar vi användaren {dataSplice[1]}");
                             KickUser(dataSplice[1]);
-                            
+                            Console.WriteLine($"Användaren {dataSplice[1]} är nu kickad");
+
                         }
                         else if (!String.IsNullOrEmpty(dataSplice[1]))
                         {

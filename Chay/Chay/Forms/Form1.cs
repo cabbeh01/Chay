@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +33,8 @@ namespace Chay
         Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
         Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
+        dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
+        dSChatt.ConversationMessagesRow newRow = null;
 
         private Point _mouseLocation;
         private bool _isMaxi = false;
@@ -267,17 +271,22 @@ namespace Chay
         {
             try
             {
-                dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
-                dSChatt.ConversationMessagesRow newRow = table.NewConversationMessagesRow();
+                
+                
                 if (us.Client.Connected)
                 {
-                    StartCommunication(tbxSend.Text);
+                    StartCommunication(new Message(us,tbxSend.Text,DateTime.Now));
                     //us._client.Close();
+
+
+                    newRow.time = DateTime.Now;
+                    newRow.text = tbxSend.Text;
+                    newRow.incoming = true;
 
                     newRow = table.NewConversationMessagesRow();
                     newRow.time = DateTime.Now;
                     newRow.text = tbxSend.Text;
-                    newRow.incoming = false;
+                    newRow.incoming = true;
                     table.AddConversationMessagesRow(newRow);
 
 
@@ -318,18 +327,15 @@ namespace Chay
                 {
                     if (twServers.SelectedNode.Text == s._name)
                     {
-                        if (!us.Client.Connected)
+                        if (us.Client.Connected)
                         {
-                            StartHandshake(s._ip, s._port);
-                            MessageBox.Show($"Du connectar till {s._name}");
+                            RemoveHandshake();
                         }
-                        else
-                        {
-                            us.Client.Client.Disconnect(true);
-                            StartHandshake(s._ip, s._port);
-                            MessageBox.Show($"Du connectar till {s._name}");
-                        }
+                        
+                        StartHandshake(s._ip, s._port);
+                        MessageBox.Show($"Du connectar till {s._name}");
 
+                        newRow = table.NewConversationMessagesRow();
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
 
@@ -339,11 +345,10 @@ namespace Chay
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                
                 cDConnected.UpdateStatus(false);
-                MessageBox.Show("Kan inte ansluta till servern");
+                MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex.ToString());
             }
         }
 
@@ -352,19 +357,39 @@ namespace Chay
             try
             {
                 await us.Client.ConnectAsync(address, port);
+                StartReading();
             }
             catch
             {
                 
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Går inte uppräta en anslutning");
-                return;
             }
         }
 
-        public async void StartCommunication(string message)
+        public void RemoveHandshake()
         {
-            byte[] outData = Encoding.Unicode.GetBytes(message); // Detta ska bytas ut om en klass som man ska skicka
+            try
+            {
+                us.Client.Client.Close();
+                cDConnected.UpdateStatus(false);
+            }
+            catch
+            {
+                cDConnected.UpdateStatus(false);
+                MessageBox.Show("Ett fel uppstod kontakta utvecklaren");
+            }
+        }
+
+        public void StartCommunication(Message msg)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream str = us.Client.GetStream();
+            formatter.Serialize(str,msg);
+            
+            //us.Client.GetStream().
+            /*
+            byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska skicka
             try
             {
                 await us.Client.GetStream().WriteAsync(outData, 0, outData.Length);
@@ -372,8 +397,38 @@ namespace Chay
             catch
             {
                 MessageBox.Show("Det går inte skicka meddelandet");
+            }*/
+        }
+        public async void StartReading()
+        {
+            try
+            {
+                if (us.Client.Connected)
+                {
+                    byte[] buffert = new byte[1024];
+
+                    int n = 0;
+                    try
+                    {
+                        n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    
+                    //Sending data on server screen
+                    //SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
+                    MessageBox.Show("Jag fick detta");
+                    StartReading();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Anslutningen upphörde");
             }
         }
+
 
         private void RetriveSettings()
         {

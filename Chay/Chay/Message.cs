@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chay
 {
+    [Serializable]
     public class Message
     {
         private User _auther;

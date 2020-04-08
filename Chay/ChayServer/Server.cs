@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chay
 {
+    [Serializable]
     public class Server
     {
         public ObjectId Id { get; set; }
