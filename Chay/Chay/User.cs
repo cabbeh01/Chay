@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Chay
 {
-    [Serializable]
+    [Serializable()]
     public class User
     {
         public ObjectId Id { get; set; }
@@ -22,6 +22,7 @@ namespace Chay
 
         public List<Server> Servers { get; set; }
 
+        [field: NonSerialized]
         internal TcpClient Client;
 
 

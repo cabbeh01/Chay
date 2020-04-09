@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Chay
 {
-    [Serializable]
-    public class Message
+    [Serializable()]
+    public class Message : ISerializable
     {
         private User _auther;
         private string _text;
@@ -57,9 +59,24 @@ namespace Chay
             }
         }
 
+        // GET & SET serialization
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("_auther", _auther);
+            info.AddValue("_text", _text);
+            info.AddValue("_delivertime", _deliveryTime);
+        }
+
+        public Message(SerializationInfo info, StreamingContext context)
+        {
+            _auther = (User)info.GetValue("_auther", typeof(User));
+            _text = (string)info.GetValue("_text", typeof(string));
+            _deliveryTime = (DateTime)info.GetValue("_delivertime", typeof(DateTime));
+        }
+
         public override string ToString()
         {
-            return $"{this._auther.Name}: {this._text}";
+            return $"{this._text}";
         }
     }
 }

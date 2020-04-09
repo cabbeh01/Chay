@@ -276,7 +276,7 @@ namespace Chay
                 
                 if (us.Client.Connected)
                 {
-                    StartCommunication(new Message(us,tbxSend.Text,DateTime.Now));
+                    StartSending(new Message(us,tbxSend.Text,DateTime.Now));
                     //us._client.Close();
 
 
@@ -382,23 +382,41 @@ namespace Chay
             }
         }
 
-        public void StartCommunication(Message msg)
+        byte[] ObjectToByteArray(object obj)
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream str = us.Client.GetStream();
-            formatter.Serialize(str,msg);
-            
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
+        }
+
+        public async void StartSending(Message msg)
+        {
+            //BinaryFormatter bf = new BinaryFormatter();
+            //Stream str = us.Client.GetStream();
+            //bf.Serialize(str,msg);
+            //str.Close();
             //us.Client.GetStream().
-            /*
-            byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska skicka
+
+
+
+            //byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska 
             try
             {
+                byte[] outData = ObjectToByteArray(msg);
+                
+                MessageBox.Show(outData.ToString());
                 await us.Client.GetStream().WriteAsync(outData, 0, outData.Length);
+                MessageBox.Show("Meddelandet har nu skickats");
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Det går inte skicka meddelandet");
-            }*/
+                MessageBox.Show("Det går inte skicka meddelandet" + "\n "+ ex.Message);
+            }
         }
         public async void StartReading()
         {

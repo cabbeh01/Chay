@@ -30,6 +30,7 @@ namespace ChayServer
             CheckDatabase();
             StartServer();
             UserInput();
+            client.NoDelay = true;
         }
 
         static void StartServer()
@@ -152,8 +153,10 @@ namespace ChayServer
             try
             {
                 client = await listener.AcceptTcpClientAsync();
-                StartReading(client);
+                Console.WriteLine("Ny användare kopplade upp sig");
                 tcpClients.Add(client);
+                StartReading(client);
+                
             }
             catch (Exception ex)
             {
@@ -161,33 +164,62 @@ namespace ChayServer
             }
             StartHandshake();
         }
-        static void StartReading(TcpClient k)
+        static async void StartReading(TcpClient k)
         {
             try
             {
                 if (k.Connected)
                 {
-                    IFormatter formatter = new BinaryFormatter();
-                    Stream str = k.GetStream();
-                    Message msg = (Message)formatter.Deserialize(str);
+                    //Message recived = null;
+                    //BinaryFormatter bf = new BinaryFormatter();
+                    //Stream str = k.GetStream();
+                    //Message msg = (Message)bf.Deserialize(str);
+                    //str.Close();
+                    //Console.WriteLine(msg.Auther.Name + ":  " + msg.Text);
 
-                    Console.WriteLine(msg.Auther.Name + ":  " + msg.Text);
-                    /*byte[] buffert = new byte[1024];
-
+                    byte[] buffert = new byte[1024];
+                    Message recived = null;
                     int n = 0;
                     try
                     {
                         n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                        
+                        //using (NetworkStream stream = k.GetStream())
+                        //{
+                        //    byte[] data = new byte[1024];
+                        //    using (MemoryStream ms = new MemoryStream())
+                        //    {
+
+                        //        int numBytesRead;
+                        //        while ((numBytesRead = stream.Read(data, 0, data.Length)) > 0)
+                        //        {
+                        //            ms.Write(data, 0, numBytesRead);
+                        //        }
+
+                        //        BinaryFormatter binForm = new BinaryFormatter();
+                        //        Message msg = (Message)binForm.Deserialize(ms);
+                        //        Console.WriteLine($"{msg.Auther.Name}: {msg.Text}");
+                        //        //rec = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
+                        //        //recived = (Message)ByteArrayToObject(ms.ToArray(), (int)ms.Length);
+                        //    }
+                        //}
+
+                        //Console.WriteLine(n);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
 
-                    //Sending data on server screen
-                    SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
+                    
+
+
+                     
+                    //Printing data ín console
+                    Console.WriteLine($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
+                    Console.WriteLine($"{recived.Auther.Name}: {recived.Text}");
                     Console.WriteLine("> ");
-                    Broadcast(buffert);*/
+                    //Broadcast(buffert);
                     StartReading(k);
                 }
                 else
@@ -208,10 +240,18 @@ namespace ChayServer
           
         }
 
-        static void SendMessage(string text)
+        static Object ByteArrayToObject(byte[] arrBytes, int length)
         {
-            Console.WriteLine(text);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter binForm = new BinaryFormatter();
+                ms.WriteAsync(arrBytes, 0, length);
+                ms.Seek(0, SeekOrigin.Begin);
+                Object obj = (Object)binForm.Deserialize(ms);
 
+                return obj;
+            }
+            
         }
 
         static void Broadcast(byte[] data)
@@ -234,6 +274,7 @@ namespace ChayServer
         {
             try
             {
+                
                 Console.Write("> ");
                 string data = Console.ReadLine();
                 if (string.IsNullOrEmpty(data))

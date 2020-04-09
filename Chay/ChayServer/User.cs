@@ -22,6 +22,7 @@ namespace Chay
 
         public List<Server> Servers { get; set; }
 
+        [field: NonSerialized]
         internal TcpClient Client;
 
 
