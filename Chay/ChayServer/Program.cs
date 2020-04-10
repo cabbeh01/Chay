@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChayServer
 {
@@ -170,6 +171,9 @@ namespace ChayServer
             {
                 if (k.Connected)
                 {
+                    // [Metadata]--[DATA]--[END]
+
+
                     //Message recived = null;
                     //BinaryFormatter bf = new BinaryFormatter();
                     //Stream str = k.GetStream();
@@ -177,48 +181,95 @@ namespace ChayServer
                     //str.Close();
                     //Console.WriteLine(msg.Auther.Name + ":  " + msg.Text);
 
-                    byte[] buffert = new byte[1024];
-                    Message recived = null;
-                    int n = 0;
-                    try
-                    {
-                        n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
-                        
-                        //using (NetworkStream stream = k.GetStream())
-                        //{
-                        //    byte[] data = new byte[1024];
-                        //    using (MemoryStream ms = new MemoryStream())
-                        //    {
-
-                        //        int numBytesRead;
-                        //        while ((numBytesRead = stream.Read(data, 0, data.Length)) > 0)
-                        //        {
-                        //            ms.Write(data, 0, numBytesRead);
-                        //        }
-
-                        //        BinaryFormatter binForm = new BinaryFormatter();
-                        //        Message msg = (Message)binForm.Deserialize(ms);
-                        //        Console.WriteLine($"{msg.Auther.Name}: {msg.Text}");
-                        //        //rec = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
-                        //        //recived = (Message)ByteArrayToObject(ms.ToArray(), (int)ms.Length);
-                        //    }
-                        //}
-
-                        //Console.WriteLine(n);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                    //byte[] buffert = new byte[1024];
 
                     
+                    //Message recived = null;
+                    //int n = 0;
+                    //int temp = 0;
+
+                    NetworkStream stream = k.GetStream();
+                    byte[] tempbuffer = new byte[k.ReceiveBufferSize];
+                    await Task.Run(() => {
+                        //List<byte> bigbuffer = new List<byte>();
+
+                        //byte[] tempbuffer = new byte[1024];
+
+                        //while (stream.Read(tempbuffer, 0, tempbuffer.Length) > 0)
+                        //{
+                        //    bigbuffer.AddRange(tempbuffer);
+                        //    Console.ForegroundColor = ConsoleColor.Red;
+                        //    Console.WriteLine("Looop ::  " + stream.Read(tempbuffer, 0, tempbuffer.Length));
+                        //    Console.WriteLine(k.ReceiveBufferSize);
+                        //}
+
+                        //Console.ForegroundColor = ConsoleColor.Green;
+                        //Console.WriteLine("Utanför loopen");
+
+                        //// now you can convert to a native byte array
+                        //byte[] completedbuffer = new byte[bigbuffer.Count];
+
+                        //bigbuffer.CopyTo(completedbuffer);
+
+                        
+
+                        stream.Read(tempbuffer, 0, tempbuffer.Length);
 
 
-                     
+                        
+
+                        //Console.WriteLine(decodedmsg);
+                       
+
+                    });
+                    Message incomming = (Message)ByteArrayToObject(tempbuffer);
+                    Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+                    //try
+                    //{
+
+
+                    //    //can be in another size like 1024 etc.. 
+                    //    //depend of the data as you sending from de client
+                    //    //i recommend small size for the correct read of the package
+
+
+
+
+
+                    //    //n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
+
+
+                    //    //using (NetworkStream stream = k.GetStream())
+                    //    //{
+                    //    //    byte[] data = new byte[1024];
+                    //    //    using (MemoryStream ms = new MemoryStream())
+                    //    //    {
+
+                    //    //        int numBytesRead;
+                    //    //        while ((numBytesRead = stream.Read(data, 0, data.Length)) > 0)
+                    //    //        {
+                    //    //            ms.Write(data, 0, numBytesRead);
+                    //    //        }
+
+                    //    //        BinaryFormatter binForm = new BinaryFormatter();
+                    //    //        Message msg = (Message)binForm.Deserialize(ms);
+                    //    //        Console.WriteLine($"{msg.Auther.Name}: {msg.Text}");
+                    //    //        //rec = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
+                    //    //        //recived = (Message)ByteArrayToObject(ms.ToArray(), (int)ms.Length);
+                    //    //    }
+                    //    //}
+
+                    //    //Console.WriteLine(n);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Console.WriteLine(ex.Message);
+                    //}
+
                     //Printing data ín console
-                    Console.WriteLine($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-                    Console.WriteLine($"{recived.Auther.Name}: {recived.Text}");
-                    Console.WriteLine("> ");
+                    //Console.WriteLine($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
+
+                    //Console.WriteLine("> ");
                     //Broadcast(buffert);
                     StartReading(k);
                 }
@@ -226,32 +277,32 @@ namespace ChayServer
                 {
                     k.Dispose();
                     tcpClients.Remove(client);
-                    UserInput();
+                    //UserInput();
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 k.Dispose();
                 tcpClients.Remove(client);
-                UserInput();
+                Console.WriteLine(ex.ToString());
+                //UserInput();
             }
 
 
           
         }
 
-        static Object ByteArrayToObject(byte[] arrBytes, int length)
+
+        static Object ByteArrayToObject(byte[] arrBytes)
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter binForm = new BinaryFormatter();
-                ms.WriteAsync(arrBytes, 0, length);
+                ms.Write(arrBytes, 0, arrBytes.Length);
                 ms.Seek(0, SeekOrigin.Begin);
                 Object obj = (Object)binForm.Deserialize(ms);
-
                 return obj;
             }
-            
         }
 
         static void Broadcast(byte[] data)

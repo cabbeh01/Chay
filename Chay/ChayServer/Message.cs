@@ -34,7 +34,7 @@ namespace Chay
                 value = this._auther;
             }
         }
-
+        
         public string Text
         {
             get
@@ -46,7 +46,7 @@ namespace Chay
                 value = this._text;
             }
         }
-
+        
         public DateTime DelivaryTime
         {
             get
@@ -76,7 +76,7 @@ namespace Chay
 
         public override string ToString()
         {
-            return $"{this._text}";
+            return $": {this._text}";
         }
     }
 }

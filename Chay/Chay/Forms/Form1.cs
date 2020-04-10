@@ -393,7 +393,27 @@ namespace Chay
                 return ms.ToArray();
             }
         }
+        Object ByteArrayToObject(byte[] arrBytes, int length)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    BinaryFormatter binForm = new BinaryFormatter();
+                    ms.Write(arrBytes, 0, length);
+                    ms.Seek(0, SeekOrigin.Begin);
+                    Object obj = (Object)binForm.Deserialize(ms);
+                    return obj;
+                }
 
+            }
+            catch
+            {
+                return null;
+            }
+
+
+        }
         public async void StartSending(Message msg)
         {
             //BinaryFormatter bf = new BinaryFormatter();
@@ -411,7 +431,11 @@ namespace Chay
                 
                 MessageBox.Show(outData.ToString());
                 await us.Client.GetStream().WriteAsync(outData, 0, outData.Length);
-                MessageBox.Show("Meddelandet har nu skickats");
+                Message test = (Message)ByteArrayToObject(outData, outData.Length);
+
+                //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
+                MessageBox.Show($"{test.Auther.Name}: {test.Text}"); 
+                MessageBox.Show("Meddelandet har nu skickats" + "\n" + outData.Length);
             }
             catch (Exception ex)
             {
@@ -425,10 +449,11 @@ namespace Chay
                 if (us.Client.Connected)
                 {
                     byte[] buffert = new byte[1024];
-
+                    
                     int n = 0;
                     try
                     {
+                        
                         n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
                     }
                     catch (Exception ex)
