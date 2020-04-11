@@ -13,7 +13,7 @@ namespace ChayServer
     public class User
     {
         public ObjectId Id { get; set; }
-        public string Username { get; private set; }
+        public string Username { get; set; }
         public string Password { get; private set; }
         public string Name { get; set; }
 
@@ -38,6 +38,14 @@ namespace ChayServer
             this.Username = username;
             this.Name = username;
             this.Password = password;
+        }
+
+        public User(TcpClient client) {
+            this.Client = client;
+        }
+        public User()
+        {
+
         }
         public override string ToString()
         {

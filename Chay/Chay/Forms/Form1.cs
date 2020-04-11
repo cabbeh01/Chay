@@ -277,7 +277,7 @@ namespace Chay
                 
                 if (us.Client.Connected)
                 {
-                    StartSending(new Message(new Userpack(us.Id,us.Name,us.Image),tbxSend.Text,DateTime.Now));
+                    StartSending(new Message(new Userpack(us.Id,us.Name,us.Image,us.Username),tbxSend.Text,DateTime.Now));
                     //us._client.Close();
 
 
@@ -359,6 +359,7 @@ namespace Chay
             try
             {
                 await us.Client.ConnectAsync(address, port);
+                StartSending(new Message(new Userpack(us.Id, us.Name, us.Image,us.Username), "connected", DateTime.Now, true));
                 StartReading();
             }
             catch
@@ -412,28 +413,25 @@ namespace Chay
             {
                 return null;
             }
-
-
         }
+
         public void StartSending(Message msg)
         {
             
             //us.Client.GetStream().
             //byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska 
-            
-            
             try
             {
                 byte[] meta = new byte[8];
-                
+
                 byte[] outData = ObjectToByteArray(msg);
                 meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
                 us.Client.GetStream().Write(meta, 0, meta.Length);
 
                 //MessageBox.Show(outData.ToString());
-                
+
                 us.Client.GetStream().Write(outData, 0, outData.Length);
-                Message test = (Message)ByteArrayToObject(outData, outData.Length);
+                //Message test = (Message)ByteArrayToObject(outData, outData.Length);
 
                 //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
                 //MessageBox.Show($"{test.Auther.Name}: {test.Text}"); 
@@ -455,14 +453,18 @@ namespace Chay
                     int n = 0;
                     try
                     {
-                        
                         n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
-                    
+
+                    string mess = Encoding.Unicode.GetString(buffert, 0, n);
+                    if(MongoDB.Bson.ObjectId.Parse(mess) == us.Id)
+                    {
+                        us.Client.Dispose();
+                    }
                     //Sending data on server screen
                     //SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
                     MessageBox.Show("Jag fick detta");
@@ -475,7 +477,7 @@ namespace Chay
             }
         }
 
-
+        
         private void RetriveSettings()
         {
 

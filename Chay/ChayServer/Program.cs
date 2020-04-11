@@ -23,7 +23,7 @@ namespace ChayServer
         static TcpClient client;
 
         static Server s = new Server();
-        static bool userExist = false;
+        
 
         static void Main(string[] args)
         {
@@ -154,10 +154,9 @@ namespace ChayServer
             try
             {
                 client = await listener.AcceptTcpClientAsync();
-                Console.WriteLine("Ny användare kopplade upp sig");
-                tcpClients.Add(client);
+                //tcpClients.Add(client);
+                users.Add(new User(client));
                 StartReading(client);
-                
             }
             catch (Exception ex)
             {
@@ -171,30 +170,9 @@ namespace ChayServer
             {
                 if (k.Connected)
                 {
+                    
                     // [Metadata]--[DATA]--[END]
 
-                    //byte[] buffert = new byte[1024];
-
-
-                    //List<byte> bigbuffer = new List<byte>();
-
-                    //byte[] tempbuffer = new byte[1024];
-
-                    //while (stream.Read(tempbuffer, 0, tempbuffer.Length) > 0)
-                    //{
-                    //    bigbuffer.AddRange(tempbuffer);
-                    //    Console.ForegroundColor = ConsoleColor.Red;
-                    //    Console.WriteLine("Looop ::  " + stream.Read(tempbuffer, 0, tempbuffer.Length));
-                    //    Console.WriteLine(k.ReceiveBufferSize);
-                    //}
-
-                    //Console.ForegroundColor = ConsoleColor.Green;
-                    //Console.WriteLine("Utanför loopen");
-
-                    //// now you can convert to a native byte array
-                    //byte[] completedbuffer = new byte[bigbuffer.Count];
-
-                    //bigbuffer.CopyTo(completedbuffer);
 
                     try
                     {
@@ -211,8 +189,22 @@ namespace ChayServer
 
                             Message incomming = (Message)ByteArrayToObject(tempbuffer);
 
-                            Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
-                            
+                            if (incomming.SysMess && incomming.Text == "connected")
+                            {
+                                Console.WriteLine($"{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
+                                foreach(User a in users)
+                                {
+                                    if(a.Client == k)
+                                    {
+                                        a.Id = incomming.Auther.Id;
+                                        a.Username = incomming.Auther.Username;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+                            }
                         });
 
                     }
@@ -221,63 +213,19 @@ namespace ChayServer
                         StartReading(k);
                     }
 
-
-
-                    //try
-                    //{
-
-
-                    //    //can be in another size like 1024 etc.. 
-                    //    //depend of the data as you sending from de client
-                    //    //i recommend small size for the correct read of the package
-
-                    //    //n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
-
-                    //    //using (NetworkStream stream = k.GetStream())
-                    //    //{
-                    //    //    byte[] data = new byte[1024];
-                    //    //    using (MemoryStream ms = new MemoryStream())
-                    //    //    {
-
-                    //    //        int numBytesRead;
-                    //    //        while ((numBytesRead = stream.Read(data, 0, data.Length)) > 0)
-                    //    //        {
-                    //    //            ms.Write(data, 0, numBytesRead);
-                    //    //        }
-
-                    //    //        BinaryFormatter binForm = new BinaryFormatter();
-                    //    //        Message msg = (Message)binForm.Deserialize(ms);
-                    //    //        Console.WriteLine($"{msg.Auther.Name}: {msg.Text}");
-                    //    //        //rec = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
-                    //    //        //recived = (Message)ByteArrayToObject(ms.ToArray(), (int)ms.Length);
-                    //    //    }
-                    //    //}
-
-                    //    //Console.WriteLine(n);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    Console.WriteLine(ex.Message);
-                    //}
-
-                    //Printing data ín console
-                    //Console.WriteLine($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-
-                    //Console.WriteLine("> ");
-                    //Broadcast(buffert);
                     StartReading(k);
                 }
                 else
                 {
                     k.Dispose();
-                    tcpClients.Remove(client);
+                    //tcpClients.Remove(client);
                     //UserInput();
                 }
             }
             catch(Exception ex)
             {
                 k.Dispose();
-                tcpClients.Remove(client);
+                //tcpClients.Remove(client);
                 Console.WriteLine(ex.ToString());
                 //UserInput();
             }
@@ -331,15 +279,9 @@ namespace ChayServer
                 switch (dataSplice[0].ToLower())
                 {
                     case "kick":
-                        if (!String.IsNullOrEmpty(dataSplice[1]) && userExist)
+                        if (!String.IsNullOrEmpty(dataSplice[1]))
                         {
                             KickUser(dataSplice[1]);
-                            Console.WriteLine($"Användaren {dataSplice[1]} är nu kickad");
-
-                        }
-                        else if (!String.IsNullOrEmpty(dataSplice[1]))
-                        {
-                            Console.WriteLine("Användaren finns inte");
                         }
                         else
                         {
@@ -350,6 +292,7 @@ namespace ChayServer
                     case "ls":
 
                         Console.WriteLine("Listar alla användare som är uppkopplade till servern");
+                        ListUsers();
                         break;
 
                     case "stop":
@@ -418,14 +361,49 @@ namespace ChayServer
 
         static void KickUser(string us)
         {
-            foreach(User u in users)
+            try
             {
-                if (u.Username == us)
+                User usr = new User();
+                foreach (User u in users)
                 {
-
-                    u.Client.Close();
+                    if (u.Username == us)
+                    {
+                        u.Client.Close();
+                        usr = u;
+                        Console.WriteLine($"Användaren {us} är nu kickad");
+                    }
                 }
+                users.Remove(usr);
             }
+            catch
+            {
+                Console.WriteLine("Användaren finns inte");
+            }
+            
+        }
+
+        static void ListUsers()
+        {
+            try
+            {
+                if(users.Count>0){
+                    User usr = new User();
+                    foreach (User u in users)
+                    {
+                        Console.WriteLine($"{u.Id}|{u.Username}|    {u.Name}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Inga användare är uppkopplade mot servern");
+                }
+                
+            }
+            catch
+            {
+                Console.WriteLine("Inga användare är uppkopplade mot servern");
+            }
+
         }
     }
 
