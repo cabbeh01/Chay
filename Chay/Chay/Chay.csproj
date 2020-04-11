@@ -155,7 +155,6 @@
     <Compile Include="Forms\ServerManager.Designer.cs">
       <DependentUpon>ServerManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Message.cs" />
     <Compile Include="MongoCRUD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,7 +259,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ChayPackages\ChayPackages.csproj">
+      <Project>{4dc5ea2b-b39f-4560-8e50-a1005277453b}</Project>
+      <Name>ChayPackages</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Vbe.Interop.Forms">
       <Guid>{0D452EE1-E08F-101A-852E-02608C4D0BB4}</Guid>

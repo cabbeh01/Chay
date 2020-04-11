@@ -8,9 +8,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chay
+namespace ChayServer
 {
-    [Serializable]
     public class User
     {
         public ObjectId Id { get; set; }
@@ -40,9 +39,6 @@ namespace Chay
             this.Name = username;
             this.Password = password;
         }
-
-        
-
         public override string ToString()
         {
             return $"{Servers}";

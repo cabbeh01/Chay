@@ -1,5 +1,4 @@
-﻿using Chay;
-using MongoDBLogin;
+﻿using MongoDBLogin;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using ChayPackages;
 
 namespace ChayServer
 {
@@ -173,57 +173,56 @@ namespace ChayServer
                 {
                     // [Metadata]--[DATA]--[END]
 
-
-                    //Message recived = null;
-                    //BinaryFormatter bf = new BinaryFormatter();
-                    //Stream str = k.GetStream();
-                    //Message msg = (Message)bf.Deserialize(str);
-                    //str.Close();
-                    //Console.WriteLine(msg.Auther.Name + ":  " + msg.Text);
-
                     //byte[] buffert = new byte[1024];
 
-                    
-                    //Message recived = null;
-                    //int n = 0;
-                    //int temp = 0;
 
-                    NetworkStream stream = k.GetStream();
-                    byte[] tempbuffer = new byte[k.ReceiveBufferSize];
-                    await Task.Run(() => {
-                        //List<byte> bigbuffer = new List<byte>();
+                    //List<byte> bigbuffer = new List<byte>();
 
-                        //byte[] tempbuffer = new byte[1024];
+                    //byte[] tempbuffer = new byte[1024];
 
-                        //while (stream.Read(tempbuffer, 0, tempbuffer.Length) > 0)
-                        //{
-                        //    bigbuffer.AddRange(tempbuffer);
-                        //    Console.ForegroundColor = ConsoleColor.Red;
-                        //    Console.WriteLine("Looop ::  " + stream.Read(tempbuffer, 0, tempbuffer.Length));
-                        //    Console.WriteLine(k.ReceiveBufferSize);
-                        //}
+                    //while (stream.Read(tempbuffer, 0, tempbuffer.Length) > 0)
+                    //{
+                    //    bigbuffer.AddRange(tempbuffer);
+                    //    Console.ForegroundColor = ConsoleColor.Red;
+                    //    Console.WriteLine("Looop ::  " + stream.Read(tempbuffer, 0, tempbuffer.Length));
+                    //    Console.WriteLine(k.ReceiveBufferSize);
+                    //}
 
-                        //Console.ForegroundColor = ConsoleColor.Green;
-                        //Console.WriteLine("Utanför loopen");
+                    //Console.ForegroundColor = ConsoleColor.Green;
+                    //Console.WriteLine("Utanför loopen");
 
-                        //// now you can convert to a native byte array
-                        //byte[] completedbuffer = new byte[bigbuffer.Count];
+                    //// now you can convert to a native byte array
+                    //byte[] completedbuffer = new byte[bigbuffer.Count];
 
-                        //bigbuffer.CopyTo(completedbuffer);
+                    //bigbuffer.CopyTo(completedbuffer);
 
-                        
+                    try
+                    {
+                        byte[] meta = new byte[8];
+                        NetworkStream stream = k.GetStream();
+                        stream.Read(meta, 0, meta.Length);
 
-                        stream.Read(tempbuffer, 0, tempbuffer.Length);
+                        int len = int.Parse(Encoding.ASCII.GetString(meta));
+                        //Console.WriteLine(len);
+                        await Task.Run(() => {
+
+                            byte[] tempbuffer = new byte[len];
+                            stream.Read(tempbuffer, 0, tempbuffer.Length);
+
+                            Message incomming = (Message)ByteArrayToObject(tempbuffer);
+
+                            Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+                            
+                        });
+
+                    }
+                    catch
+                    {
+                        StartReading(k);
+                    }
 
 
-                        
 
-                        //Console.WriteLine(decodedmsg);
-                       
-
-                    });
-                    Message incomming = (Message)ByteArrayToObject(tempbuffer);
-                    Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
                     //try
                     //{
 
@@ -232,12 +231,7 @@ namespace ChayServer
                     //    //depend of the data as you sending from de client
                     //    //i recommend small size for the correct read of the package
 
-
-
-
-
                     //    //n = await k.GetStream().ReadAsync(buffert, 0, buffert.Length);
-
 
                     //    //using (NetworkStream stream = k.GetStream())
                     //    //{
@@ -428,6 +422,7 @@ namespace ChayServer
             {
                 if (u.Username == us)
                 {
+
                     u.Client.Close();
                 }
             }

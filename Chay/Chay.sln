@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chay", "Chay\Chay.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChayServer", "ChayServer\ChayServer.csproj", "{11CA27A9-B971-4A3C-8402-E99A1C3761B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChayPackages", "ChayPackages\ChayPackages.csproj", "{4DC5EA2B-B39F-4560-8E50-A1005277453B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{11CA27A9-B971-4A3C-8402-E99A1C3761B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11CA27A9-B971-4A3C-8402-E99A1C3761B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11CA27A9-B971-4A3C-8402-E99A1C3761B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC5EA2B-B39F-4560-8E50-A1005277453B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC5EA2B-B39F-4560-8E50-A1005277453B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC5EA2B-B39F-4560-8E50-A1005277453B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC5EA2B-B39F-4560-8E50-A1005277453B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

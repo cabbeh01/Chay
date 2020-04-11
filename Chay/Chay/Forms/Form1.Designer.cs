@@ -271,9 +271,9 @@
             this.label1.Location = new System.Drawing.Point(10, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(40, 10, 0, 0);
-            this.label1.Size = new System.Drawing.Size(134, 35);
+            this.label1.Size = new System.Drawing.Size(122, 35);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Serverar";
+            this.label1.Text = "Servrar";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel2

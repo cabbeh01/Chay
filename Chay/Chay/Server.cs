@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using ChayPackages;
 
 namespace Chay
 {
@@ -23,7 +24,6 @@ namespace Chay
         [field: NonSerialized]
         internal TcpClient _client;
 
-        
         public Server(IPAddress ip, int port, List<User> users, TcpClient client)
         {
             this._ip = ip;
@@ -37,6 +37,17 @@ namespace Chay
             this._ip = ip;
             this._port = port;
             this._name = name;
+        }
+
+        public Server(int port)
+        {
+            //this._ip = ip;
+            this._port = port;
+        }
+
+        public Server()
+        {
+
         }
         public override string ToString()
         {

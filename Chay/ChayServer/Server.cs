@@ -6,10 +6,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using ChayPackages;
 
-namespace Chay
+namespace ChayServer
 {
-    [Serializable]
+    [Serializable()]
     public class Server
     {
         public ObjectId Id { get; set; }
@@ -20,7 +21,8 @@ namespace Chay
         public List<User> _users { get; set; }
         public List<Message> _messages { get; set; }
 
-        private TcpClient _client;
+        [field: NonSerialized]
+        internal TcpClient _client;
 
         
         public Server(IPAddress ip, int port, List<User> users, TcpClient client)

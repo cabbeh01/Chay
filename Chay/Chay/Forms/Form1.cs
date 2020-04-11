@@ -15,7 +15,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ChayPackages;
+using Message = ChayPackages.Message;
 
 namespace Chay
 {
@@ -276,7 +277,7 @@ namespace Chay
                 
                 if (us.Client.Connected)
                 {
-                    StartSending(new Message(us,tbxSend.Text,DateTime.Now));
+                    StartSending(new Message(new Userpack(us.Id,us.Name,us.Image),tbxSend.Text,DateTime.Now));
                     //us._client.Close();
 
 
@@ -414,28 +415,29 @@ namespace Chay
 
 
         }
-        public async void StartSending(Message msg)
+        public void StartSending(Message msg)
         {
-            //BinaryFormatter bf = new BinaryFormatter();
-            //Stream str = us.Client.GetStream();
-            //bf.Serialize(str,msg);
-            //str.Close();
+            
             //us.Client.GetStream().
-
-
-
             //byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska 
+            
+            
             try
             {
-                byte[] outData = ObjectToByteArray(msg);
+                byte[] meta = new byte[8];
                 
-                MessageBox.Show(outData.ToString());
-                await us.Client.GetStream().WriteAsync(outData, 0, outData.Length);
+                byte[] outData = ObjectToByteArray(msg);
+                meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
+                us.Client.GetStream().Write(meta, 0, meta.Length);
+
+                //MessageBox.Show(outData.ToString());
+                
+                us.Client.GetStream().Write(outData, 0, outData.Length);
                 Message test = (Message)ByteArrayToObject(outData, outData.Length);
 
                 //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
-                MessageBox.Show($"{test.Auther.Name}: {test.Text}"); 
-                MessageBox.Show("Meddelandet har nu skickats" + "\n" + outData.Length);
+                //MessageBox.Show($"{test.Auther.Name}: {test.Text}"); 
+                //MessageBox.Show("Meddelandet har nu skickats" + "\n" + outData.Length);
             }
             catch (Exception ex)
             {
@@ -464,7 +466,7 @@ namespace Chay
                     //Sending data on server screen
                     //SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
                     MessageBox.Show("Jag fick detta");
-                    StartReading();
+                    //StartReading();
                 }
             }
             catch

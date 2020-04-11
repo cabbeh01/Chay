@@ -1,28 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Chay
+namespace MessageChay
 {
     [Serializable()]
     public class Message : ISerializable
     {
-        private User _auther;
+        private Userpack _auther;
         private string _text;
         private DateTime _deliveryTime;
 
-        public Message(User user, string message, DateTime deliveryT)
+        public Message(Userpack auther, string message, DateTime deliveryT)
         {
-            this._auther = user;
+            this._auther = auther;
             this._text = message;
             this._deliveryTime = deliveryT;
         }
 
-        public User Auther
+        public Userpack Auther
         {
             get
             {
@@ -69,7 +64,7 @@ namespace Chay
 
         public Message(SerializationInfo info, StreamingContext context)
         {
-            _auther = (User)info.GetValue("_auther", typeof(User));
+            _auther = (Userpack)info.GetValue("_auther", typeof(Userpack));
             _text = (string)info.GetValue("_text", typeof(string));
             _deliveryTime = (DateTime)info.GetValue("_delivertime", typeof(DateTime));
         }

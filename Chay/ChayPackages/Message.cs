@@ -1,40 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Chay
+namespace ChayPackages
 {
     [Serializable()]
-    public class Message : ISerializable
+    public class Message
     {
-        private User _auther;
+        private Userpack _auther;
         private string _text;
         private DateTime _deliveryTime;
+        private bool _sysMess;
 
-        public Message(User user, string message, DateTime deliveryT)
+        public Message(Userpack auther, string message, DateTime deliveryT, bool sysMess=false)
         {
-            this._auther = user;
+            this._auther = auther;
             this._text = message;
             this._deliveryTime = deliveryT;
+            this._sysMess = sysMess;
         }
 
-        public User Auther
+        public Userpack Auther
         {
             get
             {
                 return this._auther;
-                
+
             }
             set
             {
-                value = this._auther;
+                this._auther = value;
             }
         }
-        
+        public bool SysMess
+        {
+            get
+            {
+                return this._sysMess;
+            }
+        }
         public string Text
         {
             get
@@ -43,10 +46,10 @@ namespace Chay
             }
             set
             {
-                value = this._text;
+                this._text = value;
             }
         }
-        
+
         public DateTime DelivaryTime
         {
             get
@@ -55,7 +58,7 @@ namespace Chay
             }
             set
             {
-                value = this._deliveryTime;
+                this._deliveryTime = value;
             }
         }
 
@@ -69,7 +72,7 @@ namespace Chay
 
         public Message(SerializationInfo info, StreamingContext context)
         {
-            _auther = (User)info.GetValue("_auther", typeof(User));
+            _auther = (Userpack)info.GetValue("_auther", typeof(Userpack));
             _text = (string)info.GetValue("_text", typeof(string));
             _deliveryTime = (DateTime)info.GetValue("_delivertime", typeof(DateTime));
         }

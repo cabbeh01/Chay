@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Chay
 {
-    [Serializable()]
     public class User
     {
         public ObjectId Id { get; set; }
