@@ -89,9 +89,9 @@ namespace Chay
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Användare eller lösenord fel");
+                MessageBox.Show(ex.ToString());
             } 
         }
 

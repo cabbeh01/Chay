@@ -14,35 +14,35 @@ namespace Chay
     public class Server
     {
         public ObjectId Id { get; set; }
-        public IPAddress _ip { get; set; }
-        public int _port { get; set; }
-        public string _name { get; set; }
+        public IPAddress Ip { get; set; }
+        public int Port { get; set; }
+        public string Name { get; set; }
 
-        public List<User> _users { get; set; }
-        public List<Message> _messages { get; set; }
+        public List<User> Users { get; set; }
+        public List<Message> Messages { get; set; }
 
         [field: NonSerialized]
         internal TcpClient _client;
 
         public Server(IPAddress ip, int port, List<User> users, TcpClient client)
         {
-            this._ip = ip;
-            this._port = port;
-            this._users = users;
+            this.Ip = ip;
+            this.Port = port;
+            this.Users = users;
             this._client = client;
         }
         
         public Server(string name, IPAddress ip, int port)
         {
-            this._ip = ip;
-            this._port = port;
-            this._name = name;
+            this.Ip = ip;
+            this.Port = port;
+            this.Name = name;
         }
 
         public Server(int port)
         {
             //this._ip = ip;
-            this._port = port;
+            this.Port = port;
         }
 
         public Server()
@@ -51,7 +51,7 @@ namespace Chay
         }
         public override string ToString()
         {
-            return $"{_name}| {_ip}: {_port}";
+            return $"{Name}| {Ip}: {Port}";
         }
     }
 }

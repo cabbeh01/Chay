@@ -9,6 +9,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using ChayPackages;
+using Chay;
+using MongoDB.Bson;
 
 namespace ChayServer
 {
@@ -18,7 +20,6 @@ namespace ChayServer
 
         static TcpListener listener;
 
-        static List<TcpClient> tcpClients = new List<TcpClient>();
         static List<User> users = new List<User>();
         static TcpClient client;
 
@@ -44,7 +45,11 @@ namespace ChayServer
                 listener.Start();
                 s = new Server(port);
                 Console.Clear();
+                
+                Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
+                Console.WriteLine("_________________________________________________________________________________ \n");
                 Console.WriteLine($"Server started at 127.0.0.1:{port}");
+                
                 
             }
             catch
@@ -154,8 +159,9 @@ namespace ChayServer
             try
             {
                 client = await listener.AcceptTcpClientAsync();
-                //tcpClients.Add(client);
+                
                 users.Add(new User(client));
+                SendId(s.Id,client);
                 StartReading(client);
             }
             catch (Exception ex)
@@ -163,6 +169,18 @@ namespace ChayServer
                 Console.WriteLine(ex.Message);
             }
             StartHandshake();
+        }
+        static void SendId(ObjectId id, TcpClient client)
+        {
+            try
+            {
+                byte[] byteId = new byte[50];
+                client.GetStream().Write(byteId, 0, byteId.Length);
+            }
+            catch
+            {
+                Console.WriteLine("Gick inte att skicka id");
+            }
         }
         static async void StartReading(TcpClient k)
         {
@@ -172,8 +190,6 @@ namespace ChayServer
                 {
                     
                     // [Metadata]--[DATA]--[END]
-
-
                     try
                     {
                         byte[] meta = new byte[8];
@@ -182,7 +198,7 @@ namespace ChayServer
 
                         int len = int.Parse(Encoding.ASCII.GetString(meta));
                         //Console.WriteLine(len);
-                        await Task.Run(() => {
+                        await Task.Run(async () => {
 
                             byte[] tempbuffer = new byte[len];
                             stream.Read(tempbuffer, 0, tempbuffer.Length);
@@ -198,13 +214,19 @@ namespace ChayServer
                                     {
                                         a.Id = incomming.Auther.Id;
                                         a.Username = incomming.Auther.Username;
+                                        a.Name = incomming.Auther.Name;
                                     }
                                 }
                             }
                             else
                             {
+                                
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+                                await UpdateMessageDB(incomming);
+                                
+                                //Broadcast(tempbuffer);
                             }
+
                         });
 
                     }
@@ -218,14 +240,14 @@ namespace ChayServer
                 else
                 {
                     k.Dispose();
-                    //tcpClients.Remove(client);
+
                     //UserInput();
                 }
             }
             catch(Exception ex)
             {
                 k.Dispose();
-                //tcpClients.Remove(client);
+
                 Console.WriteLine(ex.ToString());
                 //UserInput();
             }
@@ -247,13 +269,35 @@ namespace ChayServer
             }
         }
 
+        
+        static async Task UpdateMessageDB(Message msg)
+        {
+            try
+            {
+                await Task.Run(() => {
+                    if (s.Messages == null)
+                    {
+                        s.Messages = new List<Message>();
+                    }
+                    s.Messages.Add(msg);
+                    _db.UpdateOne<Server>("Servers", s.Id, s);
+                });
+            }
+            catch
+            {
+                Console.WriteLine("Ett fel uppstod");
+            }
+            
+        }
+
+
         static void Broadcast(byte[] data)
         {
             try
             {
-                foreach (TcpClient c in tcpClients)
+                foreach (User c in users)
                 {
-                    c.GetStream().Write(data, 0, data.Length);
+                    c.Client.GetStream().Write(data, 0, data.Length);
                 }
             }
             catch
@@ -295,12 +339,14 @@ namespace ChayServer
                         ListUsers();
                         break;
 
+
+                    
                     case "stop":
-                        if(tcpClients.Count > 0)
+                        if(users.Count > 0)
                         {
-                            foreach (TcpClient c in tcpClients)
+                            foreach (User c in users)
                             {
-                                c.Dispose();
+                                c.Client.Close();
                             }
                             listener.Stop();
                             Console.WriteLine("Servern stoppades");
@@ -327,6 +373,11 @@ namespace ChayServer
                         Console.Clear();
                         break;
 
+                    case "clean":
+
+                        s.Messages.Clear();
+                        break;
+
 
                     case "help":
                         Console.Clear();
@@ -335,6 +386,8 @@ namespace ChayServer
                         Console.WriteLine("help - Visar de kommandon som finns tillgänliga");
                         Console.WriteLine("kick XX- Stänger ner en uppkoppling mellan servern och en användare");
                         Console.WriteLine("ls - Visar de användare som är uppkopplade mot servern");
+                        Console.WriteLine("clear - Rensar terminalens utmatning");
+                        Console.WriteLine("clean - Rensar alla meddelande på servern");
                         Console.WriteLine("stop - Stoppar servern");
                         Console.WriteLine("start - Startar servern");
                         Console.WriteLine("exit - Stänger ner programmet");
@@ -390,7 +443,7 @@ namespace ChayServer
                     User usr = new User();
                     foreach (User u in users)
                     {
-                        Console.WriteLine($"{u.Id}|{u.Username}|    {u.Name}");
+                        Console.WriteLine($"Id: {u.Id}| {u.Username} - Namn({u.Name})");
                     }
                 }
                 else

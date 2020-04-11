@@ -29,6 +29,11 @@ namespace MongoDBLogin
             }
         }
 
+        public ObjectId GenID()
+        {
+            return ObjectId.GenerateNewId();
+        }
+
         public async void InsertOne<T>(string table, T data)
         {
             try

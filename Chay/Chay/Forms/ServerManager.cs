@@ -90,7 +90,9 @@ namespace Chay.Forms
                             {
                                 _us.Servers = new List<Server>();
                             }
-                            lbxOut.Items.Insert(lbxOut.SelectedIndex,new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text)));
+                            Server temp = new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text));
+                            temp.Id = _db.GenID();
+                            lbxOut.Items.Insert(lbxOut.SelectedIndex,temp);
                             lbxOut.Items.RemoveAt(lbxOut.SelectedIndex);
                             await UpdateStruct();
                             ClearTextboxes();
@@ -205,9 +207,9 @@ namespace Chay.Forms
                     gbxPickServer.Enabled = true;
                     Server a = (Server)lbxOut.SelectedItem;
 
-                    tbxServername.Text = a._name;
-                    tbxIp.Text = a._ip.ToString();
-                    tbxPort.Text = a._port.ToString();
+                    tbxServername.Text = a.Name;
+                    tbxIp.Text = a.Ip.ToString();
+                    tbxPort.Text = a.Port.ToString();
                 }
                 catch
                 {

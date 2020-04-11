@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChayPackages;
 using Message = ChayPackages.Message;
+using MongoDB.Bson;
 
 namespace Chay
 {
@@ -40,25 +41,35 @@ namespace Chay
 
         private Point _mouseLocation;
         private bool _isMaxi = false;
+        private bool _readId = false;
+        private Server pickedServer = null;
 
         public Form1(User user)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            us = user;
-            servermang = new ServerManager();
-            profile = new Profile();
-            //Setting up Client
-            us.Client = new TcpClient();
+                this.SetStyle(ControlStyles.ResizeRedraw, true);
+                us = user;
+                servermang = new ServerManager();
+                profile = new Profile();
+                //Setting up Client
+                us.Client = new TcpClient();
+
+                us.Client.NoDelay = true;
+
+                //retriveServerList();
+                this.lblUser.Text = user.Username;
+                GraphicalComponents();
+                RetriveSettings();
+                LogicalComponents();
+            }
+            catch
+            {
+                MessageBox.Show("Krash");
+            }
             
-            us.Client.NoDelay = true;
-
-            //retriveServerList();
-            this.lblUser.Text = user.Username;
-            GraphicalComponents();
-            RetriveSettings();
-            LogicalComponents();
         }
 
 
@@ -238,7 +249,7 @@ namespace Chay
                             {
                                 foreach (Server s in us.Servers)
                                 {
-                                    twServers.Nodes.Add(s._name);
+                                    twServers.Nodes.Add(s.Name);
                                 }
                             }
                         }
@@ -257,7 +268,7 @@ namespace Chay
                         {
                             foreach (Server s in us.Servers)
                             {
-                                twServers.Nodes.Add(s._name);
+                                twServers.Nodes.Add(s.Name);
                             }
                         }
                     }
@@ -273,14 +284,12 @@ namespace Chay
         {
             try
             {
-                
-                
                 if (us.Client.Connected)
                 {
                     StartSending(new Message(new Userpack(us.Id,us.Name,us.Image,us.Username),tbxSend.Text,DateTime.Now));
                     //us._client.Close();
 
-
+                    /*
                     newRow.time = DateTime.Now;
                     newRow.text = tbxSend.Text;
                     newRow.incoming = true;
@@ -292,7 +301,7 @@ namespace Chay
                     table.AddConversationMessagesRow(newRow);
 
 
-                    conversationCtrl.Rebind();
+                    conversationCtrl.Rebind();*/
                 }
                 else
                 {
@@ -300,13 +309,7 @@ namespace Chay
                 }
 
 
-                conversationCtrl.DataSource = table;
-                conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
-                conversationCtrl.IdColumnName = table.idColumn.ColumnName;
-                conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
-                conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
-
-                conversationCtrl.Rebind();
+                UpdateMessboard();
             }
             catch (Exception err)
             {
@@ -327,20 +330,21 @@ namespace Chay
                 //MessageBox.Show(twServers.SelectedNode.Text);
                 foreach (Server s in us.Servers)
                 {
-                    if (twServers.SelectedNode.Text == s._name)
+                    if (twServers.SelectedNode.Text == s.Name)
                     {
                         if (us.Client.Connected)
                         {
                             RemoveHandshake();
                         }
                         
-                        StartHandshake(s._ip, s._port);
-                        MessageBox.Show($"Du connectar till {s._name}");
+                        StartHandshake(s.Ip, s.Port);
+                        MessageBox.Show($"Du connectar till {s.Name}");
 
                         newRow = table.NewConversationMessagesRow();
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
 
+                        pickedServer = s;
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
 
@@ -370,6 +374,16 @@ namespace Chay
             }
         }
 
+        public void UpdateMessboard()
+        {
+            conversationCtrl.DataSource = table;
+            conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
+            conversationCtrl.IdColumnName = table.idColumn.ColumnName;
+            conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
+            conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
+
+            conversationCtrl.Rebind();
+        }
         public void RemoveHandshake()
         {
             try
@@ -395,14 +409,14 @@ namespace Chay
                 return ms.ToArray();
             }
         }
-        Object ByteArrayToObject(byte[] arrBytes, int length)
+        Object ByteArrayToObject(byte[] arrBytes)
         {
             try
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
                     BinaryFormatter binForm = new BinaryFormatter();
-                    ms.Write(arrBytes, 0, length);
+                    ms.Write(arrBytes, 0, arrBytes.Length);
                     ms.Seek(0, SeekOrigin.Begin);
                     Object obj = (Object)binForm.Deserialize(ms);
                     return obj;
@@ -448,27 +462,123 @@ namespace Chay
             {
                 if (us.Client.Connected)
                 {
-                    byte[] buffert = new byte[1024];
-                    
-                    int n = 0;
-                    try
+                    if (!_readId)
                     {
-                        n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                        byte[] buffert = new byte[50];
+
+                        int n = 0;
+                        try
+                        {
+                            n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        string id = Encoding.Unicode.GetString(buffert, 0, n);
+                       
+                        pickedServer.Id = ObjectId.Parse(id);
+                        _readId = true;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Console.WriteLine(ex.Message);
+                        byte[] buffert = new byte[254];
+
+                        int n = 0;
+                        try
+                        {
+                            n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+
+
+                        string mess = Encoding.Unicode.GetString(buffert, 0, n);
+                        if (mess == "newmess")
+                        {
+                            UpdateMessagesDB();
+                            mess = null;
+                        }
                     }
 
-                    string mess = Encoding.Unicode.GetString(buffert, 0, n);
-                    if(MongoDB.Bson.ObjectId.Parse(mess) == us.Id)
-                    {
-                        us.Client.Dispose();
-                    }
+                    //if (MongoDB.Bson.ObjectId.Parse(mess) == us.Id)
+                    //{
+                    //    us.Client.Dispose();
+                    //}
                     //Sending data on server screen
                     //SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-                    MessageBox.Show("Jag fick detta");
+                    //MessageBox.Show("Jag fick detta");
                     //StartReading();
+
+
+                    // [Metadata]--[DATA]--[END]
+
+
+                    //try
+                    //{
+                    //    byte[] meta = new byte[8];
+                    //    NetworkStream stream = us.Client.GetStream();
+                    //    stream.Read(meta, 0, meta.Length);
+
+                    //    int len = int.Parse(Encoding.ASCII.GetString(meta));
+                    //    //Console.WriteLine(len);
+                    //    await Task.Run(() => {
+
+                    //        byte[] tempbuffer = new byte[len];
+                    //        stream.Read(tempbuffer, 0, tempbuffer.Length);
+
+                    //        Message incomming = (Message)ByteArrayToObject(tempbuffer);
+
+                    //        if (incomming.SysMess && incomming.Text == "sys")
+                    //        {
+                    //            Console.WriteLine($"{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
+                                
+                    //        }
+                    //        else if(incomming.Auther.Id == us.Id)
+                    //        {
+                    //            if (newRow.IsNull(0))
+                    //            {
+                    //                newRow.time = DateTime.Now;
+                    //                newRow.text = tbxSend.Text;
+                    //                newRow.incoming = true;
+                    //            }
+                    //            else
+                    //            {
+                    //                newRow = table.NewConversationMessagesRow();
+                    //                newRow.time = DateTime.Now;
+                    //                newRow.text = tbxSend.Text;
+                    //                newRow.incoming = false;
+                    //            }
+                                
+                    //        }
+                    //        else
+                    //        {
+                    //            if (newRow.IsNull(0))
+                    //            {
+                    //                newRow.time = DateTime.Now;
+                    //                newRow.text = tbxSend.Text;
+                    //                newRow.incoming = true;
+                    //            }
+                    //            else
+                    //            {
+                    //                newRow = table.NewConversationMessagesRow();
+                    //                newRow.time = DateTime.Now;
+                    //                newRow.text = tbxSend.Text;
+                    //                newRow.incoming = false;
+                    //            }
+                    //        }
+                    //        UpdateMessboard();
+                    //    });
+
+                    //}
+                    //catch
+                    //{
+                    //    StartReading();
+                    //}
+
+                     
                 }
             }
             catch
@@ -477,7 +587,60 @@ namespace Chay
             }
         }
 
-        
+        private void UpdateMessagesDB()
+        {
+            try
+            {
+                List<Server> allServ = _db.GetAll<Server>("Servers");
+
+                foreach (Server sv in allServ)
+                {
+                    if (pickedServer.Id == sv.Id)
+                    {
+                        foreach (Message msg in sv.Messages)
+                        {
+                            if (msg.Auther.Id == us.Id)
+                            {
+                                if (newRow.IsNull(0))
+                                {
+                                    newRow.time = msg.DelivaryTime;
+                                    newRow.text = msg.Text;
+                                    newRow.incoming = true;
+                                }
+                                else
+                                {
+                                    newRow = table.NewConversationMessagesRow();
+                                    newRow.time = msg.DelivaryTime;
+                                    newRow.text = msg.Text;
+                                    newRow.incoming = true;
+                                }
+                            }
+                            else
+                            {
+                                if (newRow.IsNull(0))
+                                {
+                                    newRow.time = msg.DelivaryTime;
+                                    newRow.text = msg.Text;
+                                    newRow.incoming = false;
+                                }
+                                else
+                                {
+                                    newRow = table.NewConversationMessagesRow();
+                                    newRow.time = msg.DelivaryTime;
+                                    newRow.text = msg.Text;
+                                    newRow.incoming = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error 505");
+            }
+            
+        }
         private void RetriveSettings()
         {
 
