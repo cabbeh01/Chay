@@ -126,6 +126,9 @@
     <Compile Include="Components\RoundPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="dSChatt.cs">
+      <DependentUpon>dSChatt.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dSChatt.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

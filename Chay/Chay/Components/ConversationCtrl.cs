@@ -240,7 +240,7 @@ namespace Warecast.ControlsSuite
         }
         //---------------------------------------------------------------------------------------------------
 
-        /*      Send message to board
+        /*     Send message to board
          * DataRow newRow = m_DataSource.NewRow();
             newRow[m_DateColumnName] = DateTime.Now;
             newRow[m_MessageColumnName] = txtMessage.Text;

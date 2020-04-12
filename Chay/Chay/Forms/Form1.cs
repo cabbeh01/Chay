@@ -305,7 +305,8 @@ namespace Chay
                 }
                 else
                 {
-                    MessageBox.Show("Du måste vara uppkopplad mot någon server");
+                    UpdateMessagesDB();
+                    //MessageBox.Show("Du måste vara uppkopplad mot någon server");
                 }
 
 
@@ -332,6 +333,7 @@ namespace Chay
                 {
                     if (twServers.SelectedNode.Text == s.Name)
                     {
+                        pickedServer = s;
                         if (us.Client.Connected)
                         {
                             RemoveHandshake();
@@ -344,7 +346,7 @@ namespace Chay
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
 
-                        pickedServer = s;
+                        
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
 
@@ -464,24 +466,28 @@ namespace Chay
                 {
                     if (!_readId)
                     {
-                        byte[] buffert = new byte[50];
+                        byte[] buffId = new byte[254];
 
                         int n = 0;
                         try
                         {
-                            n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                            n = await us.Client.GetStream().ReadAsync(buffId, 0, buffId.Length);
                         }
-                        catch (Exception ex)
+                        catch
                         {
-                            Console.WriteLine(ex.Message);
+                            MessageBox.Show("Fel i överföringen");
                         }
-                        string id = Encoding.Unicode.GetString(buffert, 0, n);
                        
-                        pickedServer.Id = ObjectId.Parse(id);
+                        
+                        string id = Encoding.Unicode.GetString(buffId, 0, n);
+                        MessageBox.Show(id);
+                        pickedServer.Id = ObjectId.Parse(id.ToString());
                         _readId = true;
+                        UpdateMessagesDB();
+                        
                     }
                     else
-                    {
+                    {/*
                         byte[] buffert = new byte[254];
 
                         int n = 0;
@@ -495,95 +501,22 @@ namespace Chay
                         }
 
 
-                        string mess = Encoding.Unicode.GetString(buffert, 0, n);
+                        string mess = Encoding.Unicode.GetString(buffert, 0, buffert.Length);
                         if (mess == "newmess")
                         {
                             UpdateMessagesDB();
                             mess = null;
                         }
+                        */
+                        
                     }
 
-                    //if (MongoDB.Bson.ObjectId.Parse(mess) == us.Id)
-                    //{
-                    //    us.Client.Dispose();
-                    //}
-                    //Sending data on server screen
-                    //SendMessage($"User 1> {Encoding.Unicode.GetString(buffert, 0, n)}");
-                    //MessageBox.Show("Jag fick detta");
-                    //StartReading();
-
-
-                    // [Metadata]--[DATA]--[END]
-
-
-                    //try
-                    //{
-                    //    byte[] meta = new byte[8];
-                    //    NetworkStream stream = us.Client.GetStream();
-                    //    stream.Read(meta, 0, meta.Length);
-
-                    //    int len = int.Parse(Encoding.ASCII.GetString(meta));
-                    //    //Console.WriteLine(len);
-                    //    await Task.Run(() => {
-
-                    //        byte[] tempbuffer = new byte[len];
-                    //        stream.Read(tempbuffer, 0, tempbuffer.Length);
-
-                    //        Message incomming = (Message)ByteArrayToObject(tempbuffer);
-
-                    //        if (incomming.SysMess && incomming.Text == "sys")
-                    //        {
-                    //            Console.WriteLine($"{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
-                                
-                    //        }
-                    //        else if(incomming.Auther.Id == us.Id)
-                    //        {
-                    //            if (newRow.IsNull(0))
-                    //            {
-                    //                newRow.time = DateTime.Now;
-                    //                newRow.text = tbxSend.Text;
-                    //                newRow.incoming = true;
-                    //            }
-                    //            else
-                    //            {
-                    //                newRow = table.NewConversationMessagesRow();
-                    //                newRow.time = DateTime.Now;
-                    //                newRow.text = tbxSend.Text;
-                    //                newRow.incoming = false;
-                    //            }
-                                
-                    //        }
-                    //        else
-                    //        {
-                    //            if (newRow.IsNull(0))
-                    //            {
-                    //                newRow.time = DateTime.Now;
-                    //                newRow.text = tbxSend.Text;
-                    //                newRow.incoming = true;
-                    //            }
-                    //            else
-                    //            {
-                    //                newRow = table.NewConversationMessagesRow();
-                    //                newRow.time = DateTime.Now;
-                    //                newRow.text = tbxSend.Text;
-                    //                newRow.incoming = false;
-                    //            }
-                    //        }
-                    //        UpdateMessboard();
-                    //    });
-
-                    //}
-                    //catch
-                    //{
-                    //    StartReading();
-                    //}
-
-                     
+                    
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Anslutningen upphörde");
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -592,52 +525,59 @@ namespace Chay
             try
             {
                 List<Server> allServ = _db.GetAll<Server>("Servers");
-
+                newRow = table.NewConversationMessagesRow();
                 foreach (Server sv in allServ)
                 {
-                    if (pickedServer.Id == sv.Id)
+                    //pickedServer.Id == sv.Id
+                    //ObjectId.Parse("5e91d70759e6fd33103b1d46")
+                    if (ObjectId.Parse("5e91d70759e6fd33103b1d46") == sv.Id)
                     {
-                        foreach (Message msg in sv.Messages)
-                        {
-                            if (msg.Auther.Id == us.Id)
-                            {
-                                if (newRow.IsNull(0))
-                                {
-                                    newRow.time = msg.DelivaryTime;
-                                    newRow.text = msg.Text;
-                                    newRow.incoming = true;
-                                }
-                                else
-                                {
-                                    newRow = table.NewConversationMessagesRow();
-                                    newRow.time = msg.DelivaryTime;
-                                    newRow.text = msg.Text;
-                                    newRow.incoming = true;
-                                }
-                            }
-                            else
-                            {
-                                if (newRow.IsNull(0))
-                                {
-                                    newRow.time = msg.DelivaryTime;
-                                    newRow.text = msg.Text;
-                                    newRow.incoming = false;
-                                }
-                                else
-                                {
-                                    newRow = table.NewConversationMessagesRow();
-                                    newRow.time = msg.DelivaryTime;
-                                    newRow.text = msg.Text;
-                                    newRow.incoming = false;
-                                }
-                            }
+                        pickedServer = sv;
+                        UpdateMessboard();
+                    }
+                }
+
+                foreach (Message msg in pickedServer.Messages)
+                {
+                    if (msg.Auther.Id == us.Id)
+                    {
+                        if(table.Count < 0){
+                            newRow.time = msg.DelivaryTime;
+                            newRow.text = msg.Text;
+                            newRow.incoming = true;
                         }
+                        else
+                        {
+                            newRow = table.NewConversationMessagesRow();
+                            newRow.time = msg.DelivaryTime;
+                            newRow.text = msg.Text;
+                            newRow.incoming = true;
+                        }
+                        
+                        table.AddConversationMessagesRow(newRow);
+                    }
+                    else
+                    {
+                        if (table.Count < 0)
+                        {
+                            newRow.time = msg.DelivaryTime;
+                            newRow.text = msg.Text;
+                            newRow.incoming = false;
+                        }
+                        else
+                        {
+                            newRow = table.NewConversationMessagesRow();
+                            newRow.time = msg.DelivaryTime;
+                            newRow.text = msg.Text;
+                            newRow.incoming = false;
+                        }
+                        table.AddConversationMessagesRow(newRow);
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Error 505");
+                MessageBox.Show(ex.ToString());
             }
             
         }

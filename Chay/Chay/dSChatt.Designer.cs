@@ -287,6 +287,8 @@ namespace Chay {
             
             private global::System.Data.DataColumn columnid;
             
+            private global::System.Data.DataColumn columnname;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public ConversationMessagesDataTable() {
@@ -354,6 +356,14 @@ namespace Chay {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn nameColumn {
+                get {
+                    return this.columnname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace Chay {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ConversationMessagesRow AddConversationMessagesRow(string text, System.DateTime time, bool incoming) {
+            public ConversationMessagesRow AddConversationMessagesRow(string text, System.DateTime time, bool incoming, string name) {
                 ConversationMessagesRow rowConversationMessagesRow = ((ConversationMessagesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         text,
                         time,
                         incoming,
-                        null};
+                        null,
+                        name};
                 rowConversationMessagesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowConversationMessagesRow);
                 return rowConversationMessagesRow;
@@ -429,6 +440,7 @@ namespace Chay {
                 this.columntime = base.Columns["time"];
                 this.columnincoming = base.Columns["incoming"];
                 this.columnid = base.Columns["id"];
+                this.columnname = base.Columns["name"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -442,6 +454,8 @@ namespace Chay {
                 base.Columns.Add(this.columnincoming);
                 this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
+                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnname);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("ConversationMessagesKey1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columntext.AllowDBNull = false;
@@ -634,6 +648,34 @@ namespace Chay {
                 set {
                     this[this.tableConversationMessages.idColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string name {
+                get {
+                    try {
+                        return ((string)(this[this.tableConversationMessages.nameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'name\' in table \'ConversationMessages\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConversationMessages.nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsnameNull() {
+                return this.IsNull(this.tableConversationMessages.nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetnameNull() {
+                this[this.tableConversationMessages.nameColumn] = global::System.Convert.DBNull;
             }
         }
         

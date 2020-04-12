@@ -43,7 +43,7 @@ namespace ChayServer
                 int port = int.Parse(Console.ReadLine());
                 listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
-                s = new Server(port);
+                s.Port = port;
                 Console.Clear();
                 
                 Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
@@ -78,6 +78,7 @@ namespace ChayServer
                         if (serv.Id == GetSetting())
                         {
                             s = serv;
+                            
                             Console.Write("Databas  |   ");
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("fungerar");
@@ -134,7 +135,7 @@ namespace ChayServer
             }
 
         }
-        static MongoDB.Bson.ObjectId GetSetting()
+        static ObjectId GetSetting()
         {
             try
             {
@@ -142,14 +143,13 @@ namespace ChayServer
                 StreamReader reader = new StreamReader(stream);
 
                 //Default settings
-                MongoDB.Bson.ObjectId a = MongoDB.Bson.ObjectId.Parse(reader.ReadLine());
-
+                ObjectId a = ObjectId.Parse(reader.ReadLine());
                 reader.Dispose();
                 return a;
             }
             catch
             {
-                return MongoDB.Bson.ObjectId.Empty;
+                return ObjectId.Empty;
             }
 
         }
@@ -161,8 +161,9 @@ namespace ChayServer
                 client = await listener.AcceptTcpClientAsync();
                 
                 users.Add(new User(client));
-                SendId(s.Id,client);
+                
                 StartReading(client);
+                
             }
             catch (Exception ex)
             {
@@ -174,7 +175,9 @@ namespace ChayServer
         {
             try
             {
-                byte[] byteId = new byte[50];
+                byte[] byteId = new byte[254];
+                //Console.WriteLine(id);
+                byteId = Encoding.Unicode.GetBytes(id.ToString());
                 client.GetStream().Write(byteId, 0, byteId.Length);
             }
             catch
@@ -194,7 +197,7 @@ namespace ChayServer
                     {
                         byte[] meta = new byte[8];
                         NetworkStream stream = k.GetStream();
-                        stream.Read(meta, 0, meta.Length);
+                        await stream.ReadAsync(meta, 0, meta.Length);
 
                         int len = int.Parse(Encoding.ASCII.GetString(meta));
                         //Console.WriteLine(len);
@@ -215,12 +218,13 @@ namespace ChayServer
                                         a.Id = incomming.Auther.Id;
                                         a.Username = incomming.Auther.Username;
                                         a.Name = incomming.Auther.Name;
+                                        //Console.WriteLine(s.Id);
+                                        SendId(s.Id, k);
                                     }
                                 }
                             }
                             else
                             {
-                                
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
                                 await UpdateMessageDB(incomming);
                                 
@@ -230,9 +234,9 @@ namespace ChayServer
                         });
 
                     }
-                    catch
+                    catch(Exception ex)
                     {
-                        StartReading(k);
+                        Console.WriteLine("Ett fel uppstod \n" + ex.ToString());
                     }
 
                     StartReading(k);
@@ -240,7 +244,6 @@ namespace ChayServer
                 else
                 {
                     k.Dispose();
-
                     //UserInput();
                 }
             }
