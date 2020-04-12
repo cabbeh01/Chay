@@ -288,7 +288,7 @@ namespace Chay
                 {
                     StartSending(new Message(new Userpack(us.Id,us.Name,us.Image,us.Username),tbxSend.Text,DateTime.Now));
                     //us._client.Close();
-
+                    UpdateMessagesDB();
                     /*
                     newRow.time = DateTime.Now;
                     newRow.text = tbxSend.Text;
@@ -300,7 +300,7 @@ namespace Chay
                     newRow.incoming = true;
                     table.AddConversationMessagesRow(newRow);
 
-
+                    
                     conversationCtrl.Rebind();*/
                 }
                 else
@@ -447,6 +447,7 @@ namespace Chay
                 //MessageBox.Show(outData.ToString());
 
                 us.Client.GetStream().Write(outData, 0, outData.Length);
+
                 //Message test = (Message)ByteArrayToObject(outData, outData.Length);
 
                 //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
@@ -524,6 +525,7 @@ namespace Chay
         {
             try
             {
+                table.Clear();
                 List<Server> allServ = _db.GetAll<Server>("Servers");
                 newRow = table.NewConversationMessagesRow();
                 foreach (Server sv in allServ)
