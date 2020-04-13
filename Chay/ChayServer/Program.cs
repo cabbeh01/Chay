@@ -227,8 +227,10 @@ namespace ChayServer
                             {
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
                                 await UpdateMessageDB(incomming);
-                                
-                                //Broadcast(tempbuffer);
+
+                                byte[] backToClient = new byte[64];
+                                backToClient = Encoding.Unicode.GetBytes("newmess");
+                                Broadcast(backToClient);
                             }
 
                         });
@@ -294,13 +296,14 @@ namespace ChayServer
         }
 
 
-        static void Broadcast(byte[] data)
+        static async void Broadcast(byte[] data)
         {
             try
             {
                 foreach (User c in users)
                 {
-                    c.Client.GetStream().Write(data, 0, data.Length);
+                    await c.Client.GetStream().WriteAsync(data, 0, data.Length);
+                    //Console.WriteLine("Har nu broadcastat");
                 }
             }
             catch

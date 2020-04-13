@@ -346,7 +346,8 @@ namespace Chay
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
 
-                        
+                        UpdateMessagesDB();
+                        UpdateMessboard();
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
 
@@ -481,38 +482,35 @@ namespace Chay
                        
                         
                         string id = Encoding.Unicode.GetString(buffId, 0, n);
-                        MessageBox.Show(id);
+                        //MessageBox.Show(id);
                         pickedServer.Id = ObjectId.Parse(id.ToString());
                         _readId = true;
                         UpdateMessagesDB();
                         
-                    }
-                    else
-                    {/*
-                        byte[] buffert = new byte[254];
-
-                        int n = 0;
-                        try
-                        {
-                            n = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-
-
-                        string mess = Encoding.Unicode.GetString(buffert, 0, buffert.Length);
-                        if (mess == "newmess")
-                        {
-                            UpdateMessagesDB();
-                            mess = null;
-                        }
-                        */
                         
                     }
 
-                    
+                    byte[] buffert = new byte[64];
+
+                    int bRead = 0;
+                    try
+                    {
+                        bRead = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+
+                    string mess = Encoding.Unicode.GetString(buffert, 0, bRead);
+                    MessageBox.Show(mess);
+                    if (mess == "newmess")
+                    {
+                        UpdateMessagesDB();
+                    }
+
+
                 }
             }
             catch(Exception ex)
@@ -532,10 +530,9 @@ namespace Chay
                 {
                     //pickedServer.Id == sv.Id
                     //ObjectId.Parse("5e91d70759e6fd33103b1d46")
-                    if (ObjectId.Parse("5e91d70759e6fd33103b1d46") == sv.Id)
+                    if (pickedServer.Id == sv.Id)
                     {
                         pickedServer = sv;
-                        UpdateMessboard();
                     }
                 }
 
@@ -576,6 +573,7 @@ namespace Chay
                         table.AddConversationMessagesRow(newRow);
                     }
                 }
+                UpdateMessboard();
             }
             catch(Exception ex)
             {
