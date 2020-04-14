@@ -302,6 +302,7 @@ namespace ChayServer
             {
                 foreach (User c in users)
                 {
+                    Console.WriteLine("");
                     await c.Client.GetStream().WriteAsync(data, 0, data.Length);
                     //Console.WriteLine("Har nu broadcastat");
                 }

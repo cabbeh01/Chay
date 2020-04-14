@@ -266,5 +266,15 @@ namespace Chay.Forms
             }
             
         }
+
+        private void btnClose_MouseHover(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnClose_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

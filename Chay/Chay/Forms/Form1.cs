@@ -289,19 +289,7 @@ namespace Chay
                     StartSending(new Message(new Userpack(us.Id,us.Name,us.Image,us.Username),tbxSend.Text,DateTime.Now));
                     //us._client.Close();
                     UpdateMessagesDB();
-                    /*
-                    newRow.time = DateTime.Now;
-                    newRow.text = tbxSend.Text;
-                    newRow.incoming = true;
-
-                    newRow = table.NewConversationMessagesRow();
-                    newRow.time = DateTime.Now;
-                    newRow.text = tbxSend.Text;
-                    newRow.incoming = true;
-                    table.AddConversationMessagesRow(newRow);
-
                     
-                    conversationCtrl.Rebind();*/
                 }
                 else
                 {
@@ -357,7 +345,7 @@ namespace Chay
             catch(Exception ex)
             {
                 cDConnected.UpdateStatus(false);
-                MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex.ToString());
+                MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex);
             }
         }
 
@@ -369,11 +357,11 @@ namespace Chay
                 StartSending(new Message(new Userpack(us.Id, us.Name, us.Image,us.Username), "connected", DateTime.Now, true));
                 StartReading();
             }
-            catch
+            catch(Exception ex)
             {
                 
                 cDConnected.UpdateStatus(false);
-                MessageBox.Show("Går inte uppräta en anslutning");
+                MessageBox.Show("Går inte uppräta en anslutning \n" + ex);
             }
         }
 
@@ -443,6 +431,7 @@ namespace Chay
 
                 byte[] outData = ObjectToByteArray(msg);
                 meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
+                MessageBox.Show(outData.Length.ToString());
                 us.Client.GetStream().Write(meta, 0, meta.Length);
 
                 //MessageBox.Show(outData.ToString());
@@ -457,7 +446,7 @@ namespace Chay
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Det går inte skicka meddelandet" + "\n "+ ex.Message);
+                MessageBox.Show("Det går inte skicka meddelandet" + "\n "+ ex);
             }
         }
         public async void StartReading()
@@ -475,9 +464,9 @@ namespace Chay
                         {
                             n = await us.Client.GetStream().ReadAsync(buffId, 0, buffId.Length);
                         }
-                        catch
+                        catch(Exception ex)
                         {
-                            MessageBox.Show("Fel i överföringen");
+                            MessageBox.Show("Fel i överföringen" + ex);
                         }
                        
                         
@@ -499,23 +488,34 @@ namespace Chay
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(""+ex);
                     }
 
 
                     string mess = Encoding.Unicode.GetString(buffert, 0, bRead);
-                    MessageBox.Show(mess);
+                    //MessageBox.Show(mess);
                     if (mess == "newmess")
                     {
                         UpdateMessagesDB();
+                        UpdateMessboard();
                     }
 
-
+                    StartReading();
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                if (!us.Client.Connected)
+                {
+                    us.Client.GetStream().Close();
+                    
+                }
+                else
+                {
+                    StartReading();
+                }
+
+                MessageBox.Show(""+ex);
             }
         }
 
