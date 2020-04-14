@@ -649,5 +649,10 @@ namespace Chay
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void tbxSend_TextChanged(object sender, EventArgs e)
+        {
+            lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
+        }
     }
 }

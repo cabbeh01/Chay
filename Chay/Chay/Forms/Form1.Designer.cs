@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9,
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
             this.btnMiniMize = new System.Windows.Forms.Button();
             this.btnMaxMize = new System.Windows.Forms.Button();
@@ -51,14 +51,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.lblNameServer = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
-            this.tbxClient = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.lblRemainingWords = new System.Windows.Forms.Label();
+            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
+            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.pHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -218,25 +218,25 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Left;
             this.twServers.Location = new System.Drawing.Point(10, 35);
             this.twServers.Name = "twServers";
-            treeNode8.Name = "Node4";
-            treeNode8.Text = "Kalle";
-            treeNode9.Name = "Node6";
-            treeNode9.Text = "Lena";
-            treeNode10.Name = "Node7";
-            treeNode10.Text = "Klas";
-            treeNode11.Name = "Node0";
-            treeNode11.Text = "Serv 1";
-            treeNode12.Name = "Node1";
-            treeNode12.Text = "Serv 2";
-            treeNode13.Name = "Node0";
-            treeNode13.Text = "Serv 3";
-            treeNode14.Name = "Node1";
-            treeNode14.Text = "Serv 4";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Kalle";
+            treeNode2.Name = "Node6";
+            treeNode2.Text = "Lena";
+            treeNode3.Name = "Node7";
+            treeNode3.Text = "Klas";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Serv 1";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Serv 2";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Serv 3";
+            treeNode7.Name = "Node1";
+            treeNode7.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12,
-            treeNode13,
-            treeNode14});
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
@@ -247,6 +247,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.Controls.Add(this.lblRemainingWords);
             this.panel1.Controls.Add(this.twServers);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -280,14 +281,6 @@
             this.panel2.Size = new System.Drawing.Size(618, 101);
             this.panel2.TabIndex = 3;
             // 
-            // cDConnected
-            // 
-            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.cDConnected.Location = new System.Drawing.Point(458, 53);
-            this.cDConnected.Name = "cDConnected";
-            this.cDConnected.Size = new System.Drawing.Size(172, 45);
-            this.cDConnected.TabIndex = 4;
-            // 
             // lblNameServer
             // 
             this.lblNameServer.AutoSize = true;
@@ -302,12 +295,63 @@
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel5.Controls.Add(this.conversationCtrl);
-            this.panel5.Controls.Add(this.tbxClient);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(202, 166);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(618, 258);
             this.panel5.TabIndex = 8;
+            // 
+            // btnSend
+            // 
+            this.btnSend.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnSend.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSend.FlatAppearance.BorderSize = 0;
+            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSend.Location = new System.Drawing.Point(511, 0);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(107, 74);
+            this.btnSend.TabIndex = 6;
+            this.btnSend.Text = "Skicka";
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // tbxSend
+            // 
+            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxSend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSend.Location = new System.Drawing.Point(0, 0);
+            this.tbxSend.MaxLength = 512;
+            this.tbxSend.Multiline = true;
+            this.tbxSend.Name = "tbxSend";
+            this.tbxSend.Size = new System.Drawing.Size(511, 74);
+            this.tbxSend.TabIndex = 4;
+            this.tbxSend.TextChanged += new System.EventHandler(this.tbxSend_TextChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.tbxSend);
+            this.panel4.Controls.Add(this.btnSend);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(202, 424);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(618, 74);
+            this.panel4.TabIndex = 5;
+            // 
+            // lblRemainingWords
+            // 
+            this.lblRemainingWords.AutoSize = true;
+            this.lblRemainingWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRemainingWords.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblRemainingWords.Location = new System.Drawing.Point(149, 408);
+            this.lblRemainingWords.Name = "lblRemainingWords";
+            this.lblRemainingWords.Size = new System.Drawing.Size(48, 25);
+            this.lblRemainingWords.TabIndex = 5;
+            this.lblRemainingWords.Text = "504";
             // 
             // conversationCtrl
             // 
@@ -337,54 +381,13 @@
             this.conversationCtrl.Size = new System.Drawing.Size(618, 258);
             this.conversationCtrl.TabIndex = 8;
             // 
-            // tbxClient
+            // cDConnected
             // 
-            this.tbxClient.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxClient.Location = new System.Drawing.Point(0, 0);
-            this.tbxClient.Multiline = true;
-            this.tbxClient.Name = "tbxClient";
-            this.tbxClient.ReadOnly = true;
-            this.tbxClient.Size = new System.Drawing.Size(618, 258);
-            this.tbxClient.TabIndex = 7;
-            // 
-            // btnSend
-            // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnSend.FlatAppearance.BorderSize = 0;
-            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSend.Location = new System.Drawing.Point(501, 13);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(107, 43);
-            this.btnSend.TabIndex = 6;
-            this.btnSend.Text = "Skicka";
-            this.btnSend.UseVisualStyleBackColor = false;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // tbxSend
-            // 
-            this.tbxSend.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSend.Location = new System.Drawing.Point(27, 12);
-            this.tbxSend.Multiline = true;
-            this.tbxSend.Name = "tbxSend";
-            this.tbxSend.Size = new System.Drawing.Size(452, 44);
-            this.tbxSend.TabIndex = 4;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Controls.Add(this.tbxSend);
-            this.panel4.Controls.Add(this.btnSend);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(202, 424);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(618, 74);
-            this.panel4.TabIndex = 5;
+            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cDConnected.Location = new System.Drawing.Point(458, 53);
+            this.cDConnected.Name = "cDConnected";
+            this.cDConnected.Size = new System.Drawing.Size(172, 45);
+            this.cDConnected.TabIndex = 4;
             // 
             // Form1
             // 
@@ -411,7 +414,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -432,7 +434,6 @@
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox tbxSend;
-        private System.Windows.Forms.TextBox tbxClient;
         private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.Panel panel4;
         private Components.ConnectionDisplay cDConnected;
@@ -440,6 +441,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMiniMize;
         private System.Windows.Forms.Button btnMaxMize;
+        private System.Windows.Forms.Label lblRemainingWords;
     }
 }
 
