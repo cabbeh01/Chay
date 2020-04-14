@@ -28,26 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Serv 4");
             this.pHeader = new System.Windows.Forms.Panel();
+            this.btnMiniMize = new System.Windows.Forms.Button();
+            this.btnMaxMize = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnProfile = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnServermanager = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnMaxi = new System.Windows.Forms.PictureBox();
-            this.btnMini = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Logo = new System.Windows.Forms.Label();
             this.twServers = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -62,11 +60,6 @@
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pHeader.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMini)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -76,11 +69,13 @@
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            this.pHeader.Controls.Add(this.btnMiniMize);
+            this.pHeader.Controls.Add(this.btnMaxMize);
+            this.pHeader.Controls.Add(this.btnExit);
             this.pHeader.Controls.Add(this.lblUser);
             this.pHeader.Controls.Add(this.btnProfile);
             this.pHeader.Controls.Add(this.btnSettings);
             this.pHeader.Controls.Add(this.btnServermanager);
-            this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Controls.Add(this.Logo);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(2, 2);
@@ -89,6 +84,59 @@
             this.pHeader.TabIndex = 0;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            // 
+            // btnMiniMize
+            // 
+            this.btnMiniMize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMiniMize.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btnMiniMize.FlatAppearance.BorderSize = 0;
+            this.btnMiniMize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMiniMize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMiniMize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMiniMize.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnMiniMize.Location = new System.Drawing.Point(692, 0);
+            this.btnMiniMize.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.btnMiniMize.Name = "btnMiniMize";
+            this.btnMiniMize.Size = new System.Drawing.Size(42, 27);
+            this.btnMiniMize.TabIndex = 12;
+            this.btnMiniMize.Text = "🗕";
+            this.btnMiniMize.UseVisualStyleBackColor = false;
+            this.btnMiniMize.Click += new System.EventHandler(this.btnMiniMize_Click);
+            // 
+            // btnMaxMize
+            // 
+            this.btnMaxMize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaxMize.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnMaxMize.FlatAppearance.BorderSize = 0;
+            this.btnMaxMize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMaxMize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaxMize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMaxMize.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnMaxMize.Location = new System.Drawing.Point(734, 0);
+            this.btnMaxMize.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.btnMaxMize.Name = "btnMaxMize";
+            this.btnMaxMize.Size = new System.Drawing.Size(42, 27);
+            this.btnMaxMize.TabIndex = 11;
+            this.btnMaxMize.Text = "🗖";
+            this.btnMaxMize.UseVisualStyleBackColor = false;
+            this.btnMaxMize.Click += new System.EventHandler(this.btnMaxMize_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.IndianRed;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnExit.Location = new System.Drawing.Point(776, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(42, 27);
+            this.btnExit.TabIndex = 10;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblUser
             // 
@@ -153,61 +201,6 @@
             this.btnServermanager.UseVisualStyleBackColor = false;
             this.btnServermanager.Click += new System.EventHandler(this.BtnServermanager_Click);
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.btnMaxi);
-            this.panel3.Controls.Add(this.btnMini);
-            this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(676, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(138, 28);
-            this.panel3.TabIndex = 7;
-            // 
-            // btnMaxi
-            // 
-            this.btnMaxi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaxi.BackColor = System.Drawing.Color.Gray;
-            this.btnMaxi.Location = new System.Drawing.Point(45, 0);
-            this.btnMaxi.Name = "btnMaxi";
-            this.btnMaxi.Padding = new System.Windows.Forms.Padding(2);
-            this.btnMaxi.Size = new System.Drawing.Size(45, 26);
-            this.btnMaxi.TabIndex = 5;
-            this.btnMaxi.TabStop = false;
-            this.btnMaxi.Click += new System.EventHandler(this.BtnMaxi_Click);
-            // 
-            // btnMini
-            // 
-            this.btnMini.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMini.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnMini.Location = new System.Drawing.Point(0, 0);
-            this.btnMini.Name = "btnMini";
-            this.btnMini.Size = new System.Drawing.Size(45, 26);
-            this.btnMini.TabIndex = 6;
-            this.btnMini.TabStop = false;
-            this.btnMini.Click += new System.EventHandler(this.BtnMini_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.DarkGray;
-            this.btnClose.Location = new System.Drawing.Point(88, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(45, 26);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DarkGray;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // Logo
             // 
             this.Logo.AutoSize = true;
@@ -225,25 +218,25 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Left;
             this.twServers.Location = new System.Drawing.Point(10, 35);
             this.twServers.Name = "twServers";
-            treeNode1.Name = "Node4";
-            treeNode1.Text = "Kalle";
-            treeNode2.Name = "Node6";
-            treeNode2.Text = "Lena";
-            treeNode3.Name = "Node7";
-            treeNode3.Text = "Klas";
-            treeNode4.Name = "Node0";
-            treeNode4.Text = "Serv 1";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "Serv 2";
-            treeNode6.Name = "Node0";
-            treeNode6.Text = "Serv 3";
-            treeNode7.Name = "Node1";
-            treeNode7.Text = "Serv 4";
+            treeNode8.Name = "Node4";
+            treeNode8.Text = "Kalle";
+            treeNode9.Name = "Node6";
+            treeNode9.Text = "Lena";
+            treeNode10.Name = "Node7";
+            treeNode10.Text = "Klas";
+            treeNode11.Name = "Node0";
+            treeNode11.Text = "Serv 1";
+            treeNode12.Name = "Node1";
+            treeNode12.Text = "Serv 2";
+            treeNode13.Name = "Node0";
+            treeNode13.Text = "Serv 3";
+            treeNode14.Name = "Node1";
+            treeNode14.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
@@ -413,11 +406,6 @@
             this.Text = "Form1";
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnMaxi)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMini)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -433,16 +421,11 @@
         #endregion
         private System.Windows.Forms.Panel pHeader;
         private System.Windows.Forms.TreeView twServers;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Logo;
-        private System.Windows.Forms.PictureBox btnMini;
-        private System.Windows.Forms.PictureBox btnMaxi;
-        private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblNameServer;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnServermanager;
         private System.Windows.Forms.Button btnSettings;
@@ -454,6 +437,9 @@
         private System.Windows.Forms.Panel panel4;
         private Components.ConnectionDisplay cDConnected;
         private Warecast.ControlsSuite.ConversationCtrl conversationCtrl;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnMiniMize;
+        private System.Windows.Forms.Button btnMaxMize;
     }
 }
 

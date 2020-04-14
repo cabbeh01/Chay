@@ -34,13 +34,6 @@ namespace Chay
                 
             }
         }
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Login log = new Login();
-            log.Show();
-        }
-
 
         private void PHeader_MouseMove(object sender, MouseEventArgs e)
         {
@@ -187,6 +180,13 @@ namespace Chay
                 tbxPassword.PasswordChar = '•';
                 tbxRepassword.PasswordChar = '•';
             }
-        } 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Login log = new Login();
+            log.Show();
+        }
     }
 }

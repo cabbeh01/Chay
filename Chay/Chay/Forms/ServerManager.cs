@@ -48,13 +48,6 @@ namespace Chay.Forms
             }
         }
 
-        private async void btnClose_Click(object sender, EventArgs e)
-        {
-            await UpdateStruct();
-            
-            this.Hide();
-        }
-
         public List<Server> GetServers()
         {
             return _us.Servers;
@@ -267,14 +260,11 @@ namespace Chay.Forms
             
         }
 
-        private void btnClose_MouseHover(object sender, EventArgs e)
+        private async void btnExit_Click(object sender, EventArgs e)
         {
-            
-        }
+            await UpdateStruct();
 
-        private void btnClose_MouseLeave(object sender, EventArgs e)
-        {
-            
+            this.Hide();
         }
     }
 }

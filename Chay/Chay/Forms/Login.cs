@@ -64,11 +64,6 @@ namespace Chay
             Logo.ForeColor = Color.White;
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             try
@@ -102,5 +97,9 @@ namespace Chay
             this.Hide();
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

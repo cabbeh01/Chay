@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.pHeader = new System.Windows.Forms.Panel();
+            this.btnExit = new System.Windows.Forms.Button();
             this.lblServerhanterare = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbxOut = new System.Windows.Forms.ListBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -51,9 +49,6 @@
             this.btnServerUp = new System.Windows.Forms.Button();
             this.btnServerDown = new System.Windows.Forms.Button();
             this.pHeader.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -64,8 +59,8 @@
             // pHeader
             // 
             this.pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            this.pHeader.Controls.Add(this.btnExit);
             this.pHeader.Controls.Add(this.lblServerhanterare);
-            this.pHeader.Controls.Add(this.panel3);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pHeader.Location = new System.Drawing.Point(2, 2);
             this.pHeader.Name = "pHeader";
@@ -73,6 +68,23 @@
             this.pHeader.TabIndex = 2;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.IndianRed;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnExit.Location = new System.Drawing.Point(590, -1);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(42, 27);
+            this.btnExit.TabIndex = 19;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblServerhanterare
             // 
@@ -84,38 +96,6 @@
             this.lblServerhanterare.Size = new System.Drawing.Size(183, 40);
             this.lblServerhanterare.TabIndex = 18;
             this.lblServerhanterare.Text = "Serverhanterare";
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(570, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(58, 28);
-            this.panel3.TabIndex = 7;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnClose.Location = new System.Drawing.Point(8, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(45, 26);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            this.btnClose.MouseHover += new System.EventHandler(this.btnClose_MouseHover);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBox1.Location = new System.Drawing.Point(88, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lbxOut
             // 
@@ -349,9 +329,6 @@
             this.Text = "ServerManager";
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -368,9 +345,6 @@
         #endregion
 
         private System.Windows.Forms.Panel pHeader;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox btnClose;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListBox lbxOut;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
@@ -389,5 +363,6 @@
         private System.Windows.Forms.GroupBox gbxServerlist;
         private System.Windows.Forms.Button btnServerUp;
         private System.Windows.Forms.Button btnServerDown;
+        private System.Windows.Forms.Button btnExit;
     }
 }

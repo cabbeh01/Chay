@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Panel pHeader;
+            this.btnExit = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.lblPass = new System.Windows.Forms.Label();
@@ -38,20 +39,16 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbxUsername = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             pHeader = new System.Windows.Forms.Panel();
+            pHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pHeader
             // 
             pHeader.BackColor = System.Drawing.Color.SteelBlue;
+            pHeader.Controls.Add(this.btnExit);
             pHeader.Dock = System.Windows.Forms.DockStyle.Top;
             pHeader.Location = new System.Drawing.Point(2, 2);
             pHeader.Name = "pHeader";
@@ -59,6 +56,23 @@
             pHeader.TabIndex = 7;
             pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
             pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.BackColor = System.Drawing.Color.IndianRed;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnExit.Location = new System.Drawing.Point(479, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(42, 27);
+            this.btnExit.TabIndex = 8;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Logo
             // 
@@ -159,44 +173,12 @@
             this.tbxUsername.Size = new System.Drawing.Size(159, 15);
             this.tbxUsername.TabIndex = 0;
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel3.Controls.Add(this.btnClose);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(465, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(58, 28);
-            this.panel3.TabIndex = 7;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnClose.Location = new System.Drawing.Point(10, -1);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(45, 26);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBox1.Location = new System.Drawing.Point(88, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 26);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(525, 346);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(pHeader);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblRegister);
@@ -210,13 +192,11 @@
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            pHeader.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,8 +212,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbxUsername;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox btnClose;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnExit;
     }
 }

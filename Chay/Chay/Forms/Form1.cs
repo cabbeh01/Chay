@@ -137,30 +137,6 @@ namespace Chay
             lblUser.Location = new Point(639 - (us.Username.Length * 7) ,0);
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void BtnMaxi_Click(object sender, EventArgs e)
-        {
-            if (!_isMaxi)
-            {
-                this.WindowState = FormWindowState.Maximized;
-                _isMaxi = true;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-                _isMaxi = false;
-            }
-            
-        }
-
-        private void BtnMini_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
@@ -648,6 +624,30 @@ namespace Chay
             {
                 
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMaxMize_Click(object sender, EventArgs e)
+        {
+            if (!_isMaxi)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                _isMaxi = true;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                _isMaxi = false;
+            }
+        }
+
+        private void btnMiniMize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
