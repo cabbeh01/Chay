@@ -17,14 +17,10 @@ namespace ChayServer
     class Program
     {
         static MongoCRUD _db = new MongoCRUD("dbChay");
-
         static TcpListener listener;
-
-        static List<User> users = new List<User>();
         static TcpClient client;
-
         static Server s = new Server();
-        
+
 
         static void Main(string[] args)
         {
@@ -43,12 +39,13 @@ namespace ChayServer
                 int port = int.Parse(Console.ReadLine());
                 listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
+                s.Users = new List<User>();
                 s.Port = port;
                 Console.Clear();
                 
                 Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
                 Console.WriteLine("_________________________________________________________________________________ \n");
-                Console.WriteLine($"Server started at 127.0.0.1:{port}");
+                Console.WriteLine($"Server started at 127.0.0.1:{port}\n");
                 
                 
             }
@@ -159,10 +156,11 @@ namespace ChayServer
             try
             {
                 client = await listener.AcceptTcpClientAsync();
+
+                User a = new User(client);
+                s.Users.Add(a);
                 
-                users.Add(new User(client));
-                
-                StartReading(client);
+                StartReading(a);
                 
             }
             catch (Exception ex)
@@ -185,18 +183,18 @@ namespace ChayServer
                 Console.WriteLine("Gick inte att skicka id");
             }
         }
-        static async void StartReading(TcpClient k)
+        static async void StartReading(User u)
         {
             try
             {
-                if (k.Connected)
+                if (u.Client.Connected)
                 {
                     
                     // [Metadata]--[DATA]--[END]
                     try
                     {
                         byte[] meta = new byte[8];
-                        NetworkStream stream = k.GetStream();
+                        NetworkStream stream = u.Client.GetStream();
                         await stream.ReadAsync(meta, 0, meta.Length);
 
                         int len = int.Parse(Encoding.ASCII.GetString(meta));
@@ -210,16 +208,20 @@ namespace ChayServer
 
                             if (incomming.SysMess && incomming.Text == "connected")
                             {
-                                Console.WriteLine($"{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
-                                foreach(User a in users)
+                                Console.Write($"\n{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write("  +\n");
+                                Console.ForegroundColor = ConsoleColor.Gray;
+                                foreach (User a in s.Users)
                                 {
-                                    if(a.Client == k)
+                                    if(a.Client == u.Client)
                                     {
                                         a.Id = incomming.Auther.Id;
                                         a.Username = incomming.Auther.Username;
                                         a.Name = incomming.Auther.Name;
                                         //Console.WriteLine(s.Id);
-                                        SendId(s.Id, k);
+                                        SendId(s.Id, u.Client);
+                                        _db.UpdateOne<Server>("Servers", s.Id, s);
                                     }
                                 }
                             }
@@ -238,20 +240,37 @@ namespace ChayServer
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine("Ett fel uppstod \n" + ex.ToString());
+                        //Console.WriteLine("Ett fel uppstod \n" + ex.ToString());
+                        if (ex.GetType().IsAssignableFrom(typeof(System.IO.IOException)))
+                        {
+                            u.Client.Dispose();
+                            s.Users.Remove(u);
+                            _db.UpdateOne<Server>("Servers", s.Id, s);
+                            Console.Write($"\n{u.Id}: ({u.Name}) lämnade servern");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("  -");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+                        else
+                        {
+                            StartReading(u);
+                        }
+                        
                     }
 
-                    StartReading(k);
+                    StartReading(u);
                 }
                 else
                 {
-                    k.Dispose();
+                    u.Client.Dispose();
+                    s.Users.Remove(u);
                     //UserInput();
                 }
             }
             catch(Exception ex)
             {
-                k.Dispose();
+                u.Client.Dispose();
+                s.Users.Remove(u);
 
                 Console.WriteLine(ex.ToString());
                 //UserInput();
@@ -300,7 +319,7 @@ namespace ChayServer
         {
             try
             {
-                foreach (User c in users)
+                foreach (User c in s.Users)
                 {
                     Console.WriteLine("");
                     await c.Client.GetStream().WriteAsync(data, 0, data.Length);
@@ -336,43 +355,32 @@ namespace ChayServer
                         }
                         else
                         {
+                            Console.Write(dataSplice[0] + "\n" + dataSplice[1]);
                             Console.WriteLine("Du måste mata in en användare som du vill kicka");
                         }
                         break;
 
                     case "ls":
 
-                        Console.WriteLine("Listar alla användare som är uppkopplade till servern");
                         ListUsers();
                         break;
-
-
                     
-                    case "stop":
-                        if(users.Count > 0)
+                    case "restart":
+                        if(s.Users.Count > 0)
                         {
-                            foreach (User c in users)
+                            foreach (User c in s.Users)
                             {
-                                c.Client.Close();
+                                c.Client.Dispose();
                             }
-                            listener.Stop();
-                            Console.WriteLine("Servern stoppades");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Servern stoppades");
+
+                            s.Users.Clear();
                         }
                         
-                        break;
-
-                    case "start":
-                        if (!listener.Pending())
-                        {
-                            listener.Start();
-                            Console.WriteLine("Servern startades");
-                        }
-                        Console.WriteLine("Servern är redan igång");
-
+                        Console.Clear();
+                        
+                        listener.Stop();
+                        listener.Start();
+                        Console.WriteLine("Servern stoppades");
                         break;
 
                     case "clear":
@@ -383,6 +391,9 @@ namespace ChayServer
                     case "clean":
 
                         s.Messages.Clear();
+                        byte[] backToClient = new byte[64];
+                        backToClient = Encoding.Unicode.GetBytes("newmess");
+                        Broadcast(backToClient);
                         break;
 
 
@@ -394,9 +405,8 @@ namespace ChayServer
                         Console.WriteLine("kick XX- Stänger ner en uppkoppling mellan servern och en användare");
                         Console.WriteLine("ls - Visar de användare som är uppkopplade mot servern");
                         Console.WriteLine("clear - Rensar terminalens utmatning");
-                        Console.WriteLine("clean - Rensar alla meddelande på servern");
-                        Console.WriteLine("stop - Stoppar servern");
-                        Console.WriteLine("start - Startar servern");
+                        Console.WriteLine("clean - Rensar alla meddelande på servern och databasen");
+                        Console.WriteLine("restart - Startar om servern");
                         Console.WriteLine("exit - Stänger ner programmet");
                         break;
 
@@ -405,7 +415,6 @@ namespace ChayServer
                         Console.Read();
                         Environment.Exit(0);
                         break;
-
 
                 }
 
@@ -424,7 +433,7 @@ namespace ChayServer
             try
             {
                 User usr = new User();
-                foreach (User u in users)
+                foreach (User u in s.Users)
                 {
                     if (u.Username == us)
                     {
@@ -433,7 +442,7 @@ namespace ChayServer
                         Console.WriteLine($"Användaren {us} är nu kickad");
                     }
                 }
-                users.Remove(usr);
+                s.Users.Remove(usr);
             }
             catch
             {
@@ -446,9 +455,9 @@ namespace ChayServer
         {
             try
             {
-                if(users.Count>0){
+                if(s.Users.Count>0){
                     User usr = new User();
-                    foreach (User u in users)
+                    foreach (User u in s.Users)
                     {
                         Console.WriteLine($"Id: {u.Id}| {u.Username} - Namn({u.Name})");
                     }

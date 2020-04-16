@@ -262,8 +262,10 @@ namespace Chay
             {
                 if (us.Client.Connected)
                 {
-                    StartSending(new Message(new Userpack(us.Id,us.Name,us.Image,us.Username),tbxSend.Text,DateTime.Now));
-                    //us._client.Close();
+                    if (!String.IsNullOrEmpty(tbxSend.Text))
+                    {
+                        StartSending(new Message(new Userpack(us.Id, us.Name, us.Image, us.Username), tbxSend.Text, DateTime.Now));
+                    }
                     UpdateMessagesDB();
                     
                 }
@@ -282,9 +284,6 @@ namespace Chay
             }
         }
 
-        
-
-
 
         //Connection when choosing a connection to join
         private void twServers_DoubleClick(object sender, EventArgs e)
@@ -297,6 +296,7 @@ namespace Chay
                 {
                     if (twServers.SelectedNode.Text == s.Name)
                     {
+                        
                         pickedServer = s;
                         if (us.Client.Connected)
                         {
@@ -309,9 +309,18 @@ namespace Chay
                         newRow = table.NewConversationMessagesRow();
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
+                        
 
+
+                        
                         UpdateMessagesDB();
                         UpdateMessboard();
+
+                        foreach(User u in pickedServer.Users)
+                        {
+                            twServers.SelectedNode.Nodes.Add(u.Name);
+                        }
+                        twServers.ExpandAll();
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
 
@@ -407,7 +416,7 @@ namespace Chay
 
                 byte[] outData = ObjectToByteArray(msg);
                 meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
-                MessageBox.Show(outData.Length.ToString());
+                //MessageBox.Show(outData.Length.ToString());
                 us.Client.GetStream().Write(meta, 0, meta.Length);
 
                 //MessageBox.Show(outData.ToString());
@@ -512,43 +521,48 @@ namespace Chay
                     }
                 }
 
-                foreach (Message msg in pickedServer.Messages)
+                if(pickedServer.Messages != null)
                 {
-                    if (msg.Auther.Id == us.Id)
+                    foreach (Message msg in pickedServer.Messages)
                     {
-                        if(table.Count < 0){
-                            newRow.time = msg.DelivaryTime;
-                            newRow.text = msg.Text;
-                            newRow.incoming = true;
+                        if (msg.Auther.Id == us.Id)
+                        {
+                            if (table.Count < 0)
+                            {
+                                newRow.time = msg.DelivaryTime;
+                                newRow.text = msg.Text;
+                                newRow.incoming = true;
+                            }
+                            else
+                            {
+                                newRow = table.NewConversationMessagesRow();
+                                newRow.time = msg.DelivaryTime;
+                                newRow.text = msg.Text;
+                                newRow.incoming = true;
+                            }
+
+                            table.AddConversationMessagesRow(newRow);
                         }
                         else
                         {
-                            newRow = table.NewConversationMessagesRow();
-                            newRow.time = msg.DelivaryTime;
-                            newRow.text = msg.Text;
-                            newRow.incoming = true;
+                            if (table.Count < 0)
+                            {
+                                newRow.time = msg.DelivaryTime;
+                                newRow.text = msg.Text;
+                                newRow.incoming = false;
+                            }
+                            else
+                            {
+                                newRow = table.NewConversationMessagesRow();
+                                newRow.time = msg.DelivaryTime;
+                                newRow.text = msg.Text;
+                                newRow.incoming = false;
+                            }
+                            table.AddConversationMessagesRow(newRow);
                         }
-                        
-                        table.AddConversationMessagesRow(newRow);
-                    }
-                    else
-                    {
-                        if (table.Count < 0)
-                        {
-                            newRow.time = msg.DelivaryTime;
-                            newRow.text = msg.Text;
-                            newRow.incoming = false;
-                        }
-                        else
-                        {
-                            newRow = table.NewConversationMessagesRow();
-                            newRow.time = msg.DelivaryTime;
-                            newRow.text = msg.Text;
-                            newRow.incoming = false;
-                        }
-                        table.AddConversationMessagesRow(newRow);
                     }
                 }
+                
                 UpdateMessboard();
             }
             catch(Exception ex)
