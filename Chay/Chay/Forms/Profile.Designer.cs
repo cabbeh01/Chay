@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.Panel pHeader;
             System.Windows.Forms.Panel pHeader2;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.lblProfil = new System.Windows.Forms.Label();
             this.btnUpload = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -200,6 +201,7 @@
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(pHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Profile";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.Text = "Profile";

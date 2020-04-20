@@ -303,15 +303,11 @@ namespace Chay
                             RemoveHandshake();
                         }
                         
-                        StartHandshake(s.Ip, s.Port);
-                        MessageBox.Show($"Du connectar till {s.Name}");
-
+                        StartHandshake(s.Ip, s.Port,s.Name);
+                        
                         newRow = table.NewConversationMessagesRow();
                         cDConnected.UpdateStatus(true);
                         lblNameServer.Text = twServers.SelectedNode.Text;
-                        
-
-
                         
                         UpdateMessagesDB();
                         UpdateMessboard();
@@ -330,23 +326,28 @@ namespace Chay
             catch(Exception ex)
             {
                 cDConnected.UpdateStatus(false);
-                MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex);
+                //MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex);
             }
         }
 
-        public async void StartHandshake(IPAddress address, int port)
+        public async void StartHandshake(IPAddress address, int port, string name)
         {
             try
             {
+                if(us.Client == null)
+                {
+                    us.Client = new TcpClient();
+                }
                 await us.Client.ConnectAsync(address, port);
                 StartSending(new Message(new Userpack(us.Id, us.Name, us.Image,us.Username), "connected", DateTime.Now, true));
                 StartReading();
+                MessageBox.Show($"Du connectar till {name}");
             }
             catch(Exception ex)
             {
                 
                 cDConnected.UpdateStatus(false);
-                MessageBox.Show("Går inte uppräta en anslutning \n" + ex);
+                MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex);
             }
         }
 
@@ -451,7 +452,8 @@ namespace Chay
                         }
                         catch(Exception ex)
                         {
-                            MessageBox.Show("Fel i överföringen" + ex);
+                            //MessageBox.Show("Fel i överföringen" + ex);
+                            us.Client.GetStream().Close();
                         }
                        
                         
@@ -460,8 +462,8 @@ namespace Chay
                         pickedServer.Id = ObjectId.Parse(id.ToString());
                         _readId = true;
                         UpdateMessagesDB();
-                        
-                        
+                        cDConnected.UpdateStatus(true);
+
                     }
 
                     byte[] buffert = new byte[64];
@@ -473,9 +475,10 @@ namespace Chay
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(""+ex);
+                        //MessageBox.Show(""+ex);
+                        us.Client.GetStream().Close();
                     }
-
+                    
 
                     string mess = Encoding.Unicode.GetString(buffert, 0, bRead);
                     //MessageBox.Show(mess);
@@ -484,23 +487,18 @@ namespace Chay
                         UpdateMessagesDB();
                         UpdateMessboard();
                     }
-
+                    cDConnected.UpdateStatus(true);
                     StartReading();
+                }
+                else
+                {
+                    us.Client.Client.Disconnect(true);
                 }
             }
             catch(Exception ex)
             {
-                if (!us.Client.Connected)
-                {
-                    us.Client.GetStream().Close();
-                    
-                }
-                else
-                {
-                    StartReading();
-                }
 
-                MessageBox.Show(""+ex);
+                MessageBox.Show("Startreading"+ex);
             }
         }
 

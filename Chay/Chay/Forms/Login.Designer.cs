@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Panel pHeader;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.btnExit = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
@@ -189,6 +190,7 @@
             this.Controls.Add(this.Logo);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
