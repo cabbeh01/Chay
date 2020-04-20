@@ -1,32 +1,30 @@
 ﻿using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ChayPackages
 {
     [Serializable]
     public class Userpack
     {
-        /// <summary> </summary>
+        /// <summary>ObjectId som tilldelas utav MongoDB.Bson</summary>
         private ObjectId _id;
 
-        /// <summary> </summary>
+        /// <summary>Namnet på användaren</summary>
         private string _name;
 
-        /// <summary> </summary>
+        /// <summary>Bilden på användaren i base64 format</summary>
         private string _image;
-
-        /// <summary> </summary>
+        
+        /// <summary>Användarnmanet</summary>
         private string _username;
 
         /// <summary>
-        /// 
+        /// Standardkonstruktor som deklarerar alla variabler till ett användbart objekt
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="image"></param>
-        /// <param name="username"></param>
+        /// <param name="id">ObjectId som tillhör databasen på användaren</param>
+        /// <param name="name">Namnet på användaren</param>
+        /// <param name="image">Bilden på användaren i base64 format</param>
+        /// <param name="username">Användarnamnet</param>
         public Userpack(ObjectId id, string name, string image, string username)
         {
             this._id = id;
@@ -36,7 +34,7 @@ namespace ChayPackages
         }
 
         /// <summary>
-        /// 
+        /// GET Returnerar ObjectId:et
         /// </summary>
         public ObjectId Id
         {
@@ -47,7 +45,7 @@ namespace ChayPackages
         }
 
         /// <summary>
-        /// 
+        /// GET Returnerar namnet
         /// </summary>
         public string Name
         {
@@ -58,7 +56,7 @@ namespace ChayPackages
         }
 
         /// <summary>
-        /// 
+        /// GET Returnerar användarnamnet
         /// </summary>
         public string Username
         {
@@ -69,7 +67,7 @@ namespace ChayPackages
         }
         
         /// <summary>
-        /// 
+        /// GET returnerar bilden
         /// </summary>
         public string Image
         {

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Windows.Forms;
-using MongoDB.Bson.Serialization;
-using Chay;
 
 namespace MongoDBLogin
 {

@@ -34,7 +34,7 @@ namespace ChayPackages
         }
         
         /// <summary>
-        /// 
+        /// GET/SET Userpack Auther
         /// </summary>
         public Userpack Auther
         {
@@ -50,7 +50,7 @@ namespace ChayPackages
         }
         
         /// <summary>
-        /// 
+        /// GET SysMess
         /// </summary>
         public bool SysMess
         {
@@ -61,7 +61,7 @@ namespace ChayPackages
         }
         
         /// <summary>
-        /// 
+        /// GET/SET string message
         /// </summary>
         public string Text
         {
@@ -74,9 +74,9 @@ namespace ChayPackages
                 this._text = value;
             }
         }
-        
+
         /// <summary>
-        /// 
+        /// GET/SET DelivaryTime
         /// </summary>
         public DateTime DelivaryTime
         {
@@ -94,8 +94,8 @@ namespace ChayPackages
         /// <summary>
         /// SET serialization
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
+        /// <param name="info">Innehåller informationen om den data som ska serializeras</param>
+        /// <param name="context">Beskriver destinationen till streamen [Används ej]</param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             /*
@@ -110,8 +110,8 @@ namespace ChayPackages
         /// <summary>
         /// GET serialization
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
+        /// <param name="info">Innehåller informationen om den data som ska serializeras</param>
+        /// <param name="context">Beskriver destinationen till streamen [Används ej]</param>
         public Message(SerializationInfo info, StreamingContext context)
         {
             /*
@@ -124,7 +124,7 @@ namespace ChayPackages
         }
 
         /// <summary>
-        /// 
+        /// Data som skrivs ut när ToString körs vilket returnerar endast textmeddelandet 
         /// </summary>
         /// <returns>Returnerar meddelandete som skickas</returns>
         public override string ToString()
