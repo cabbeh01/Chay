@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Kalle");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lena");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Klas");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9,
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Serv 2");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Serv 3");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Serv 4");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Kalle");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lena");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Klas");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Serv 1", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Serv 2");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Serv 3");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Serv 4");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pHeader = new System.Windows.Forms.Panel();
             this.btnMiniMize = new System.Windows.Forms.Button();
@@ -53,13 +53,13 @@
             this.lblRemainingWords = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.lblNameServer = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
+            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.pHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -79,9 +79,9 @@
             this.pHeader.Controls.Add(this.btnServermanager);
             this.pHeader.Controls.Add(this.Logo);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(2, 2);
+            this.pHeader.Location = new System.Drawing.Point(0, 0);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(818, 63);
+            this.pHeader.Size = new System.Drawing.Size(822, 63);
             this.pHeader.TabIndex = 0;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
             this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
@@ -95,7 +95,7 @@
             this.btnMiniMize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMiniMize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMiniMize.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnMiniMize.Location = new System.Drawing.Point(692, 0);
+            this.btnMiniMize.Location = new System.Drawing.Point(696, 0);
             this.btnMiniMize.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.btnMiniMize.Name = "btnMiniMize";
             this.btnMiniMize.Size = new System.Drawing.Size(42, 27);
@@ -113,7 +113,7 @@
             this.btnMaxMize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaxMize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaxMize.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnMaxMize.Location = new System.Drawing.Point(734, 0);
+            this.btnMaxMize.Location = new System.Drawing.Point(738, 0);
             this.btnMaxMize.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.btnMaxMize.Name = "btnMaxMize";
             this.btnMaxMize.Size = new System.Drawing.Size(42, 27);
@@ -131,7 +131,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnExit.Location = new System.Drawing.Point(776, 0);
+            this.btnExit.Location = new System.Drawing.Point(780, 0);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(42, 27);
             this.btnExit.TabIndex = 10;
@@ -146,7 +146,7 @@
             this.lblUser.BackColor = System.Drawing.Color.SteelBlue;
             this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblUser.Location = new System.Drawing.Point(639, 0);
+            this.lblUser.Location = new System.Drawing.Point(643, 0);
             this.lblUser.Name = "lblUser";
             this.lblUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblUser.Size = new System.Drawing.Size(31, 15);
@@ -219,29 +219,29 @@
             this.twServers.Dock = System.Windows.Forms.DockStyle.Left;
             this.twServers.Location = new System.Drawing.Point(10, 35);
             this.twServers.Name = "twServers";
-            treeNode8.Name = "Node4";
-            treeNode8.Text = "Kalle";
-            treeNode9.Name = "Node6";
-            treeNode9.Text = "Lena";
-            treeNode10.Name = "Node7";
-            treeNode10.Text = "Klas";
-            treeNode11.Name = "Node0";
-            treeNode11.Text = "Serv 1";
-            treeNode12.Name = "Node1";
-            treeNode12.Text = "Serv 2";
-            treeNode13.Name = "Node0";
-            treeNode13.Text = "Serv 3";
-            treeNode14.Name = "Node1";
-            treeNode14.Text = "Serv 4";
+            treeNode1.Name = "Node4";
+            treeNode1.Text = "Kalle";
+            treeNode2.Name = "Node6";
+            treeNode2.Text = "Lena";
+            treeNode3.Name = "Node7";
+            treeNode3.Text = "Klas";
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Serv 1";
+            treeNode5.Name = "Node1";
+            treeNode5.Text = "Serv 2";
+            treeNode6.Name = "Node0";
+            treeNode6.Text = "Serv 3";
+            treeNode7.Name = "Node1";
+            treeNode7.Text = "Serv 4";
             this.twServers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12,
-            treeNode13,
-            treeNode14});
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.twServers.ShowLines = false;
             this.twServers.ShowPlusMinus = false;
             this.twServers.ShowRootLines = false;
-            this.twServers.Size = new System.Drawing.Size(200, 398);
+            this.twServers.Size = new System.Drawing.Size(200, 402);
             this.twServers.TabIndex = 1;
             this.twServers.DoubleClick += new System.EventHandler(this.twServers_DoubleClick);
             // 
@@ -252,10 +252,10 @@
             this.panel1.Controls.Add(this.twServers);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(2, 65);
+            this.panel1.Location = new System.Drawing.Point(0, 63);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(200, 433);
+            this.panel1.Size = new System.Drawing.Size(200, 437);
             this.panel1.TabIndex = 2;
             // 
             // lblRemainingWords
@@ -264,7 +264,7 @@
             this.lblRemainingWords.AutoSize = true;
             this.lblRemainingWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRemainingWords.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblRemainingWords.Location = new System.Drawing.Point(149, 408);
+            this.lblRemainingWords.Location = new System.Drawing.Point(149, 412);
             this.lblRemainingWords.Name = "lblRemainingWords";
             this.lblRemainingWords.Size = new System.Drawing.Size(48, 25);
             this.lblRemainingWords.TabIndex = 5;
@@ -289,18 +289,10 @@
             this.panel2.Controls.Add(this.cDConnected);
             this.panel2.Controls.Add(this.lblNameServer);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(202, 65);
+            this.panel2.Location = new System.Drawing.Point(200, 63);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(618, 101);
+            this.panel2.Size = new System.Drawing.Size(622, 101);
             this.panel2.TabIndex = 3;
-            // 
-            // cDConnected
-            // 
-            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.cDConnected.Location = new System.Drawing.Point(458, 53);
-            this.cDConnected.Name = "cDConnected";
-            this.cDConnected.Size = new System.Drawing.Size(172, 45);
-            this.cDConnected.TabIndex = 4;
             // 
             // lblNameServer
             // 
@@ -317,10 +309,51 @@
             this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel5.Controls.Add(this.conversationCtrl);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(202, 166);
+            this.panel5.Location = new System.Drawing.Point(200, 164);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(618, 258);
+            this.panel5.Size = new System.Drawing.Size(622, 262);
             this.panel5.TabIndex = 8;
+            // 
+            // btnSend
+            // 
+            this.btnSend.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnSend.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSend.FlatAppearance.BorderSize = 0;
+            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSend.Location = new System.Drawing.Point(515, 0);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(107, 74);
+            this.btnSend.TabIndex = 6;
+            this.btnSend.Text = "Skicka";
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // tbxSend
+            // 
+            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxSend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSend.Location = new System.Drawing.Point(0, 0);
+            this.tbxSend.MaxLength = 512;
+            this.tbxSend.Multiline = true;
+            this.tbxSend.Name = "tbxSend";
+            this.tbxSend.Size = new System.Drawing.Size(515, 74);
+            this.tbxSend.TabIndex = 4;
+            this.tbxSend.TextChanged += new System.EventHandler(this.tbxSend_TextChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.tbxSend);
+            this.panel4.Controls.Add(this.btnSend);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(200, 426);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(622, 74);
+            this.panel4.TabIndex = 5;
             // 
             // conversationCtrl
             // 
@@ -347,49 +380,16 @@
             this.conversationCtrl.RemoteBalloonPadding = new System.Windows.Forms.Padding(20, 20, 10, 10);
             this.conversationCtrl.RemoteCellPadding = new System.Windows.Forms.Padding(10);
             this.conversationCtrl.RemoteText = "Du";
-            this.conversationCtrl.Size = new System.Drawing.Size(618, 258);
+            this.conversationCtrl.Size = new System.Drawing.Size(622, 262);
             this.conversationCtrl.TabIndex = 8;
             // 
-            // btnSend
+            // cDConnected
             // 
-            this.btnSend.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnSend.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSend.FlatAppearance.BorderSize = 0;
-            this.btnSend.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSend.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSend.Location = new System.Drawing.Point(511, 0);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(107, 74);
-            this.btnSend.TabIndex = 6;
-            this.btnSend.Text = "Skicka";
-            this.btnSend.UseVisualStyleBackColor = false;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // tbxSend
-            // 
-            this.tbxSend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxSend.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSend.Location = new System.Drawing.Point(0, 0);
-            this.tbxSend.MaxLength = 512;
-            this.tbxSend.Multiline = true;
-            this.tbxSend.Name = "tbxSend";
-            this.tbxSend.Size = new System.Drawing.Size(511, 74);
-            this.tbxSend.TabIndex = 4;
-            this.tbxSend.TextChanged += new System.EventHandler(this.tbxSend_TextChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Controls.Add(this.tbxSend);
-            this.panel4.Controls.Add(this.btnSend);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(202, 424);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(618, 74);
-            this.panel4.TabIndex = 5;
+            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cDConnected.Location = new System.Drawing.Point(462, 53);
+            this.cDConnected.Name = "cDConnected";
+            this.cDConnected.Size = new System.Drawing.Size(172, 45);
+            this.cDConnected.TabIndex = 4;
             // 
             // Form1
             // 
@@ -407,7 +407,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(650, 390);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.pHeader.ResumeLayout(false);

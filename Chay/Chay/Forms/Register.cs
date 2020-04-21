@@ -52,50 +52,61 @@ namespace Chay
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(tbxUsername.Text))
+            try
             {
-                if (!string.IsNullOrEmpty(tbxPassword.Text) && PasswordValidator(tbxPassword.Text))
+                if (!string.IsNullOrEmpty(tbxUsername.Text))
                 {
-                    if (tbxRepassword.Text == tbxPassword.Text)
+                    if (!string.IsNullOrEmpty(tbxPassword.Text) && PasswordValidator(tbxPassword.Text))
                     {
-                        try
+                        if (tbxRepassword.Text == tbxPassword.Text)
                         {
-                            User u = _db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
-                            if (!(u.Username == tbxUsername.Text))
+                            try
                             {
-                                User n = new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text));
-                                n.Name = tbxUsername.Text;
-                                _db.InsertOne("Users", n);
+                                User u = _db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+                                if (!(u.Username == tbxUsername.Text))
+                                {
+                                    User n = new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text));
+                                    n.Name = tbxUsername.Text;
+                                    _db.InsertOne("Users", n);
+                                    MessageBox.Show("Ditt konto är nu skapat");
+                                    this.Close();
+                                    Login log = new Login();
+                                    log.Show();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Användaren existerar redan, vänligen välj ett annat användare");
+                                }
+                            }
+                            catch
+                            {
+                                _db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
                                 MessageBox.Show("Ditt konto är nu skapat");
                                 this.Close();
                                 Login log = new Login();
                                 log.Show();
                             }
-                            else
-                            {
-                                MessageBox.Show("Användaren existerar redan, vänligen välj ett annat användare");
-                            }
+
+
                         }
-                        catch
+                        else
                         {
-                            _db.InsertOne("Users", new User(tbxUsername.Text, MongoCRUD.Encrypt(tbxPassword.Text)));
-                            MessageBox.Show("Ditt konto är nu skapat");
-                            this.Close();
-                            Login log = new Login();
-                            log.Show();
+                            MessageBox.Show("Lösenorden måste matcha");
                         }
-                        
-                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Du måste mata in ett lösenord som är mer än 6 tecken och har minst ett specialtecken och en versal");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Du måste mata in ett lösenord som är mer än 6 tecken och har minst ett specialtecken och en versal");
+                    MessageBox.Show("Du måste mata in ett användarnamn");
                 }
             }
-            else
+            catch
             {
-                MessageBox.Show("Du måste mata in ett användarnamn");
+                MessageBox.Show("Går ej att registrera");
             }
         }
 

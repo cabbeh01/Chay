@@ -27,8 +27,7 @@ namespace Chay
         public enum TimeFormat
         {
             HHmmss,
-            HHmm,
-            Hmm
+            HHmm
         }
 
         public Settings(ref ChatColor c, ref TimeFormat tf)

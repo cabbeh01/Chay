@@ -48,6 +48,7 @@ namespace Chay
                 InitializeComponent();
 
                 this.SetStyle(ControlStyles.ResizeRedraw, true);
+                this.FormBorderStyle = FormBorderStyle.None;
                 us = user;
                 servermang = new ServerManager();
                 profile = new Profile();
@@ -72,35 +73,31 @@ namespace Chay
 
         //Resizeable windows form without border
 
-        private const int cGrip = 16;
-        private const int cCaption = 32;
-
         protected override void WndProc(ref System.Windows.Forms.Message m)
         {
-            if (m.Msg == 0x84)
-            {
-                Point pos = new Point(m.LParam.ToInt32());
-                pos = this.PointToScreen(pos);
-
-                if (pos.Y < cCaption)
-                {
-                    m.Result = (IntPtr)3;
-                    return;
-                }
-                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
-                {
-                    m.Result = (IntPtr)17;
-                    return;
-                }
-
-                if (pos.Y >= this.ClientSize.Height - cGrip)
-                {
-                    m.Result = (IntPtr)15;
-                    return;
-                }
-            }
-
+            const int WM_NCHITTEST = 0x84;
+            const int HTCLIENT = 1;
+            const int HTCAPTION = 2;
             base.WndProc(ref m);
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    if(m.Result == (IntPtr)HTCLIENT)
+                    {
+                        m.Result = (IntPtr)HTCAPTION;
+                    }
+                    break;
+            }
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.Style = (cp.Style | 262144);
+                return cp;
+            }
         }
 
         //Moveable header
@@ -111,7 +108,7 @@ namespace Chay
 
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 Point mousePose = Control.MousePosition;
                 mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
@@ -120,7 +117,7 @@ namespace Chay
         }
 
 
-        
+
         public void GraphicalComponents()
         {
             // -----    Logo    -----
@@ -613,15 +610,13 @@ namespace Chay
 
                     switch (timeFormat)
                     {
-                        case "Hmm":
-                            
-                            S_tFormat = Settings.TimeFormat.Hmm;
-                            break;
                         case "HHmmss":
+                            conversationCtrl.LongTimeSett = true;
                             S_tFormat = Settings.TimeFormat.HHmmss;
                             break;
 
                         case "HHmm":
+                            conversationCtrl.LongTimeSett = false;
                             S_tFormat = Settings.TimeFormat.HHmm;
                             break;
                     }

@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Security.Cryptography;
-
 
 namespace Warecast.ControlsSuite
 {
+    //OBS denna kod är tagen från någon annans bibliotek, fast har behövt modifieras för att fungera med mitt program
     public partial class ConversationCtrl : UserControl
     {
         #region public properties
@@ -117,6 +109,13 @@ namespace Warecast.ControlsSuite
         {
             get { return m_RemoteText; }
             set { m_RemoteText = value; }
+        }
+        //---------------------------------------------------------------------------------------------------
+        bool longTimeSett = false;
+        public bool LongTimeSett
+        {
+            get { return longTimeSett; }
+            set { longTimeSett = value; }
         }
         //---------------------------------------------------------------------------------------------------
         [Browsable(true)]
@@ -434,8 +433,20 @@ namespace Warecast.ControlsSuite
                 Rectangle dateTimeRectangle = RectangleUtils.GetPaddedRectangle(paddedImageBounds, m_BalloonTextPadding);
                 dateTimeRectangle.Offset(0, dateTimeRectangle.Size.Height - (int)m_DateTimeRegionHeight);
                 dateTimeRectangle.Size = new Size(dateTimeRectangle.Size.Width, (int)m_DateTimeRegionHeight);
-                sizef = e.Graphics.MeasureString(messageDateTime.ToLongTimeString(), font, dateTimeRectangle.Size, dateStringFormat, out charFitter, out linesFilled);
-                graphicsCtxt.DrawString(messageDateTime.ToLongTimeString(), font, dateTimeBrush, dateTimeRectangle, dateStringFormat);
+
+                //messageDateTime.ToLongTimeString()
+                //messageDateTime.ToShortTimeString()
+
+                if (longTimeSett)
+                {
+                    sizef = e.Graphics.MeasureString(messageDateTime.ToLongTimeString(), font, dateTimeRectangle.Size, dateStringFormat, out charFitter, out linesFilled);
+                    graphicsCtxt.DrawString(messageDateTime.ToLongTimeString(), font, dateTimeBrush, dateTimeRectangle, dateStringFormat);
+                }
+                else
+                {
+                    sizef = e.Graphics.MeasureString(messageDateTime.ToShortTimeString(), font, dateTimeRectangle.Size, dateStringFormat, out charFitter, out linesFilled);
+                    graphicsCtxt.DrawString(messageDateTime.ToShortTimeString(), font, dateTimeBrush, dateTimeRectangle, dateStringFormat);
+                }
                 dateTimeBrush.Dispose();
                 fontBrush.Dispose();
                 balloonBrush.Dispose();
