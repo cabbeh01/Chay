@@ -8,15 +8,24 @@ namespace Chay
 {
     public partial class Register : Form
     {
+        /// <summary> </summary>
         private Point _mouseLocation;
+
+        /// <summary> </summary>
         private MongoCRUD _db = new MongoCRUD("dbChay");
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Register()
         {
             InitializeComponent();
             GraphicalComponents();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void GraphicalComponents()
         {
             try
@@ -35,6 +44,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -45,11 +57,17 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void btnRegister_Click(object sender, EventArgs e)
         {
             try
@@ -110,6 +128,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -117,6 +138,9 @@ namespace Chay
             log.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void tbxRepassword_TextChanged(object sender, EventArgs e)
         {
             if (tbxRepassword.Text == tbxPassword.Text && !string.IsNullOrEmpty(tbxPassword.Text) && !string.IsNullOrEmpty(tbxRepassword.Text))
@@ -131,6 +155,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void tbxPassword_TextChanged(object sender, EventArgs e)
         {
             if (tbxRepassword.Text == tbxPassword.Text && !string.IsNullOrEmpty(tbxPassword.Text) && !string.IsNullOrEmpty(tbxRepassword.Text))
@@ -145,6 +172,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private bool PasswordValidator(string password)
         {
             if (password.Length > 6)
@@ -179,6 +209,9 @@ namespace Chay
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void bCbxShowPass_Click(object sender, EventArgs e)
         {
             if (!bCbxShowPass.Check)
@@ -193,6 +226,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();

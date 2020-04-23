@@ -53,13 +53,13 @@
             this.lblRemainingWords = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.lblNameServer = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbxSend = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.conversationCtrl = new Warecast.ControlsSuite.ConversationCtrl();
-            this.cDConnected = new Chay.Components.ConnectionDisplay();
             this.pHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -294,6 +294,14 @@
             this.panel2.Size = new System.Drawing.Size(622, 101);
             this.panel2.TabIndex = 3;
             // 
+            // cDConnected
+            // 
+            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cDConnected.Location = new System.Drawing.Point(462, 53);
+            this.cDConnected.Name = "cDConnected";
+            this.cDConnected.Size = new System.Drawing.Size(172, 45);
+            this.cDConnected.TabIndex = 4;
+            // 
             // lblNameServer
             // 
             this.lblNameServer.AutoSize = true;
@@ -313,6 +321,35 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(622, 262);
             this.panel5.TabIndex = 8;
+            // 
+            // conversationCtrl
+            // 
+            this.conversationCtrl.BackColor = System.Drawing.Color.Transparent;
+            this.conversationCtrl.BalloonBackColor = System.Drawing.Color.SteelBlue;
+            this.conversationCtrl.BalloonTextPadding = new System.Windows.Forms.Padding(10);
+            this.conversationCtrl.DataSource = null;
+            this.conversationCtrl.DateColumnName = "";
+            this.conversationCtrl.DateTimeRegionHeight = ((uint)(20u));
+            this.conversationCtrl.DateTimeTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.conversationCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.conversationCtrl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.conversationCtrl.IdColumnName = "";
+            this.conversationCtrl.IsIncomingColumnName = "";
+            this.conversationCtrl.Location = new System.Drawing.Point(0, 0);
+            this.conversationCtrl.LongTimeSett = false;
+            this.conversationCtrl.Margin = new System.Windows.Forms.Padding(4);
+            this.conversationCtrl.MeBalloonPadding = new System.Windows.Forms.Padding(10, 20, 20, 10);
+            this.conversationCtrl.MeCellPadding = new System.Windows.Forms.Padding(10);
+            this.conversationCtrl.MessageColumnName = "";
+            this.conversationCtrl.MessageToDateTimeVerticalIndent = 10;
+            this.conversationCtrl.MeText = "Mig";
+            this.conversationCtrl.MinimalBalloonWidth = 250;
+            this.conversationCtrl.Name = "conversationCtrl";
+            this.conversationCtrl.RemoteBalloonPadding = new System.Windows.Forms.Padding(20, 20, 10, 10);
+            this.conversationCtrl.RemoteCellPadding = new System.Windows.Forms.Padding(10);
+            this.conversationCtrl.RemoteText = "Du";
+            this.conversationCtrl.Size = new System.Drawing.Size(622, 262);
+            this.conversationCtrl.TabIndex = 8;
             // 
             // btnSend
             // 
@@ -354,42 +391,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(622, 74);
             this.panel4.TabIndex = 5;
-            // 
-            // conversationCtrl
-            // 
-            this.conversationCtrl.BackColor = System.Drawing.Color.Transparent;
-            this.conversationCtrl.BalloonBackColor = System.Drawing.Color.SteelBlue;
-            this.conversationCtrl.BalloonTextPadding = new System.Windows.Forms.Padding(10);
-            this.conversationCtrl.DataSource = null;
-            this.conversationCtrl.DateColumnName = "";
-            this.conversationCtrl.DateTimeRegionHeight = ((uint)(20u));
-            this.conversationCtrl.DateTimeTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.conversationCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.conversationCtrl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.conversationCtrl.IdColumnName = "";
-            this.conversationCtrl.IsIncomingColumnName = "";
-            this.conversationCtrl.Location = new System.Drawing.Point(0, 0);
-            this.conversationCtrl.Margin = new System.Windows.Forms.Padding(4);
-            this.conversationCtrl.MeBalloonPadding = new System.Windows.Forms.Padding(10, 20, 20, 10);
-            this.conversationCtrl.MeCellPadding = new System.Windows.Forms.Padding(10);
-            this.conversationCtrl.MessageColumnName = "";
-            this.conversationCtrl.MessageToDateTimeVerticalIndent = 10;
-            this.conversationCtrl.MeText = "Mig";
-            this.conversationCtrl.MinimalBalloonWidth = 250;
-            this.conversationCtrl.Name = "conversationCtrl";
-            this.conversationCtrl.RemoteBalloonPadding = new System.Windows.Forms.Padding(20, 20, 10, 10);
-            this.conversationCtrl.RemoteCellPadding = new System.Windows.Forms.Padding(10);
-            this.conversationCtrl.RemoteText = "Du";
-            this.conversationCtrl.Size = new System.Drawing.Size(622, 262);
-            this.conversationCtrl.TabIndex = 8;
-            // 
-            // cDConnected
-            // 
-            this.cDConnected.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.cDConnected.Location = new System.Drawing.Point(462, 53);
-            this.cDConnected.Name = "cDConnected";
-            this.cDConnected.Size = new System.Drawing.Size(172, 45);
-            this.cDConnected.TabIndex = 4;
             // 
             // Form1
             // 

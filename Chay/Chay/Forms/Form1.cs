@@ -259,6 +259,7 @@ namespace Chay
                     if (!String.IsNullOrEmpty(tbxSend.Text))
                     {
                         StartSending(new Message(new Userpack(us.Id, us.Name, us.Image, us.Username), tbxSend.Text, DateTime.Now));
+                        tbxSend.Clear();
                     }
                     UpdateMessagesDB();
                     
@@ -317,7 +318,7 @@ namespace Chay
                     }
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 cDConnected.UpdateStatus(false);
                 //MessageBox.Show("Kan inte ansluta till servern" + "\n" + ex);
@@ -417,6 +418,7 @@ namespace Chay
 
                 us.Client.GetStream().Write(outData, 0, outData.Length);
 
+
                 //Message test = (Message)ByteArrayToObject(outData, outData.Length);
 
                 //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
@@ -443,7 +445,7 @@ namespace Chay
                         {
                             n = await us.Client.GetStream().ReadAsync(buffId, 0, buffId.Length);
                         }
-                        catch(Exception ex)
+                        catch
                         {
                             //MessageBox.Show("Fel i överföringen" + ex);
                             us.Client.GetStream().Close();
@@ -466,7 +468,7 @@ namespace Chay
                     {
                         bRead = await us.Client.GetStream().ReadAsync(buffert, 0, buffert.Length);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         //MessageBox.Show(""+ex);
                         us.Client.GetStream().Close();

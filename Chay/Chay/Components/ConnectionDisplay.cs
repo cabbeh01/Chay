@@ -12,17 +12,30 @@ namespace Chay.Components
 {
     public partial class ConnectionDisplay : UserControl
     {
-        public bool connected = false;
+        /// <summary>
+        /// Variabel som är status för om användaren är uppkopplad
+        /// </summary>
+        private bool _connected = false;
+
+        /// <summary>
+        /// Standardkonstruktor
+        /// </summary>
         public ConnectionDisplay()
         {
             InitializeComponent();
-            UpdateStatus(connected);
+            UpdateStatus(_connected);
         }
 
+        /// <summary>
+        /// Uppdaterar statusen på modulen beroende på parametern som matas in
+        /// </summary>
+        /// <param name="status">Status värdet på servern</param>
         public void UpdateStatus(bool status)
         {
-            connected = status;
-            if (connected)
+            _connected = status;
+            
+            //Kollar ifall statusen på klienten är uppkopplad och isåfall ändras färgen till grönt
+            if (_connected)
             {
                 this.rpbxStatus.BackColor = Color.SeaGreen;
             }
@@ -31,7 +44,5 @@ namespace Chay.Components
                 this.rpbxStatus.BackColor = Color.Maroon;
             }
         }
-       
-
     }
 }
