@@ -16,33 +16,50 @@ namespace Chay
 {
     public partial class Login : Form
     {
+        /// <summary>Muspekarens position</summary>
         private Point _mouseLocation;
+
+        /// <summary>Databasen</summary>
         private MongoCRUD _db = new MongoCRUD("dbChay");
+
+        /// <summary>Egen fontcollection</summary>
         public static PrivateFontCollection pfc = new PrivateFontCollection();
         
+        /// <summary>
+        /// Standardkonstruktor
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             GraphicalComponents();
         }
 
-        //Moveable header
+        /// <summary>
+        /// Musposition lagras när användaren klickar med musknappen
+        /// </summary>
         private void pHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
 
+        /// <summary>
+        /// Flyttar fönstret till den position som musen rör sig till
+        /// </summary>
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
+                //Sätter fönsterpositionen till där musen är
                 Point mousePose = Control.MousePosition;
                 mousePose.Offset(_mouseLocation.X, _mouseLocation.Y);
                 this.Location = mousePose;
             }
         }
 
-        //Logo
+        
+        /// <summary>
+        /// Grafiska komponenter läses in
+        /// </summary>
         public void GraphicalComponents()
         {
             try
@@ -64,18 +81,26 @@ namespace Chay
             Logo.ForeColor = Color.White;
         }
 
+        /// <summary>
+        /// Login knappen klickas på
+        /// </summary>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
+                //Data basen returnerar en användare ifall användaren finns
                 User found = _db.FindByParameter<User>("Users", "Username", tbxUsername.Text);
+
+                //Jämför det krypterade lösenordet på databasen med det som användaren skrev in
                 if (found.Password == MongoCRUD.Encrypt(tbxPassword.Text))
                 {
+                    //Deklarerar den nya formen och skickar med användaren
                     Form1 form = new Form1(found);
                     
-                    //MessageBox.Show("Du är nu inloggad");
+                    //Visar den nya formen
                     form.Show();
-                    //this.Dispose();
+
+                    //Gömmer denna formen
                     this.Hide();
                 }
                 else
@@ -90,13 +115,24 @@ namespace Chay
             } 
         }
 
+        /// <summary>
+        /// Registreringsknappen klickas på
+        /// </summary>
         private void LlblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //Deklararerar formen för registreringen
             Register reg = new Register();
+
+            //Visar formen
             reg.Show();
+
+            //Gömmer denna formen
             this.Hide();
         }
 
+        /// <summary>
+        /// Klickar på avsluta
+        /// </summary>
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();

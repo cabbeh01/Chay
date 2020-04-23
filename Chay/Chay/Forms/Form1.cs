@@ -301,12 +301,13 @@ namespace Chay
                         StartHandshake(s.Ip, s.Port,s.Name);
                         
                         newRow = table.NewConversationMessagesRow();
-                        cDConnected.UpdateStatus(true);
+                        
                         lblNameServer.Text = twServers.SelectedNode.Text;
                         
                         UpdateMessagesDB();
                         UpdateMessboard();
 
+                        twServers.SelectedNode.Nodes.Clear();
                         foreach(User u in pickedServer.Users)
                         {
                             twServers.SelectedNode.Nodes.Add(u.Name);
@@ -329,14 +330,14 @@ namespace Chay
         {
             try
             {
-                if(us.Client == null)
-                {
-                    us.Client = new TcpClient();
-                }
+                us.Client = new TcpClient();
                 await us.Client.ConnectAsync(address, port);
                 StartSending(new Message(new Userpack(us.Id, us.Name, us.Image,us.Username), "connected", DateTime.Now, true));
                 StartReading();
                 MessageBox.Show($"Du connectar till {name}");
+                UpdateMessagesDB();
+                UpdateMessboard();
+                cDConnected.UpdateStatus(true);
             }
             catch
             {
@@ -430,6 +431,10 @@ namespace Chay
                 MessageBox.Show("Det går inte skicka meddelandet" + "\n "+ ex);
             }
         }
+
+
+
+        // ------------------   Påbörjar läsning   -------------------
         public async void StartReading()
         {
             try
@@ -448,7 +453,7 @@ namespace Chay
                         catch
                         {
                             //MessageBox.Show("Fel i överföringen" + ex);
-                            us.Client.GetStream().Close();
+                            
                         }
                        
                         
@@ -471,7 +476,7 @@ namespace Chay
                     catch
                     {
                         //MessageBox.Show(""+ex);
-                        us.Client.GetStream().Close();
+                        
                     }
                     
 
@@ -487,13 +492,18 @@ namespace Chay
                 }
                 else
                 {
-                    us.Client.Client.Disconnect(true);
+                    //us.Client = new TcpClient();
+                    cDConnected.UpdateStatus(false);
                 }
             }
             catch(Exception ex)
             {
-
-                MessageBox.Show("Startreading"+ex);
+                /*if (us.Client.Connected)
+                {
+                    us.Client.GetStream().Close();
+                }*/
+                cDConnected.UpdateStatus(false);
+                MessageBox.Show("Startreading \n"+ex);
             }
         }
 
@@ -631,10 +641,7 @@ namespace Chay
             }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
         private void btnMaxMize_Click(object sender, EventArgs e)
         {
@@ -658,6 +665,12 @@ namespace Chay
         private void tbxSend_TextChanged(object sender, EventArgs e)
         {
             lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
+        }
+
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
