@@ -487,6 +487,11 @@ namespace Chay
                         UpdateMessagesDB();
                         UpdateMessboard();
                     }
+                    if(mess == "kicked")
+                    {
+                        RemoveHandshake();
+                        cDConnected.UpdateStatus(false);
+                    }
                     cDConnected.UpdateStatus(true);
                     StartReading();
                 }

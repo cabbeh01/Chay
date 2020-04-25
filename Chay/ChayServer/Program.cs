@@ -26,7 +26,7 @@ namespace ChayServer
             Console.WriteLine("Servern kopplar upp sig");
             CheckDatabase();
             StartServer();
-            UserInput();
+            UserInputAsync();
             client.NoDelay = true;
         }
 
@@ -227,7 +227,8 @@ namespace ChayServer
                             else
                             {
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
-                                await UpdateMessageDB(incomming);
+                                s.Messages.Add(incomming);
+                                await UpdateMessageDB();
 
                                 byte[] backToClient = new byte[64];
                                 backToClient = Encoding.Unicode.GetBytes("newmess");
@@ -293,7 +294,7 @@ namespace ChayServer
         }
 
         
-        static async Task UpdateMessageDB(Message msg)
+        static async Task UpdateMessageDB()
         {
             try
             {
@@ -302,7 +303,6 @@ namespace ChayServer
                     {
                         s.Messages = new List<Message>();
                     }
-                    s.Messages.Add(msg);
                     _db.UpdateOne<Server>("Servers", s.Id, s);
                 });
             }
@@ -331,8 +331,25 @@ namespace ChayServer
             }
         }
 
-        
-        static void UserInput()
+        static async void SendtoUser(User usr,byte[] data)
+        {
+            try
+            {
+                foreach (User c in s.Users)
+                {
+                    Console.WriteLine("");
+                    await c.Client.GetStream().WriteAsync(data, 0, data.Length);
+                    //Console.WriteLine("Har nu broadcastat");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Går inte att broadcasta");
+            }
+        }
+
+
+        static void UserInputAsync()
         {
             try
             {
@@ -341,7 +358,7 @@ namespace ChayServer
                 string data = Console.ReadLine();
                 if (string.IsNullOrEmpty(data))
                 {
-                    UserInput();
+                    UserInputAsync();
                 }
                 data.Remove(0, 1);
                 string[] dataSplice = data.Split();
@@ -389,10 +406,20 @@ namespace ChayServer
 
                     case "clean":
 
-                        s.Messages.Clear();
-                        byte[] backToClient = new byte[64];
-                        backToClient = Encoding.Unicode.GetBytes("newmess");
-                        Broadcast(backToClient);
+                        try
+                        {
+                            s.Messages.Clear();
+                            _db.UpdateOne<Server>("Servers", s.Id, s);
+                            byte[] backToClient = new byte[64];
+                            backToClient = Encoding.Unicode.GetBytes("newmess");
+                            Broadcast(backToClient);
+                        }
+                        catch
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Det går inte rensa meddelandena");
+                        }
+                        
                         break;
 
 
@@ -420,14 +447,14 @@ namespace ChayServer
             }
             catch
             {
-
+                Console.WriteLine("");
             }
 
-            UserInput();
+            UserInputAsync();
         }
 
 
-        static void KickUser(string us)
+        static async void KickUser(string us)
         {
             try
             {
@@ -436,7 +463,10 @@ namespace ChayServer
                 {
                     if (u.Username == us)
                     {
-                        u.Client.Close();
+                        byte[] backToClient = new byte[64];
+                        backToClient = Encoding.Unicode.GetBytes("kicked");
+                        await u.Client.GetStream().WriteAsync(backToClient, 0, backToClient.Length);
+                        u.Client.Dispose();
                         usr = u;
                         Console.WriteLine($"Användaren {us} är nu kickad");
                     }
