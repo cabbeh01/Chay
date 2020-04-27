@@ -331,7 +331,7 @@ namespace ChayServer
             }
         }
 
-        static async void SendtoUser(User usr,byte[] data)
+        /*static async void SendtoUser(User usr,byte[] data)
         {
             try
             {
@@ -346,8 +346,7 @@ namespace ChayServer
             {
                 Console.WriteLine("Går inte att broadcasta");
             }
-        }
-
+        }*/
 
         static void UserInputAsync()
         {

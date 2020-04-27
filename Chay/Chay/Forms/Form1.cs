@@ -120,15 +120,23 @@ namespace Chay
 
         public void GraphicalComponents()
         {
-            // -----    Logo    -----
+            try
+            {
 
-            //      Includes font
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile(Application.StartupPath + "\\Font\\Ranchers-Regular.ttf");
-            Logo.Font = new Font(pfc.Families[0], 20, FontStyle.Regular);
-            Logo.ForeColor = Color.White;
+                // -----    Logo    -----
 
-            lblUser.Location = new Point(639 - (us.Username.Length * 7) ,0);
+                //      Includes font
+                pfc.AddFontFile(Application.StartupPath + "\\Font\\Ranchers-Regular.ttf");
+                Logo.Font = new Font(pfc.Families[0], 20, FontStyle.Regular);
+                Logo.ForeColor = Color.White;
+
+                lblUser.Location = new Point(639 - (us.Username.Length * 7), 0);
+            }
+            catch
+            {
+                Logo.Font = DefaultFont;
+            }
+            
         }
 
 
@@ -462,6 +470,7 @@ namespace Chay
                         pickedServer.Id = ObjectId.Parse(id.ToString());
                         _readId = true;
                         UpdateMessagesDB();
+                        UpdateMessboard();
                         cDConnected.UpdateStatus(true);
 
                     }
@@ -489,6 +498,7 @@ namespace Chay
                     }
                     if(mess == "kicked")
                     {
+                        MessageBox.Show("Du blev kickad");
                         RemoveHandshake();
                         cDConnected.UpdateStatus(false);
                     }
