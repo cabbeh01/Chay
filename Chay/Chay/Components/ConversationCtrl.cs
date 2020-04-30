@@ -437,6 +437,7 @@ namespace Warecast.ControlsSuite
                 //messageDateTime.ToLongTimeString()
                 //messageDateTime.ToShortTimeString()
 
+                //Ändrar datumformatet på meddelandebubblorna
                 if (longTimeSett)
                 {
                     sizef = e.Graphics.MeasureString(messageDateTime.ToLongTimeString(), font, dateTimeRectangle.Size, dateStringFormat, out charFitter, out linesFilled);

@@ -1,12 +1,7 @@
 ﻿using MongoDBLogin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,7 +49,6 @@ namespace Chay.Forms
             catch
             {
                 MessageBox.Show("Typsnitten kunde ej laddas in");
-
             }
         }
 
@@ -86,36 +80,44 @@ namespace Chay.Forms
         {
             try
             {
+                dlgOpenImage.Filter = "PNG files (*.png)|*.png|JPEG/JPG files (*.jpg)|*.jpg";
+
+                //Öppnar openFile dialog
                 DialogResult result = dlgOpenImage.ShowDialog();
+
+                //Klickar användaren OK/Ja
                 if (DialogResult.OK == result)
                 {
+                    //Den valda filen lagras i Image img
                     Image img = Image.FromFile(dlgOpenImage.FileName);
+
+                    //Kollar begränsningar så att inte bilden överskrider 1000x1000px samt är i förhållande 1x1
                     if(img.Width/img.Height == 1 && img.Width <= 1000 && img.Height <= 1000)
                     {
-
-                        //Image temp = img.GetThumbnailImage(100, 100, () => false, IntPtr.Zero);
+                        //Skapar en minnesström
                         MemoryStream stream = new MemoryStream();
+                        
+                        //Sparar bilden till strömmen
                         img.Save(stream, img.RawFormat);
+
+                        //Konverterar bilden till bytes
                         byte[] imgBytes = stream.ToArray();
 
-                        MemoryStream ms = new MemoryStream(imgBytes, 0, imgBytes.Length);
-                        ms.Write(imgBytes, 0, imgBytes.Length);
-                        rpbxImage.Image = Image.FromStream(ms, true);
-
-                        //https://stackoverflow.com/questions/1922040/how-to-resize-an-image-c-sharp
+                        //Sätter bilden till den som användaren valde
+                        rpbxImage.Image = img;
 
                         //Konverterar byte[] till Base64 sträng
                         _base64String = Convert.ToBase64String(imgBytes);
 
-                        //MessageBox.Show(_base64String);
                         stream.Dispose();
-                        ms.Dispose();
                         _pictureuploaded = true;
                     }
                     else
                     {
                         MessageBox.Show("Bilden är för stor eller i fel format");
                     }
+
+                    //Släpper använda resurser
                     img.Dispose();
                 }
             }
@@ -123,8 +125,6 @@ namespace Chay.Forms
             {
                 MessageBox.Show("Det går inte ladda upp bilden");
             }
-            
-            
         }
         
         /// <summary>
@@ -135,9 +135,11 @@ namespace Chay.Forms
             await Task.Run(() => {
                 if (_pictureuploaded)
                 {
+                    //Sätter användarbilden till den valda bilden om användaren varit inne i upload
                     _us.Image = _base64String;
                 }
                 _us.Name = tbxChatName.Text;
+
                 //Lägger till uppdaterar namnet i användarobjektet och updaterar sedan användaren på databasen
                 _db.UpdateOne<User>("Users", _us.Id, _us);
             });
@@ -165,12 +167,19 @@ namespace Chay.Forms
                 {
                     try
                     {
+                        //konverterar Base64 till Bytes
                         byte[] imgBytes = Convert.FromBase64String(_us.Image);
 
+                        //Gör om bytesen till en stream
                         MemoryStream ms = new MemoryStream(imgBytes, 0, imgBytes.Length);
+
                         ms.Write(imgBytes, 0, imgBytes.Length);
+
+                        //Bygger ihop bilden
                         Image restImg = Image.FromStream(ms, true);
                         rpbxImage.Image = restImg;
+
+                        //Släpper använda resurser
                         ms.Dispose();
                     }
                     catch

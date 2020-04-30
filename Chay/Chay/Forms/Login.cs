@@ -1,15 +1,7 @@
-﻿using Chay.Forms;
-using MongoDBLogin;
+﻿using MongoDBLogin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chay
@@ -69,7 +61,7 @@ namespace Chay
                 Logo.Font = new Font(pfc.Families[1], 56, FontStyle.Regular);
                 Font text = new Font(pfc.Families[0], 15.75f, FontStyle.Regular);
                 lblPass.Font = text;
-                lblPass.Font = text;
+                lblUser.Font = text;
                 lblRegister.Font = new Font(pfc.Families[0], 12, FontStyle.Regular);
             }
             catch

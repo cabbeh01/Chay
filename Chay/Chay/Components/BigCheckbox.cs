@@ -28,6 +28,7 @@ namespace Chay
             InitializeComponent();
             try
             {
+                //Importerar bild från fil
                 img = Image.FromFile("Images\\cross.jpg");
             }
             catch
