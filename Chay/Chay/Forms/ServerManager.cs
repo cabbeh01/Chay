@@ -12,11 +12,16 @@ namespace Chay.Forms
 {
     public partial class ServerManager : Form
     {
-        //private MongoCRUD _db;
+        /// <summary>Muspekarens position</summary>
         private Point _mouseLocation;
+
+        /// <summary>Definerar standardvärden på server som lagts till</summary>
         private Server _def = new Server("new1", IPAddress.Parse("127.0.0.1"), 2000);
 
+        /// <summary>Användare</summary>
         internal User _us;
+
+        /// <summary>Databas</summary>
         internal MongoCRUD _db;
 
         public ServerManager()
