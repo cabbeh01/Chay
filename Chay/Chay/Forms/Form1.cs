@@ -335,8 +335,15 @@ namespace Chay
         /// </summary>
         private async void LogicalComponents()
         {
-            //Läser in serverlistan
-            await this.RetriveServerList();
+            try
+            {
+                //Läser in serverlistan
+                await this.RetriveServerList();
+            }
+            catch
+            {
+
+            }
         }
         
         /// <summary>
@@ -486,14 +493,22 @@ namespace Chay
 
         public void UpdateMessboard()
         {
-            conversationCtrl.DataSource = table;
-            conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
-            conversationCtrl.IdColumnName = table.idColumn.ColumnName;
-            conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
-            conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
-            conversationCtrl.NameColumnName = table.nameColumn.ColumnName;
+            try
+            {
+                conversationCtrl.DataSource = table;
+                conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
+                conversationCtrl.IdColumnName = table.idColumn.ColumnName;
+                conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
+                conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
+                conversationCtrl.NameColumnName = table.nameColumn.ColumnName;
 
-            conversationCtrl.Rebind();
+                conversationCtrl.Rebind();
+            }
+            catch
+            {
+
+            }
+            
         }
         public void RemoveHandshake()
         {
@@ -511,28 +526,16 @@ namespace Chay
 
         byte[] ObjectToByteArray(object obj)
         {
-            if (obj == null)
-                return null;
-            BinaryFormatter bf = new BinaryFormatter();
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
-        Object ByteArrayToObject(byte[] arrBytes)
-        {
             try
             {
+                if (obj == null)
+                    return null;
+                BinaryFormatter bf = new BinaryFormatter();
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    BinaryFormatter binForm = new BinaryFormatter();
-                    ms.Write(arrBytes, 0, arrBytes.Length);
-                    ms.Seek(0, SeekOrigin.Begin);
-                    Object obj = (Object)binForm.Deserialize(ms);
-                    return obj;
+                    bf.Serialize(ms, obj);
+                    return ms.ToArray();
                 }
-
             }
             catch
             {
