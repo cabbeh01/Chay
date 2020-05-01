@@ -45,8 +45,6 @@ namespace ChayServer
                 Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
                 Console.WriteLine("_________________________________________________________________________________ \n");
                 Console.WriteLine($"Server started at 127.0.0.1:{port}\n");
-                
-                
             }
             catch
             {
@@ -379,24 +377,6 @@ namespace ChayServer
 
                         ListUsers();
                         break;
-                    
-                    case "restart":
-                        if(s.Users.Count > 0)
-                        {
-                            foreach (User c in s.Users)
-                            {
-                                c.Client.Dispose();
-                            }
-
-                            s.Users.Clear();
-                        }
-                        
-                        Console.Clear();
-                        
-                        listener.Stop();
-                        listener.Start();
-                        Console.WriteLine("Servern stoppades");
-                        break;
 
                     case "clear":
 
@@ -431,7 +411,6 @@ namespace ChayServer
                         Console.WriteLine("ls - Visar de användare som är uppkopplade mot servern");
                         Console.WriteLine("clear - Rensar terminalens utmatning");
                         Console.WriteLine("clean - Rensar alla meddelande på servern och databasen");
-                        Console.WriteLine("restart - Startar om servern");
                         Console.WriteLine("exit - Stänger ner programmet");
                         break;
 

@@ -20,27 +20,69 @@ namespace Chay
 {
     public partial class Form1 : Form
     {
-        //Forms
-        private User us;
+        //---------    Fönster     ----------
+
+        /// <summary>Inställningsformen</summary>
         private Settings setting            = null;
+
+        /// <summary>Serverhanteringsformen</summary>
         private ServerManager servermang;
+
+        /// <summary>Profilformen</summary>
         private Profile profile;
 
+
+
+
+        // --------   Andra deklarationer   --------
+
+        /// <summary>Databasen</summary>
         private MongoCRUD _db = new MongoCRUD("dbChay");
 
+        /// <summary>Användaren</summary>
+        private User us;
+
+        /// <summary>Privata font kollektionen som inne håller två stycken fonter</summary>
         public static PrivateFontCollection pfc = new PrivateFontCollection();
-        //Settings
+
+
+
+
+        //----------  StandardInställningar   ---------
+
+        /// <summary>Chattfärgen</summary>
         Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
+
+        /// <summary>Tidsformatet</summary>
         Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
+
+
+        //----------  Andra deklarationer   ---------
+
+        /// <summary>Skapar en dataTable</summary>
         dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
+
+        /// <summary>Skapar en meddelande rad</summary>
         dSChatt.ConversationMessagesRow newRow = null;
 
+        /// <summary>Muspekarens position</summary>
         private Point _mouseLocation;
+
+        /// <summary>Status om fönstret är maximerat</summary>
         private bool _isMaxi = false;
+
+        /// <summary>Läst ett id på den uppkopplade servern</summary>
         private bool _readId = false;
+
+        /// <summary>Valda servern</summary>
         private Server pickedServer = null;
 
+
+        /// <summary>
+        /// Standardkonstruktor
+        /// </summary>
+        /// <param name="user">Inloggad användare</param>
         public Form1(User user)
         {
             try
@@ -49,15 +91,19 @@ namespace Chay
 
                 this.SetStyle(ControlStyles.ResizeRedraw, true);
                 this.FormBorderStyle = FormBorderStyle.None;
+                
+                //Sätter användaren till den användaren som matades in vid inloggningen
                 us = user;
+                
+                //Skapar objekten på de fönsterna
                 servermang = new ServerManager();
                 profile = new Profile();
-                //Setting up Client
-                us.Client = new TcpClient();
 
+                //Sätter upp klienten
+                us.Client = new TcpClient();
                 us.Client.NoDelay = true;
 
-                //retriveServerList();
+                //Läser in och kör viktiga funktioner
                 this.lblUser.Text = user.Username;
                 GraphicalComponents();
                 RetriveSettings();
@@ -71,12 +117,20 @@ namespace Chay
         }
 
 
-        //Resizeable windows form without border
-
+        //Fungerar inte riktigt som jag hoppats men tillräckligt för att ta sig runt i programmet
+        /// <summary>
+        /// Omskalningsbart fönster utan boarder
+        /// </summary>
+        /// <param name="m">Windows Form special meddelande</param>
         protected override void WndProc(ref System.Windows.Forms.Message m)
         {
+            //Skickats till ett fönster för att bestämma vilken del av fönstret som motsvarar en viss skärmkoordinat
             const int WM_NCHITTEST = 0x84;
+
+            //I klient vyn
             const int HTCLIENT = 1;
+
+            //I title baren
             const int HTCAPTION = 2;
             base.WndProc(ref m);
             switch (m.Msg)
@@ -90,22 +144,32 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Skapar förutsättningen och layouten med specifika parametrar som är inbyggt i Windowsform
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams cp = base.CreateParams;
+                
+                //Stilen på parametern vid en viss parameter
                 cp.Style = (cp.Style | 262144);
                 return cp;
             }
         }
 
-        //Moveable header
+        /// <summary>
+        /// Musposition lagras när användaren klickar med musknappen
+        /// </summary>
         private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
 
+        /// <summary>
+        /// Flyttar fönstret till den position som musen rör sig till
+        /// </summary>
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -117,7 +181,9 @@ namespace Chay
         }
 
 
-
+        /// <summary>
+        /// Läser in grafiska komponenter som etc. typsnitt
+        /// </summary>
         public void GraphicalComponents()
         {
             try
@@ -139,34 +205,54 @@ namespace Chay
             
         }
 
-
+        /// <summary>
+        /// Inställningsknappen klickas på
+        /// </summary>
         private void BtnSettings_Click(object sender, EventArgs e)
         {
+            //Om instansen inte finns
             if(setting == null)
             {
+                //Skapa en ny instans
                 setting = new Settings(ref S_cColor, ref S_tFormat);
+
+                //Skapa en händelse
                 setting.FormClosed += S_FormClosed;
+
+                //Visa fönstret
                 setting.Show();
             }
             else
             {
+                //Annars lägg fönstret överst
                 setting.BringToFront();
             }
         }
 
+        /// <summary>
+        /// Inställningsfönstret stängs
+        /// </summary>
         private void S_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //Sätter fönstret till null
             setting = null;
-            RetriveSettings();
-            conversationCtrl.Rebind();
-            //GC.Collect();
-        }
-       
 
+            //Hämtar inställningarna
+            RetriveSettings();
+
+            //Uppdaterar meddelande rutan
+            conversationCtrl.Rebind();
+        }
+
+        /// <summary>
+        /// Serverhanterarknappen klickas på
+        /// </summary>
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
+            //Om den inte visas
             if (!servermang.Visible)
             {
+                //Visa fönstret och ladda serverar
                 servermang._us = us;
                 servermang._db = _db;
                 
@@ -176,25 +262,37 @@ namespace Chay
             }
             else
             {
+                //Annars lägg fönstret överst
                 servermang.BringToFront();
             }
         }
 
+        /// <summary>
+        /// Serverhanterar visningen ändras
+        /// </summary>
         private async void Servermang_VisibleChanged(object sender, EventArgs e)
         {
+            //Är den inte synlig
             if (!servermang.Visible)
             {
+                //Hämta serverna
                 us.Servers = servermang.GetServers();
                 await RetriveServerList();
+
+                //Ta bort händelse
                 servermang.VisibleChanged -= Servermang_VisibleChanged;
             }
         }
 
+        /// <summary>
+        /// Profilknappen klickas på
+        /// </summary>
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            
-            if (!servermang.Visible)
+            //Om den inte visas
+            if (!profile.Visible)
             {
+                //Visa den
                 profile._us = us;
                 profile._db = _db;
 
@@ -203,15 +301,23 @@ namespace Chay
             }
             else
             {
+                //Annars lägg fönstret överst
                 profile.BringToFront();
             }
         }
 
+        /// <summary>
+        /// Logiska komponenter läses in
+        /// </summary>
         private async void LogicalComponents()
         {
+            //Läser in serverlistan
             await this.RetriveServerList();
         }
         
+        /// <summary>
+        /// Hämtar serverlistan
+        /// </summary>
         private async Task RetriveServerList()
         {
             
@@ -656,8 +762,14 @@ namespace Chay
             }
         }
 
-        
+        private void tbxSend_TextChanged(object sender, EventArgs e)
+        {
+            lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
+        }
 
+        /// <summary>
+        /// Klickar på maximera
+        /// </summary>
         private void btnMaxMize_Click(object sender, EventArgs e)
         {
             if (!_isMaxi)
@@ -672,17 +784,17 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Klickar på minimera
+        /// </summary>
         private void btnMiniMize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void tbxSend_TextChanged(object sender, EventArgs e)
-        {
-            lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
-        }
-
-
+        /// <summary>
+        /// Klickar på avsluta
+        /// </summary>
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
