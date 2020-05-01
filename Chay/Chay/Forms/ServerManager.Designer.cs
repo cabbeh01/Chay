@@ -224,6 +224,7 @@
             this.tbxServername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbxServername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxServername.Location = new System.Drawing.Point(20, 8);
+            this.tbxServername.MaxLength = 25;
             this.tbxServername.Name = "tbxServername";
             this.tbxServername.Size = new System.Drawing.Size(159, 15);
             this.tbxServername.TabIndex = 1;

@@ -24,17 +24,22 @@ namespace Chay.Forms
         /// <summary>Databas</summary>
         internal MongoCRUD _db;
 
+        /// <summary>
+        /// Standardkonstruktor
+        /// </summary>
         public ServerManager()
         {
             InitializeComponent();
             GraphicalComponents();
         }
 
+        /// <summary>
+        /// Läser in grafiska komponenter som typsnitt
+        /// </summary>
         public void GraphicalComponents()
         {
             try
             {
-                //lblRegister.Font = new Font(Login.pfc.Families[0], 24, FontStyle.Regular);
                 Font text = new Font(Login.pfc.Families[0], 15.75f, FontStyle.Regular);
                 Font gbxtext = new Font(Login.pfc.Families[0], 26.25f, FontStyle.Regular);
                 gbxServerlist.Font = gbxtext;
@@ -47,15 +52,21 @@ namespace Chay.Forms
             catch
             {
                 MessageBox.Show("Typsnitten kunde ej laddas in");
-
             }
         }
 
+        /// <summary>
+        /// Hämtar alla serverna hos användaren
+        /// </summary>
+        /// <returns>Returnerar användarens serverar</returns>
         public List<Server> GetServers()
         {
             return _us.Servers;
         }
 
+        /// <summary>
+        /// Flyttar fönstret till den position som musen rör sig till
+        /// </summary>
         private void pHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -66,31 +77,51 @@ namespace Chay.Forms
             }
         }
 
+        /// <summary>
+        /// Musposition lagras när användaren klickar med musknappen
+        /// </summary>
         private void pHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
 
+        /// <summary>
+        /// Uppdaterar serverna för användaren uppe i databasen
+        /// </summary>
         private async void UpdateServer()
         {
+            //Kollar så att servern har ett namn
             if (!String.IsNullOrEmpty(tbxServername.Text))
             {
                 try
                 {
+                    //Försöker parsa en IP-Adress (sträng) till en Ip-Address (IPAddress)
                     IPAddress ip = IPAddress.Parse(tbxIp.Text);
                     try
                     {
+                        //Kollar så att porten som matas in är en giltlig port
                         if(int.Parse(tbxPort.Text) > 0 && int.Parse(tbxPort.Text) < 65536) 
                         {
+                            //Skulle användaren inte ha en lista på databasen så skapas den nu i alla fall
                             if(_us.Servers == null)
                             {
                                 _us.Servers = new List<Server>();
                             }
+
+                            //Skapa ett temporärt serverobjekt
                             Server temp = new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text));
+
+                            //Lägger till ObjectID
                             temp.Id = _db.GenID();
+
+                            //Sätter in den sparade servern och ersätter den tempservern som är deklarerad i början av denna klassen
                             lbxOut.Items.Insert(lbxOut.SelectedIndex,temp);
                             lbxOut.Items.RemoveAt(lbxOut.SelectedIndex);
+
+                            //Uppdaterar informationen på databasen
                             await UpdateStruct();
+
+                            //Rensar textrutorna
                             ClearTextboxes();
                             MessageBox.Show("Server uppdaterad");
                         }
@@ -117,6 +148,9 @@ namespace Chay.Forms
             }
         }
 
+        /// <summary>
+        /// Uppdaterar informationen på databasen
+        /// </summary>
         private async Task UpdateStruct()
         {
             await Task.Run(() => {
@@ -124,23 +158,32 @@ namespace Chay.Forms
                 _db.UpdateOne<User>("Users", _us.Id, _us);
             });
         }
+
+        /// <summary>
+        /// Hämtar serverar om det finns tillgängliga på databasen
+        /// </summary>
         public void RetrieveServers()
         {
             try
             {
+                //Rensar listan i serverhanteraren
                 lbxOut.Items.Clear();
                 try
                 {
+                    //Hittas en användare
                     _us = _db.FindById<User>("Users", _us.Id);
                 }
                 catch
                 {
                     MessageBox.Show("Kan inte nå serven");
                 }
+
+                //Söker den igenom serverna och lägger till i listan
                 foreach (Server a in _us.Servers)
                 {
                     lbxOut.Items.Add(a);
                 }
+
                 lbxOut.SelectedIndex = 0;
                 LoadPickedServer();
             }
@@ -149,12 +192,22 @@ namespace Chay.Forms
                 
             }
         }
+
+        /// <summary>
+        /// Tar bort server från listan
+        /// </summary>
+        /// <param name="s">Servern som ska plockas bort</param>
         private async void RemoveServer(Server s)
         {
             try
             {
+                //Tar bort servern från listboxen
                 lbxOut.Items.Remove(s);
+
+                //Uppdaterar användaren på databasen
                 await UpdateStruct();
+
+                //Avaktiverar bortagninsknappen om där inte finns några serverar
                 if (lbxOut.Items.Count == 0)
                 {
                     btnRemove.Enabled = false;
@@ -166,43 +219,66 @@ namespace Chay.Forms
             }
 
         }
+
+        /// <summary>
+        /// Sparar knappen klickas på
+        /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateServer();
         }
 
+        /// <summary>
+        /// Lägg till server knappen klickas på
+        /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             lbxOut.Items.Add(_def);
             btnRemove.Enabled = true;
         }
 
+        /// <summary>
+        /// Ta bort server knappen klickas på
+        /// </summary>
         private void btnRemove_Click(object sender, EventArgs e)
         {
             RemoveServer((Server)lbxOut.SelectedItem);
             ClearTextboxes();
         }
 
+        /// <summary>
+        /// Rensar textrutorna
+        /// </summary>
         private void ClearTextboxes()
         {
             tbxIp.Clear();
             tbxServername.Clear();
             tbxPort.Clear();
         }
+
+        /// <summary>
+        /// Väljer vald server om det valda värdet skulle ändra sig
+        /// </summary>
         private void lbxOut_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadPickedServer();
         }
 
+        /// <summary>
+        /// Laddar in information om vald server
+        /// </summary>
         private void LoadPickedServer()
         {
+            //Sålänge vald server inte är odefinierat
             if(!(lbxOut.SelectedItem == null))
             {
                 try
                 {
+                    //Aktiverar groupboxen om det servern som är vald finns
                     gbxPickServer.Enabled = true;
                     Server a = (Server)lbxOut.SelectedItem;
 
+                    //Tilldelar informationen på respektive textruta
                     tbxServername.Text = a.Name;
                     tbxIp.Text = a.Ip.ToString();
                     tbxPort.Text = a.Port.ToString();
@@ -219,18 +295,23 @@ namespace Chay.Forms
 
         }
 
+        /// <summary>
+        /// Flyttar upp den valda servern ett steg
+        /// </summary>
         private void btnServerUp_Click(object sender, EventArgs e)
         {
             try
             {
-                // only if the first item isn't the current one
+                //Endast om första objektet inte är den valda
                 if (lbxOut.SelectedIndex > 0)
                 {
-                    // add a duplicate item up in the listbox
+                    //Lägger till ett dublicerat objekt ett upp i listboxen
                     lbxOut.Items.Insert(lbxOut.SelectedIndex - 1, lbxOut.SelectedItem);
-                    // make it the current item
+
+                    //Gör det till den valda
                     lbxOut.SelectedIndex = (lbxOut.SelectedIndex - 2);
-                    // delete the old occurrence of this item
+
+                    //Tar bort den gamla instansen av det objektet
                     lbxOut.Items.RemoveAt(lbxOut.SelectedIndex + 2);
                 }
             }
@@ -241,18 +322,23 @@ namespace Chay.Forms
             
         }
 
+        /// <summary>
+        /// Flyttar ned den valda servern ett steg
+        /// </summary>
         private void btnServerDown_Click(object sender, EventArgs e)
         {
             try
             {
-                // only if the last item isn't the current one
+                //Endast om sista objektet inte är den valda
                 if ((lbxOut.SelectedIndex != -1) && (lbxOut.SelectedIndex < lbxOut.Items.Count - 1))
                 {
-                    // add a duplicate item down in the listbox
+                    //Lägger till ett dublicerat objekt ett ner i listboxen
                     lbxOut.Items.Insert(lbxOut.SelectedIndex + 2, lbxOut.SelectedItem);
-                    // make it the current item
+
+                    //Gör det till den valda
                     lbxOut.SelectedIndex = lbxOut.SelectedIndex + 2;
-                    // delete the old occurrence of this item
+
+                    //Tar bort den gamla instansen av det objektet
                     lbxOut.Items.RemoveAt(lbxOut.SelectedIndex - 2);
                 }
             }
@@ -263,11 +349,27 @@ namespace Chay.Forms
             
         }
 
+        /// <summary>
+        /// Stänger fönstret
+        /// </summary>
         private async void btnExit_Click(object sender, EventArgs e)
         {
-            await UpdateStruct();
+            try
+            {
+                //Uppdaterar databasen
+                await UpdateStruct();
 
-            this.Hide();
+                //Gömmer fönstret
+                this.Hide();
+            }
+            catch
+            {
+                MessageBox.Show("Går inte spara på databasen");
+
+                //Gömmer fönstret
+                this.Hide();
+            }
+            
         }
     }
 }
