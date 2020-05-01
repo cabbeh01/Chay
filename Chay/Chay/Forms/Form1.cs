@@ -249,22 +249,30 @@ namespace Chay
         /// </summary>
         private void BtnServermanager_Click(object sender, EventArgs e)
         {
-            //Om den inte visas
-            if (!servermang.Visible)
+            try
             {
-                //Visa fönstret och ladda serverar
-                servermang._us = us;
-                servermang._db = _db;
-                
-                servermang.VisibleChanged += Servermang_VisibleChanged;
-                servermang.RetrieveServers();
-                servermang.Show();
+                //Om den inte visas
+                if (!servermang.Visible)
+                {
+                    //Visa fönstret och ladda serverar
+                    servermang._us = us;
+                    servermang._db = _db;
+
+                    servermang.VisibleChanged += Servermang_VisibleChanged;
+                    servermang.RetrieveServers();
+                    servermang.Show();
+                }
+                else
+                {
+                    //Annars lägg fönstret överst
+                    servermang.BringToFront();
+                }
             }
-            else
+            catch
             {
-                //Annars lägg fönstret överst
-                servermang.BringToFront();
+                servermang = new ServerManager();
             }
+            
         }
 
         /// <summary>
@@ -272,16 +280,24 @@ namespace Chay
         /// </summary>
         private async void Servermang_VisibleChanged(object sender, EventArgs e)
         {
-            //Är den inte synlig
-            if (!servermang.Visible)
+            try
             {
-                //Hämta serverna
-                us.Servers = servermang.GetServers();
-                await RetriveServerList();
+                //Är den inte synlig
+                if (!servermang.Visible)
+                {
+                    //Hämta serverna
+                    us.Servers = servermang.GetServers();
+                    await RetriveServerList();
 
-                //Ta bort händelse
-                servermang.VisibleChanged -= Servermang_VisibleChanged;
+                    //Ta bort händelse
+                    servermang.VisibleChanged -= Servermang_VisibleChanged;
+                }
             }
+            catch
+            {
+
+            }
+            
         }
 
         /// <summary>
@@ -289,21 +305,29 @@ namespace Chay
         /// </summary>
         private void btnProfile_Click(object sender, EventArgs e)
         {
-            //Om den inte visas
-            if (!profile.Visible)
+            try
             {
-                //Visa den
-                profile._us = us;
-                profile._db = _db;
+                //Om den inte visas
+                if (!profile.Visible)
+                {
+                    //Visa den
+                    profile._us = us;
+                    profile._db = _db;
 
-                profile.RetrieveData();
-                profile.Show();
+                    profile.RetrieveData();
+                    profile.Show();
+                }
+                else
+                {
+                    //Annars lägg fönstret överst
+                    profile.BringToFront();
+                }
             }
-            else
+            catch
             {
-                //Annars lägg fönstret överst
-                profile.BringToFront();
+                profile = new Profile();
             }
+            
         }
 
         /// <summary>
@@ -467,6 +491,7 @@ namespace Chay
             conversationCtrl.IdColumnName = table.idColumn.ColumnName;
             conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
             conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
+            conversationCtrl.NameColumnName = table.nameColumn.ColumnName;
 
             conversationCtrl.Rebind();
         }
@@ -655,6 +680,7 @@ namespace Chay
                             {
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
+                                newRow.name = "Jag";
                                 newRow.incoming = true;
                             }
                             else
@@ -662,6 +688,7 @@ namespace Chay
                                 newRow = table.NewConversationMessagesRow();
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
+                                newRow.name = "Jag";
                                 newRow.incoming = true;
                             }
 
@@ -673,6 +700,7 @@ namespace Chay
                             {
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
+                                newRow.name = msg.Auther.Name;
                                 newRow.incoming = false;
                             }
                             else
@@ -680,6 +708,7 @@ namespace Chay
                                 newRow = table.NewConversationMessagesRow();
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
+                                newRow.name = msg.Auther.Name;
                                 newRow.incoming = false;
                             }
                             table.AddConversationMessagesRow(newRow);

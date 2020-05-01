@@ -41,6 +41,13 @@ namespace Warecast.ControlsSuite
             set { m_DateColumnName = value.Trim(); }
         }
         //---------------------------------------------------------------------------------------------------
+        String m_NameColumnName = string.Empty;
+        public String NameColumnName
+        {
+            get { return m_NameColumnName; }
+            set { m_NameColumnName = value.Trim(); }
+        }
+        //---------------------------------------------------------------------------------------------------
         String m_IsIncomingColumnName = string.Empty;
         public String IsIncomingColumnName
         {
@@ -176,13 +183,15 @@ namespace Warecast.ControlsSuite
                m_IdColumnName == string.Empty ||
                m_MessageColumnName == string.Empty ||
                m_DateColumnName == string.Empty ||
-               m_IsIncomingColumnName == string.Empty)
+               m_IsIncomingColumnName == string.Empty ||
+               m_NameColumnName == string.Empty)
                 return false;
 
             if (!m_DataSource.Columns.Contains(m_IdColumnName) ||
                 !m_DataSource.Columns.Contains(m_MessageColumnName) ||
                 !m_DataSource.Columns.Contains(m_DateColumnName) ||
-                !m_DataSource.Columns.Contains(m_IsIncomingColumnName)) //one of the columns cannot be found
+                !m_DataSource.Columns.Contains(m_IsIncomingColumnName) ||
+                !m_DataSource.Columns.Contains(m_NameColumnName)) //one of the columns cannot be found
                 return false;
 
             //verify types of columns to avoid crash
@@ -207,6 +216,13 @@ namespace Warecast.ControlsSuite
                 return false;
             }
 
+            if (m_DataSource.Columns[m_NameColumnName].DataType != typeof(String) &&
+              m_DataSource.Columns[m_NameColumnName].DataType != typeof(string))
+            {
+                //not a string
+                return false;
+            }
+
             if (m_DataSource.Columns[m_DateColumnName].DataType != typeof(DateTime))
             {
                 //not a string
@@ -219,6 +235,7 @@ namespace Warecast.ControlsSuite
                 //not a boolean
                 return false;
             }
+
             return true;
         }
         //---------------------------------------------------------------------------------------------------
@@ -329,8 +346,8 @@ namespace Warecast.ControlsSuite
             DataRow row = m_DataSource.Rows[e.RowIndex];
             bool isMessageIncoming = (bool)row[m_IsIncomingColumnName];
             String messageText = (String)row[m_MessageColumnName];
-
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2)
+            String nameSender = (String)row[m_NameColumnName];
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
             {
                 SolidBrush fontBrush = new SolidBrush(gridConversationMessages.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor);
                 if (e.ColumnIndex == 0)
@@ -339,7 +356,7 @@ namespace Warecast.ControlsSuite
                     {
                         //first column is ME title / image 
                         paddedImageBounds = RectangleUtils.GetPaddedRectangle(e.CellBounds, m_MeCellPadding);
-                        graphicsCtxt.DrawString(m_MeText, font, fontBrush, paddedImageBounds.Location);
+                        graphicsCtxt.DrawString(nameSender, font, fontBrush, paddedImageBounds.Location);
                     }
                 }
                 else
@@ -350,7 +367,7 @@ namespace Warecast.ControlsSuite
                         StringFormat remoteStringFormat = new StringFormat();
                         remoteStringFormat.Alignment = StringAlignment.Far;
                         paddedImageBounds = RectangleUtils.GetPaddedRectangle(e.CellBounds, m_RemoteCellPadding);
-                        graphicsCtxt.DrawString(m_RemoteText, font, fontBrush, paddedImageBounds, remoteStringFormat);
+                        graphicsCtxt.DrawString(nameSender, font, fontBrush, paddedImageBounds, remoteStringFormat);
                     }
                 }
                 fontBrush.Dispose();

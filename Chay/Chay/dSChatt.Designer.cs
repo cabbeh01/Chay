@@ -466,6 +466,7 @@ namespace Chay {
                 this.columnid.AutoIncrementSeed = -1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
+                this.columnname.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -654,28 +655,11 @@ namespace Chay {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string name {
                 get {
-                    try {
-                        return ((string)(this[this.tableConversationMessages.nameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'name\' in table \'ConversationMessages\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableConversationMessages.nameColumn]));
                 }
                 set {
                     this[this.tableConversationMessages.nameColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsnameNull() {
-                return this.IsNull(this.tableConversationMessages.nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetnameNull() {
-                this[this.tableConversationMessages.nameColumn] = global::System.Convert.DBNull;
             }
         }
         

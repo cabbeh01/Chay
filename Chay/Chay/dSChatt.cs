@@ -4,5 +4,8 @@
 
     partial class dSChatt
     {
+        partial class ConversationMessagesDataTable
+        {
+        }
     }
 }
