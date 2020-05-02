@@ -225,6 +225,10 @@ namespace ChayServer
                             else
                             {
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+                                if(s.Messages == null)
+                                {
+                                    s.Messages = new List<Message>();
+                                }
                                 s.Messages.Add(incomming);
                                 await UpdateMessageDB();
 

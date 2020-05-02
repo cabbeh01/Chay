@@ -353,69 +353,78 @@ namespace Chay
         {
             
             await Task.Run(() => {
+                //Körs en process mellan två trådar
                 if (InvokeRequired)
                 {
+                    //Gör så att jag kan styra en annan tråd via denna klassen
                     this.Invoke(new MethodInvoker(delegate
                     {
-                        try
-                        {
-                            twServers.Nodes.Clear();
-                            if(us.Servers != null)
-                            {
-                                foreach (Server s in us.Servers)
-                                {
-                                    twServers.Nodes.Add(s.Name);
-                                }
-                            }
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Serverna kan inte hämtas");
-                        }
+                        UpdateTreeViewServer();
                     }));
                 }
                 else
                 {
-                    try
-                    {
-                        twServers.Nodes.Clear();
-                        if (us.Servers != null)
-                        {
-                            foreach (Server s in us.Servers)
-                            {
-                                twServers.Nodes.Add(s.Name);
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Serverna kan inte hämtas");
-                    }
+                    UpdateTreeViewServer();
                 }
             });
         }
 
+        /// <summary>
+        /// Uppdaterar Treeview listan på serverar
+        /// </summary>
+        private void UpdateTreeViewServer()
+        {
+            try
+            {
+                //Rensar servrarna på treeviewn
+                twServers.Nodes.Clear();
+
+                //Om det finns serverar lägg till dem i treeviewn
+                if (us.Servers != null)
+                {
+                    foreach (Server s in us.Servers)
+                    {
+                        twServers.Nodes.Add(s.Name);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Serverna kan inte hämtas");
+            }
+        }
+
+        /// <summary>
+        /// När skicka knappen klickas på
+        /// </summary>
         private void btnSend_Click(object sender, EventArgs e)
         {
             try
             {
+                //Är klienten uppkopplad
                 if (us.Client.Connected)
                 {
+                    //Är textrutan där meddelandet är inte tom
                     if (!String.IsNullOrEmpty(tbxSend.Text))
                     {
+                        //Skicka meddelandet
                         StartSending(new Message(new Userpack(us.Id, us.Name, us.Image, us.Username), tbxSend.Text, DateTime.Now));
+                        
+                        //Rensa textrutan
                         tbxSend.Clear();
                     }
+
+                    //Hämta meddelande från databasen
                     UpdateMessagesDB();
                     
                 }
                 else
                 {
+                    //Hämta meddelande från databasen
                     UpdateMessagesDB();
-                    //MessageBox.Show("Du måste vara uppkopplad mot någon server");
                 }
 
-
+                //Uppdaterar strukturen för hur objektet meddelande ska tas in i ConversationCTRL
                 UpdateMessboard();
             }
             catch (Exception err)
@@ -425,38 +434,47 @@ namespace Chay
         }
 
 
-        //Connection when choosing a connection to join
+        /// <summary>
+        /// Uppkopplar mot den server som användaren väljer att dubbelklicka på
+        /// </summary>
         private void twServers_DoubleClick(object sender, EventArgs e)
         {
             try
             {
-                //us._client.Close();
-                //MessageBox.Show(twServers.SelectedNode.Text);
+                //För varje server
                 foreach (Server s in us.Servers)
                 {
+                    //Stämmer namnet på den server som jag klickade på
                     if (twServers.SelectedNode.Text == s.Name)
                     {
-                        
+                        //Sätt serverobjektet till den valda servern
                         pickedServer = s;
+
+                        //Skulle användaren redan tidigare vara uppkopplad stäng den tidigare uppkopplingen
                         if (us.Client.Connected)
                         {
                             RemoveHandshake();
                         }
                         
+                        //Starta uppkoppling mot den valda servern
                         StartHandshake(s.Ip, s.Port,s.Name);
                         
+                        //Skapar nytt meddelandeTable
                         newRow = table.NewConversationMessagesRow();
                         
+                        //Namnet på den server man är uppkopplad mot ändrats
                         lblNameServer.Text = twServers.SelectedNode.Text;
                         
+                        //Uppdatera meddelande
                         UpdateMessagesDB();
                         UpdateMessboard();
 
                         twServers.SelectedNode.Nodes.Clear();
-                        foreach(User u in pickedServer.Users)
+                        foreach (User u in pickedServer.Users)
                         {
                             twServers.SelectedNode.Nodes.Add(u.Name);
                         }
+
                         twServers.ExpandAll();
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
@@ -483,6 +501,8 @@ namespace Chay
                 UpdateMessagesDB();
                 UpdateMessboard();
                 cDConnected.UpdateStatus(true);
+
+                
             }
             catch
             {
