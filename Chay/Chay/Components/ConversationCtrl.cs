@@ -256,22 +256,6 @@ namespace Warecast.ControlsSuite
         }
         //---------------------------------------------------------------------------------------------------
 
-        /*     Send message to board
-         * DataRow newRow = m_DataSource.NewRow();
-            newRow[m_DateColumnName] = DateTime.Now;
-            newRow[m_MessageColumnName] = txtMessage.Text;
-            newRow[m_IsIncomingColumnName] = false;
-            m_DataSource.Rows.Add(newRow);
-
-            txtMessage.Clear();
-            txtMessage.Focus();
-            RefreshData();
-
-            if (m_DataSource.Rows.Count > 0)
-                gridConversationMessages.FirstDisplayedScrollingRowIndex = m_DataSource.Rows.Count - 1; //scroll to new message
-                */
-
-        //---------------------------------------------------------------------------------------------------
         #endregion private
 
         #region mesages grid virtual mode events and painting
@@ -346,8 +330,10 @@ namespace Warecast.ControlsSuite
             DataRow row = m_DataSource.Rows[e.RowIndex];
             bool isMessageIncoming = (bool)row[m_IsIncomingColumnName];
             String messageText = (String)row[m_MessageColumnName];
+
+            //Namnet på användaren som skickat
             String nameSender = (String)row[m_NameColumnName];
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4 )
             {
                 SolidBrush fontBrush = new SolidBrush(gridConversationMessages.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor);
                 if (e.ColumnIndex == 0)
@@ -356,6 +342,7 @@ namespace Warecast.ControlsSuite
                     {
                         //first column is ME title / image 
                         paddedImageBounds = RectangleUtils.GetPaddedRectangle(e.CellBounds, m_MeCellPadding);
+                        //Skriver in namnet brevid bubblan med en padding
                         graphicsCtxt.DrawString(nameSender, font, fontBrush, paddedImageBounds.Location);
                     }
                 }
@@ -367,6 +354,7 @@ namespace Warecast.ControlsSuite
                         StringFormat remoteStringFormat = new StringFormat();
                         remoteStringFormat.Alignment = StringAlignment.Far;
                         paddedImageBounds = RectangleUtils.GetPaddedRectangle(e.CellBounds, m_RemoteCellPadding);
+                        //Skriver in namnet brevid bubblan med en padding
                         graphicsCtxt.DrawString(nameSender, font, fontBrush, paddedImageBounds, remoteStringFormat);
                     }
                 }
