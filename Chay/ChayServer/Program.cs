@@ -15,62 +15,115 @@ namespace ChayServer
 {
     class Program
     {
+        /// <summary>Databasen</summary>
         static MongoCRUD _db = new MongoCRUD("dbChay");
+
+        /// <summary>TCP lyssnare</summary>
         static TcpListener listener;
+
+        /// <summary>TCP client</summary>
         static TcpClient client;
+
+        /// <summary>Servern</summary>
         static Server s = new Server();
 
-
+        /// <summary>
+        /// Standardkonstruktor för kommandoapplikation
+        /// </summary>
         static void Main(string[] args)
-        {
-            Console.WriteLine("Servern kopplar upp sig");
-            CheckDatabase();
-            StartServer();
-            UserInputAsync();
-            client.NoDelay = true;
-        }
-
-        static void StartServer()
         {
             try
             {
-                Console.Write("Vänligen välj en port: ");
-                int port = int.Parse(Console.ReadLine());
-                listener = new TcpListener(IPAddress.Any, port);
-                listener.Start();
-                s.Users = new List<User>();
-                s.Port = port;
-                Console.Clear();
+                //Skriver ut nödvändig information
+                Console.WriteLine("Servern kopplar upp sig");
+
+                //Kontrollerar databasen
+                CheckDatabase();
                 
-                Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
-                Console.WriteLine("_________________________________________________________________________________ \n");
-                Console.WriteLine($"Server started at 127.0.0.1:{port}\n");
+                //Startar servern
+                StartServer();
+
+                //Väntar på att användaren ska mata in ett kommando i konsolen
+                UserInputAsync();
+                client.NoDelay = true;
             }
             catch
             {
                 Console.Clear();
+                Console.WriteLine("Ett problem uppstod vänligen kontakta utvecklaren");
+            }
+        }
+
+        /// <summary>
+        /// Starta servern
+        /// </summary>
+        static void StartServer()
+        {
+            try
+            {
+                //Låter användaren välja vilken port serverna ska starta på
+                Console.Write("Vänligen välj en port: ");
+                int port = int.Parse(Console.ReadLine());
+
+                //Skapar en lyssanre
+                listener = new TcpListener(IPAddress.Any, port);
+
+                //Startar lyssningen
+                listener.Start();
+
+                //Gör en lista för alla uppkopplade användare
+                s.Users = new List<User>();
+                
+                //Sätter serverporten till porten som användaren valde
+                s.Port = port;
+
+                
+                Console.Clear();
+                
+                //Skriver ut anslutnings informationen till servern
+                Console.WriteLine("För information om vilka kommandon som finns tillgängliga vänlig använd \" help \" ");
+                Console.WriteLine("_________________________________________________________________________________ \n");
+                Console.WriteLine($"Server started at 127.0.0.1:{port}\n"); 
+            }
+            catch
+            {
+                //Matar inte användaren in en port
+                //Skrivs detta ut på skärmen
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Vänligen mata in en korrekt port");
                 Console.ForegroundColor = ConsoleColor.Gray;
+
+                //Kör metoden igen
                 StartServer();
             }
 
+            //Startar Handshake
             StartHandshake();
         }
 
-        
+        /// <summary>
+        /// Kollar databasen
+        /// </summary>
         static void CheckDatabase()
         {
             try
             {
+                //Existerar filen env
                 if (File.Exists("env"))
                 {
+                    //Hämstar alla serverar på databasen
                     List<Server> ls = _db.GetAll<Server>("Servers");
-                    MongoDB.Bson.ObjectId objID = GetSetting();
+
+                    //Hämtar ObjectID från filen
+                    MongoDB.Bson.ObjectId objID = GetObjectID();
+                    
                     foreach (Server serv in ls)
                     {
-                        if (serv.Id == GetSetting())
+                        //Finns ObjectID:et
+                        if (serv.Id == GetObjectID())
                         {
+                            //Sätter server objektet till serv
                             s = serv;
                             
                             Console.Write("Databas  |   ");
@@ -83,7 +136,8 @@ namespace ChayServer
                 }
                 else
                 {
-                    SetSetting();
+                    //Annars skapar den ett ObjektID samt fil
+                    SetObjectID();
                 }
             }
             catch(Exception err)
@@ -92,21 +146,35 @@ namespace ChayServer
             }
 
         }
-        static void SetSetting()
+
+        /// <summary>
+        /// Skapar ObjektID
+        /// </summary>
+        static void SetObjectID()
         {
             try
             {
-                
+                //Öppnar en filströmm
                 FileStream stream = new FileStream("env", FileMode.OpenOrCreate, FileAccess.Write);
+
+                //Skapar en skrivare
                 StreamWriter writer = new StreamWriter(stream);
 
+                //Genererar ObjectID
                 s.Id = _db.GenID();
-                //Default settings
+
+                //Skriver ID till filen
                 writer.Write(s.Id);
+
+                //Släpper resurser
                 writer.Dispose();
+
+
                 try
                 {
+                    //Sätter in ID:et i databasen
                     _db.InsertOne("Servers", s);
+
                     Console.Write("Databas  |   ");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("fungerar");
@@ -129,15 +197,25 @@ namespace ChayServer
             }
 
         }
-        static ObjectId GetSetting()
+
+        /// <summary>
+        /// Hämtar ObjektID
+        /// </summary>
+        /// <returns>Returnerar objektID om dewt finns</returns>
+        static ObjectId GetObjectID()
         {
             try
             {
+                //Öppnar strömm
                 FileStream stream = new FileStream("env", FileMode.Open, FileAccess.Read);
+
+                //Deklarerar läsare
                 StreamReader reader = new StreamReader(stream);
 
-                //Default settings
+                //Hämtar ObjectID
                 ObjectId a = ObjectId.Parse(reader.ReadLine());
+
+                //Släpper resurser
                 reader.Dispose();
                 return a;
             }
@@ -148,15 +226,23 @@ namespace ChayServer
 
         }
 
+        /// <summary>
+        /// Startar Handshake mellan sever och klient
+        /// </summary>
         static async void StartHandshake()
         {
             try
             {
+                //Hittar den en användare som försöker ansluta
                 client = await listener.AcceptTcpClientAsync();
 
+                //Kopplar klienten till en User
                 User a = new User(client);
+
+                //Lägger till användaren i användarlistan
                 s.Users.Add(a);
                 
+                //Börjar läsa
                 StartReading(a);
                 
             }
@@ -164,15 +250,27 @@ namespace ChayServer
             {
                 Console.WriteLine(ex.Message);
             }
+
+            //Väntar på att någon ny ska ansluta
             StartHandshake();
         }
+
+        /// <summary>
+        /// Skickar ID till användare
+        /// </summary>
+        /// <param name="id">ObjectID:et</param>
+        /// <param name="client">Klienten</param>
         static void SendId(ObjectId id, TcpClient client)
         {
             try
             {
+                //Buffert minne till att skicka
                 byte[] byteId = new byte[254];
-                //Console.WriteLine(id);
+                
+                //Gör om ID:et till byte
                 byteId = Encoding.Unicode.GetBytes(id.ToString());
+                
+                //Skickar ID:et till klienten
                 client.GetStream().Write(byteId, 0, byteId.Length);
             }
             catch
@@ -180,10 +278,16 @@ namespace ChayServer
                 Console.WriteLine("Gick inte att skicka id");
             }
         }
+
+        /// <summary>
+        /// Påbörjar läsning
+        /// </summary>
+        /// <param name="u">Användaren</param>
         static async void StartReading(User u)
         {
             try
             {
+                //Är klienten uppkopplad
                 if (u.Client.Connected)
                 {
                     
@@ -266,7 +370,6 @@ namespace ChayServer
                 {
                     u.Client.Dispose();
                     s.Users.Remove(u);
-                    //UserInput();
                 }
             }
             catch(Exception ex)
@@ -275,14 +378,15 @@ namespace ChayServer
                 s.Users.Remove(u);
 
                 Console.WriteLine(ex.ToString());
-                //UserInput();
             }
 
-
-          
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arrBytes"></param>
+        /// <returns>Returnerar objektet</returns>
         static Object ByteArrayToObject(byte[] arrBytes)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -295,7 +399,9 @@ namespace ChayServer
             }
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
         static async Task UpdateMessageDB()
         {
             try
@@ -315,7 +421,10 @@ namespace ChayServer
             
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         static async void Broadcast(byte[] data)
         {
             try
@@ -333,23 +442,9 @@ namespace ChayServer
             }
         }
 
-        /*static async void SendtoUser(User usr,byte[] data)
-        {
-            try
-            {
-                foreach (User c in s.Users)
-                {
-                    Console.WriteLine("");
-                    await c.Client.GetStream().WriteAsync(data, 0, data.Length);
-                    //Console.WriteLine("Har nu broadcastat");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Går inte att broadcasta");
-            }
-        }*/
-
+        /// <summary>
+        /// 
+        /// </summary>
         static void UserInputAsync()
         {
             try
@@ -435,7 +530,10 @@ namespace ChayServer
             UserInputAsync();
         }
 
-
+        /// <summary>
+        /// Sparkar användaren från servern
+        /// </summary>
+        /// <param name="us">Användare</param>
         static async void KickUser(string us)
         {
             try
@@ -462,12 +560,19 @@ namespace ChayServer
             
         }
 
+        /// <summary>
+        /// Listar användarna
+        /// </summary>
         static void ListUsers()
         {
             try
             {
+                //Finns det några användare
                 if(s.Users.Count>0){
+                    
                     User usr = new User();
+
+                    //Skrivs de ut på skärmen
                     foreach (User u in s.Users)
                     {
                         Console.WriteLine($"Id: {u.Id}| {u.Username} - Namn({u.Name})");
