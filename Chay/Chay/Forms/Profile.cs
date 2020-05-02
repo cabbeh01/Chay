@@ -31,9 +31,17 @@ namespace Chay.Forms
         /// </summary>
         public Profile()
         {
-            InitializeComponent();
-            GraphicalComponents();
-            _pictureuploaded = false;
+            try
+            {
+                InitializeComponent();
+                GraphicalComponents();
+                _pictureuploaded = false;
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+            }
+            
         }
 
         /// <summary>
@@ -224,10 +232,19 @@ namespace Chay.Forms
         /// </summary>
         private async void btnSaveProf_Click(object sender, EventArgs e)
         {
-            //Uppdaterar datan som namnet och bilden till användaren
-            await UpdateStruct();
-            MessageBox.Show("Dina ändringar har sparats");
-            this.Hide();
+            try
+            {
+                //Uppdaterar datan som namnet och bilden till användaren
+                await UpdateStruct();
+                MessageBox.Show("Dina ändringar har sparats");
+                this.Hide();
+            }
+            catch
+            {
+                MessageBox.Show("Dina gick inte att spara");
+                this.Hide();
+            }
+            
         }
 
         /// <summary>

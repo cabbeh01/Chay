@@ -29,8 +29,15 @@ namespace Chay.Forms
         /// </summary>
         public ServerManager()
         {
-            InitializeComponent();
-            GraphicalComponents();
+            try
+            {
+                InitializeComponent();
+                GraphicalComponents();
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+            }
         }
 
         /// <summary>

@@ -22,8 +22,16 @@ namespace Chay
         /// </summary>
         public Login()
         {
-            InitializeComponent();
-            GraphicalComponents();
+            try
+            {
+                InitializeComponent();
+                GraphicalComponents();
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+            }
+            
         }
 
         /// <summary>
@@ -112,14 +120,21 @@ namespace Chay
         /// </summary>
         private void LlblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //Deklararerar formen för registreringen
-            Register reg = new Register();
+            try
+            {
+                //Deklararerar formen för registreringen
+                Register reg = new Register();
 
-            //Visar formen
-            reg.Show();
+                //Visar formen
+                reg.Show();
 
-            //Gömmer denna formen
-            this.Hide();
+                //Gömmer denna formen
+                this.Hide();
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>

@@ -87,7 +87,7 @@ namespace Chay
         /// <returns>Namn| Ip-address: portnummer</returns>
         public override string ToString()
         {
-            return $"{Name}| {Ip}: {Port}";
+            return $"{Name} | {Ip}: {Port}";
         }
     }
 }

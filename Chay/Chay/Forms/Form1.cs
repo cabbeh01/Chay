@@ -111,7 +111,7 @@ namespace Chay
             }
             catch
             {
-                MessageBox.Show("Krash");
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
             }
             
         }
@@ -546,27 +546,16 @@ namespace Chay
         public void StartSending(Message msg)
         {
             
-            //us.Client.GetStream().
-            //byte[] outData = Encoding.Unicode.GetBytes(msg); // Detta ska bytas ut om en klass som man ska 
             try
             {
                 byte[] meta = new byte[8];
 
                 byte[] outData = ObjectToByteArray(msg);
                 meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
-                //MessageBox.Show(outData.Length.ToString());
+
                 us.Client.GetStream().Write(meta, 0, meta.Length);
 
-                //MessageBox.Show(outData.ToString());
-
                 us.Client.GetStream().Write(outData, 0, outData.Length);
-
-
-                //Message test = (Message)ByteArrayToObject(outData, outData.Length);
-
-                //Serializa och deserializa fungerar. Problemet är att skicka datan från client till server.
-                //MessageBox.Show($"{test.Auther.Name}: {test.Text}"); 
-                //MessageBox.Show("Meddelandet har nu skickats" + "\n" + outData.Length);
             }
             catch (Exception ex)
             {
@@ -598,7 +587,6 @@ namespace Chay
                             
                         }
                        
-                        
                         string id = Encoding.Unicode.GetString(buffId, 0, n);
                         //MessageBox.Show(id);
                         pickedServer.Id = ObjectId.Parse(id.ToString());
@@ -619,7 +607,6 @@ namespace Chay
                     catch
                     {
                         //MessageBox.Show(""+ex);
-                        
                     }
                     
 
@@ -647,10 +634,6 @@ namespace Chay
             }
             catch(Exception ex)
             {
-                /*if (us.Client.Connected)
-                {
-                    us.Client.GetStream().Close();
-                }*/
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Startreading \n"+ex);
             }

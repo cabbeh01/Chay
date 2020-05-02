@@ -15,16 +15,24 @@ namespace Chay.Components
         /// </summary>
         protected override void OnPaint(PaintEventArgs pe)
         {
-            //En path konstrueras
-            GraphicsPath grpath = new GraphicsPath();
+            try
+            {
+                //En path konstrueras
+                GraphicsPath grpath = new GraphicsPath();
 
-            //Skapar en Ellipse (Cirkel) och kopplar sedan bilden till Ellipsen (Cirkeln) 
-            grpath.AddEllipse(0, 0, ClientSize.Width, ClientSize.Height);
-            this.Region = new System.Drawing.Region(grpath);
+                //Skapar en Ellipse (Cirkel) och kopplar sedan bilden till Ellipsen (Cirkeln) 
+                grpath.AddEllipse(0, 0, ClientSize.Width, ClientSize.Height);
+                this.Region = new System.Drawing.Region(grpath);
 
-            //Drar ut bilden över det nyskapadeområdet 
-            this.SizeMode = PictureBoxSizeMode.StretchImage;
-            base.OnPaint(pe);
+                //Drar ut bilden över det nyskapadeområdet 
+                this.SizeMode = PictureBoxSizeMode.StretchImage;
+                base.OnPaint(pe);
+            }
+            catch
+            {
+                base.OnPaint(pe);
+            }
+            
         }
     }
 }

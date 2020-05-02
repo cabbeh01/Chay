@@ -18,8 +18,15 @@ namespace Chay
         /// </summary>
         public Register()
         {
-            InitializeComponent();
-            GraphicalComponents();
+            try
+            {
+                InitializeComponent();
+                GraphicalComponents();
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+            }
         }
 
         /// <summary>
@@ -187,36 +194,44 @@ namespace Chay
         /// </summary>
         private bool PasswordValidator(string password)
         {
-            //Måste vara minst 7 tecken samt en stor bokstav och ett specialtecken
-            if (password.Length > 6)
+            try
             {
-                int checkUpper = 0;
-                int checkSymbol = 0;
-                foreach (char a in password)
+                //Måste vara minst 7 tecken samt en stor bokstav och ett specialtecken
+                if (password.Length > 6)
                 {
-                    if (char.IsUpper(a))
+                    int checkUpper = 0;
+                    int checkSymbol = 0;
+                    foreach (char a in password)
                     {
-                        checkUpper++;
+                        if (char.IsUpper(a))
+                        {
+                            checkUpper++;
+                        }
+                        if (char.IsPunctuation(a))
+                        {
+                            checkSymbol++;
+                        }
                     }
-                    if (char.IsPunctuation(a))
-                    {
-                        checkSymbol++;
-                    }
-                }
 
-                if (checkSymbol > 0 && checkUpper > 0)
-                {
-                    return true;
+                    if (checkSymbol > 0 && checkUpper > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     return false;
                 }
             }
-            else
+            catch
             {
                 return false;
             }
+            
 
         }
 

@@ -37,12 +37,20 @@ namespace Chay
         /// <param name="tf">Referar till Tidsformat</param>
         public Settings(ref ChatColor c, ref TimeFormat tf)
         {
-            InitializeComponent();
-            InsertDataCombobox();
-            GraphicalComponents();
+            try
+            {
+                InitializeComponent();
+                InsertDataCombobox();
+                GraphicalComponents();
 
-            cbxChatColor.SelectedItem = c;
-            cbxTimeFormat.SelectedItem = tf;
+                cbxChatColor.SelectedItem = c;
+                cbxTimeFormat.SelectedItem = tf;
+            }
+            catch
+            {
+                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+            }
+            
         }
 
         /// <summary>
