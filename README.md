@@ -6,4 +6,5 @@ Slutarbete i Programmering 2
 - Serializa och deserializa klasser
 - Använda mig av mongoDB bibliotek c#
 - Skapa eget GUI
-- Skapa DLL filer
+- Skapat DLL fil
+- Hasha med md5 hash
