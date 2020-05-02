@@ -460,6 +460,7 @@ namespace Chay {
                                 this.columnid}, true));
                 this.columntext.AllowDBNull = false;
                 this.columntime.AllowDBNull = false;
+                this.columntime.DateTimeMode = global::System.Data.DataSetDateTime.Local;
                 this.columnincoming.AllowDBNull = false;
                 this.columnincoming.DefaultValue = ((bool)(false));
                 this.columnid.AutoIncrement = true;

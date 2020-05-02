@@ -23,7 +23,7 @@ namespace Chay
         //---------    Fönster     ----------
 
         /// <summary>Inställningsformen</summary>
-        private Settings setting            = null;
+        private Settings setting = null;
 
         /// <summary>Serverhanteringsformen</summary>
         private ServerManager servermang;
@@ -51,20 +51,20 @@ namespace Chay
         //----------  StandardInställningar   ---------
 
         /// <summary>Chattfärgen</summary>
-        Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
+        private Settings.ChatColor S_cColor     = Settings.ChatColor.Blå;
 
         /// <summary>Tidsformatet</summary>
-        Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
+        private Settings.TimeFormat S_tFormat   = Settings.TimeFormat.HHmm;
 
 
 
         //----------  Andra deklarationer   ---------
 
         /// <summary>Skapar en dataTable</summary>
-        dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
+        private dSChatt.ConversationMessagesDataTable table = new dSChatt.ConversationMessagesDataTable();
 
         /// <summary>Skapar en meddelande rad</summary>
-        dSChatt.ConversationMessagesRow newRow = null;
+        private dSChatt.ConversationMessagesRow newRow = null;
 
         /// <summary>Muspekarens position</summary>
         private Point _mouseLocation;
@@ -88,7 +88,7 @@ namespace Chay
             try
             {
                 InitializeComponent();
-
+                
                 this.SetStyle(ControlStyles.ResizeRedraw, true);
                 this.FormBorderStyle = FormBorderStyle.None;
                 
@@ -469,6 +469,7 @@ namespace Chay
                         UpdateMessagesDB();
                         UpdateMessboard();
 
+                        //Uppdaterar treeview och se de anslutna användarna samt sig själv
                         twServers.SelectedNode.Nodes.Clear();
                         foreach (User u in pickedServer.Users)
                         {
@@ -478,7 +479,6 @@ namespace Chay
                         twServers.ExpandAll();
                         //us.Client.Close();
                         //us._client.Connect(s._ip, s._port);
-
                     }
                 }
             }
@@ -489,20 +489,36 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Startar handshake mellan client och server
+        /// </summary>
+        /// <param name="address">Ipaddress till servern</param>
+        /// <param name="port">Portnummer</param>
+        /// <param name="name">Namnet på servern</param>
         public async void StartHandshake(IPAddress address, int port, string name)
         {
             try
             {
+                //Skapar nu klient
                 us.Client = new TcpClient();
+
+                //Kopplar upp sig asynkront
                 await us.Client.ConnectAsync(address, port);
+
+                //Skickar infomeddelande till servern att en användare kopplar upp sig
                 StartSending(new Message(new Userpack(us.Id, us.Name, us.Image,us.Username), "connected", DateTime.Now, true));
+
+                //Börjar läsa från servern
                 StartReading();
+
                 MessageBox.Show($"Du connectar till {name}");
+                
+                //Uppdaterar meddelande som finns på servern
                 UpdateMessagesDB();
                 UpdateMessboard();
-                cDConnected.UpdateStatus(true);
 
-                
+                //Uppdaterar uppkopplingsstatus
+                cDConnected.UpdateStatus(true);
             }
             catch
             {
@@ -511,30 +527,17 @@ namespace Chay
             }
         }
 
-        public void UpdateMessboard()
-        {
-            try
-            {
-                conversationCtrl.DataSource = table;
-                conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
-                conversationCtrl.IdColumnName = table.idColumn.ColumnName;
-                conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
-                conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
-                conversationCtrl.NameColumnName = table.nameColumn.ColumnName;
-
-                conversationCtrl.Rebind();
-            }
-            catch
-            {
-
-            }
-            
-        }
+        /// <summary>
+        /// Tar bort handshaken med servern
+        /// </summary>
         public void RemoveHandshake()
         {
             try
             {
+                //Stänger uppkopplingen med servern
                 us.Client.Client.Close();
+
+                //Uppdaterar uppkopplingsstatus
                 cDConnected.UpdateStatus(false);
             }
             catch
@@ -544,13 +547,48 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Uppdaterar controlCtrl (grafiska med bubblorna) samt kopplar de till ett dataSet
+        /// </summary>
+        public void UpdateMessboard()
+        {
+            try
+            {
+                //Kopplar dataSet till respektive modul
+                conversationCtrl.DataSource = table;
+                conversationCtrl.MessageColumnName = table.textColumn.ColumnName;
+                conversationCtrl.IdColumnName = table.idColumn.ColumnName;
+                conversationCtrl.DateColumnName = table.timeColumn.ColumnName;
+                conversationCtrl.IsIncomingColumnName = table.incomingColumn.ColumnName;
+                conversationCtrl.NameColumnName = table.nameColumn.ColumnName;
+
+                //Uppdaterar komponenten
+                conversationCtrl.Rebind();
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        /// <summary>
+        /// Gör om ett object till en bytearray med hjälp av Serialization
+        /// </summary>
+        /// <param name="obj">Objektet</param>
+        /// <returns>Returnerar en bytearray</returns>
         byte[] ObjectToByteArray(object obj)
         {
             try
             {
+                //Om objektet inte är definierat
                 if (obj == null)
                     return null;
+
+                //Skapar en binärformaterare
                 BinaryFormatter bf = new BinaryFormatter();
+
+                //Serializar objectet och returnerar en array
                 using (MemoryStream ms = new MemoryStream())
                 {
                     bf.Serialize(ms, obj);
@@ -563,18 +601,27 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Påbörja sändning
+        /// </summary>
+        /// <param name="msg">Meddelande</param>
         public void StartSending(Message msg)
         {
-            
             try
             {
+                //Skapar en metatag
                 byte[] meta = new byte[8];
 
+                //Skapar en datadel i bytearray
                 byte[] outData = ObjectToByteArray(msg);
+
+                //Lägger längden på objektet i metan
                 meta = Encoding.ASCII.GetBytes(outData.Length.ToString());
 
+                //Skickar metan
                 us.Client.GetStream().Write(meta, 0, meta.Length);
 
+                //Skickar objektet
                 us.Client.GetStream().Write(outData, 0, outData.Length);
             }
             catch (Exception ex)
@@ -585,38 +632,47 @@ namespace Chay
 
 
 
-        // ------------------   Påbörjar läsning   -------------------
+        /// <summary>
+        /// Påbörjar läsning
+        /// </summary>
         public async void StartReading()
         {
             try
             {
+                //Är klienten uppkopplad
                 if (us.Client.Connected)
                 {
+                    //Har den inte läst id:et
                     if (!_readId)
                     {
+                        //skapar en buffert för att hämta id:et
                         byte[] buffId = new byte[254];
 
                         int n = 0;
                         try
                         {
+                            //Läser in id:et från servern
                             n = await us.Client.GetStream().ReadAsync(buffId, 0, buffId.Length);
                         }
                         catch
                         {
                             //MessageBox.Show("Fel i överföringen" + ex);
-                            
                         }
-                       
+                        
+                        //Skapar en sträng id och gör om bytearrayen till sträng
                         string id = Encoding.Unicode.GetString(buffId, 0, n);
-                        //MessageBox.Show(id);
+
+                        //Sätter valda serverns Id till det id:et den fick 
                         pickedServer.Id = ObjectId.Parse(id.ToString());
                         _readId = true;
+
+                        //Uppdaterar meddelandena från databasen samt statusen på servern
                         UpdateMessagesDB();
                         UpdateMessboard();
                         cDConnected.UpdateStatus(true);
-
                     }
 
+                    //Annars väntar den på att läsa in de meddelande som servern skickar
                     byte[] buffert = new byte[64];
 
                     int bRead = 0;
@@ -629,26 +685,30 @@ namespace Chay
                         //MessageBox.Show(""+ex);
                     }
                     
-
+                    //Gör om meddelandet till text
                     string mess = Encoding.Unicode.GetString(buffert, 0, bRead);
-                    //MessageBox.Show(mess);
+
+                    //Är det ett meddelande så uppdatera meddelanda på klienten
                     if (mess == "newmess")
                     {
                         UpdateMessagesDB();
                         UpdateMessboard();
                     }
+
+                    //Är det att klienten blev kickad så lämna servern
                     if(mess == "kicked")
                     {
                         MessageBox.Show("Du blev kickad");
                         RemoveHandshake();
                         cDConnected.UpdateStatus(false);
                     }
+
+                    //Uppdatera status
                     cDConnected.UpdateStatus(true);
                     StartReading();
                 }
                 else
                 {
-                    //us.Client = new TcpClient();
                     cDConnected.UpdateStatus(false);
                 }
             }
@@ -659,31 +719,44 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// UppdateraMeddelande från databasen
+        /// </summary>
         private void UpdateMessagesDB()
         {
             try
             {
+                //Rensa meddelande hso klienten
                 table.Clear();
+
+                //Hämta alla tillgängliga serverar från databasen
                 List<Server> allServ = _db.GetAll<Server>("Servers");
+
+                //Skapa en ny rad som meddelandena kan ligga på
                 newRow = table.NewConversationMessagesRow();
+
+                //Letar upp servern som klienten är uppkopplad mot
                 foreach (Server sv in allServ)
                 {
-                    //pickedServer.Id == sv.Id
-                    //ObjectId.Parse("5e91d70759e6fd33103b1d46")
                     if (pickedServer.Id == sv.Id)
                     {
                         pickedServer = sv;
                     }
                 }
 
+                //Så länge där finns meddelande
                 if(pickedServer.Messages != null)
                 {
+                    //Gå igenom alla meddalnden
                     foreach (Message msg in pickedServer.Messages)
                     {
+                        //Är meddelande mitt id
                         if (msg.Auther.Id == us.Id)
                         {
+                            //Finns där meddelanden
                             if (table.Count < 0)
                             {
+                                //Bygger meddelande
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
                                 newRow.name = "Jag";
@@ -691,6 +764,7 @@ namespace Chay
                             }
                             else
                             {
+                                //Bygger meddelande
                                 newRow = table.NewConversationMessagesRow();
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
@@ -700,10 +774,14 @@ namespace Chay
 
                             table.AddConversationMessagesRow(newRow);
                         }
+
+                        //Är meddelandet någon annans id
                         else
                         {
+                            //Finns där meddelanden
                             if (table.Count < 0)
                             {
+                                //Bygger meddelande
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
                                 newRow.name = msg.Auther.Name;
@@ -711,6 +789,7 @@ namespace Chay
                             }
                             else
                             {
+                                //Bygger meddelande
                                 newRow = table.NewConversationMessagesRow();
                                 newRow.time = msg.DelivaryTime;
                                 newRow.text = msg.Text;
@@ -721,7 +800,8 @@ namespace Chay
                         }
                     }
                 }
-                
+
+                //Uppdatera controlCTRL
                 UpdateMessboard();
             }
             catch(Exception ex)
@@ -730,26 +810,38 @@ namespace Chay
             }
             
         }
+
+        /// <summary>
+        /// Hämta användarens inställningar
+        /// </summary>
         private void RetriveSettings()
         {
 
             try
             {
+                //Finns det en mapp som heter Chay i Appdata
                 if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+ "\\Chay\\"))
                 {
+                    //Skapar en filströmm
                     FileStream stream = new FileStream(Settings.fileName, FileMode.Open, FileAccess.Read);
+                    
+                    //Skapar en läsare
                     StreamReader reader = new StreamReader(stream);
 
-                   
+                    //Läser inställningarna
                     string colorMessage = reader.ReadLine();
                     string timeFormat = reader.ReadLine();
+
+                    //Skulle värdena vara ogiltliga så kastar den en Exception
                     if(String.IsNullOrEmpty(colorMessage) && String.IsNullOrEmpty(timeFormat))
                     {
                         throw new System.ArgumentException("Värdena är ogiltliga", "Ogiltliga värden");
                     }
 
+                    //Släpper läsarresurserna
                     reader.Dispose();
 
+                    //Kopplar den färgen som valts till bubblorna
                     switch (colorMessage)
                     {
                         case "Blå":
@@ -775,7 +867,7 @@ namespace Chay
                             break;
                     }
 
-
+                    //Kopplar tidsformatet som valts till den inställningen
                     switch (timeFormat)
                     {
                         case "HHmmss":
@@ -797,6 +889,9 @@ namespace Chay
             }
         }
 
+        /// <summary>
+        /// Visar antalet bokstäver som man kan skriva
+        /// </summary>
         private void tbxSend_TextChanged(object sender, EventArgs e)
         {
             lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
