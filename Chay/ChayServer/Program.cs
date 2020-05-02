@@ -342,6 +342,10 @@ namespace ChayServer
 
                                         //Uppdaterar databasen
                                         _db.UpdateOne<Server>("Servers", s.Id, s);
+
+                                        byte[] backToClient = new byte[64];
+                                        backToClient = Encoding.Unicode.GetBytes("userstat");
+                                        Broadcast(backToClient);
                                     }
                                 }
                             }
@@ -390,6 +394,10 @@ namespace ChayServer
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("  -");
                             Console.ForegroundColor = ConsoleColor.Gray;
+
+                            byte[] backToClient = new byte[64];
+                            backToClient = Encoding.Unicode.GetBytes("userstat");
+                            Broadcast(backToClient);
                         }
                         else
                         {

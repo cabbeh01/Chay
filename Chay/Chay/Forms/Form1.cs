@@ -469,16 +469,21 @@ namespace Chay
                         UpdateMessagesDB();
                         UpdateMessboard();
 
-                        //Uppdaterar treeview och se de anslutna användarna samt sig själv
+                        //Tar bort gamla användare från andra noder
+                        foreach(TreeNode a in twServers.Nodes) { 
+                            if(a != twServers.SelectedNode)
+                            {
+                                a.Nodes.Clear();
+                            }
+                        }
+
+                        //Uppdaterar treeview till den valda
                         twServers.SelectedNode.Nodes.Clear();
                         foreach (User u in pickedServer.Users)
                         {
                             twServers.SelectedNode.Nodes.Add(u.Name);
                         }
-
                         twServers.ExpandAll();
-                        //us.Client.Close();
-                        //us._client.Connect(s._ip, s._port);
                     }
                 }
             }
@@ -703,8 +708,17 @@ namespace Chay
                         cDConnected.UpdateStatus(false);
                     }
 
+                    //Någon ny användare joinar eller lämnar servern
+                    if (mess == "userstat")
+                    {
+                        UpdateUserlistDB();
+                    }
+
                     //Uppdatera status
                     cDConnected.UpdateStatus(true);
+
+                    
+
                     StartReading();
                 }
                 else
@@ -716,6 +730,40 @@ namespace Chay
             {
                 cDConnected.UpdateStatus(false);
                 MessageBox.Show("Startreading \n"+ex);
+            }
+        }
+
+        /// <summary>
+        /// Uppdaterar användarlistan på uppkopplad databas
+        /// </summary>
+        private void UpdateUserlistDB()
+        {
+            //Hämta alla tillgängliga serverar från databasen
+            List<Server> allServ = _db.GetAll<Server>("Servers");
+
+
+            //Letar upp servern som klienten är uppkopplad mot
+            foreach (Server sv in allServ)
+            {
+                if (pickedServer.Id == sv.Id)
+                {
+                    pickedServer = sv;
+                }
+            }
+
+            //Uppdaterar serverlistan med användare uppkoplade på servern
+            try
+            {
+                twServers.SelectedNode.Nodes.Clear();
+                foreach (User u in pickedServer.Users)
+                {
+                    twServers.SelectedNode.Nodes.Add(u.Name);
+                }
+                twServers.ExpandAll();
+            }
+            catch
+            {
+
             }
         }
 
@@ -745,7 +793,7 @@ namespace Chay
                 }
 
                 //Så länge där finns meddelande
-                if(pickedServer.Messages != null)
+                if (pickedServer.Messages != null)
                 {
                     //Gå igenom alla meddalnden
                     foreach (Message msg in pickedServer.Messages)
