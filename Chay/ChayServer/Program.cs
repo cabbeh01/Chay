@@ -294,48 +294,75 @@ namespace ChayServer
                     // [Metadata]--[DATA]--[END]
                     try
                     {
+                        //Buffert för metan
                         byte[] meta = new byte[8];
+
+                        //Skapar en nätverkström
                         NetworkStream stream = u.Client.GetStream();
+
+                        //Läser in hela metan
                         await stream.ReadAsync(meta, 0, meta.Length);
 
+                        //Hämtar längden på det inkommande paketet
                         int len = int.Parse(Encoding.ASCII.GetString(meta));
-                        //Console.WriteLine(len);
+                        
+                        //Läser in det inkommande paketet
                         await Task.Run(async () => {
 
+                            //Skapar buffert för det inkommande meddelandet
                             byte[] tempbuffer = new byte[len];
+
+                            //Läser meddelandet
                             stream.Read(tempbuffer, 0, tempbuffer.Length);
 
+                            //Gör ett objekt av meddelandet
                             Message incomming = (Message)ByteArrayToObject(tempbuffer);
 
+                            //Är det ett uppkopplingsmeddelande
                             if (incomming.SysMess && incomming.Text == "connected")
                             {
+                                //Skriv ut att just denna användare kopplat upp sig mot servern
                                 Console.Write($"\n{incomming.Auther.Id}: ({incomming.Auther.Name}) joinade servern");
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("  +\n");
                                 Console.ForegroundColor = ConsoleColor.Gray;
+
                                 foreach (User a in s.Users)
                                 {
+                                    //Går igenom alla klienter och kopplar denna användaren till dens klient
                                     if(a.Client == u.Client)
                                     {
+                                        //Lägger in information i användarobjektet om denna användare
                                         a.Id = incomming.Auther.Id;
                                         a.Username = incomming.Auther.Username;
                                         a.Name = incomming.Auther.Name;
-                                        //Console.WriteLine(s.Id);
+                                        
+                                        //Skicakr tillbaka Serverns ID
                                         SendId(s.Id, u.Client);
+
+                                        //Uppdaterar databasen
                                         _db.UpdateOne<Server>("Servers", s.Id, s);
                                     }
                                 }
                             }
                             else
                             {
+                                //Skriver ut meddelandet på skärmen
                                 Console.WriteLine($"{incomming.Auther.Name}: {incomming.Text}");
+
+                                //Finns ingen serverlista skapas denna
                                 if(s.Messages == null)
                                 {
                                     s.Messages = new List<Message>();
                                 }
+
+                                //Lägger till meddelandet i listan
                                 s.Messages.Add(incomming);
+
+                                //Uppdaterar databasen
                                 await UpdateMessageDB();
 
+                                //Skickar tillbaka med en broadcast att det finns nytt meddelande att hämta
                                 byte[] backToClient = new byte[64];
                                 backToClient = Encoding.Unicode.GetBytes("newmess");
                                 Broadcast(backToClient);
@@ -346,12 +373,19 @@ namespace ChayServer
                     }
                     catch(Exception ex)
                     {
-                        //Console.WriteLine("Ett fel uppstod \n" + ex.ToString());
+                        //Är det ett IOException meddelande har en användare lämnat servern
                         if (ex.GetType().IsAssignableFrom(typeof(System.IO.IOException)))
                         {
+                            //Tar bort användaren från servern
                             u.Client.Dispose();
+
+                            //Tar bort användaren från användarlistan
                             s.Users.Remove(u);
+
+                            //Uppdaterar databasen
                             _db.UpdateOne<Server>("Servers", s.Id, s);
+
+                            //Skriver ut vem som lämnat
                             Console.Write($"\n{u.Id}: ({u.Name}) lämnade servern");
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("  -");
@@ -359,16 +393,21 @@ namespace ChayServer
                         }
                         else
                         {
+                            //Börjar läsa ifall något gått fel
                             StartReading(u);
                         }
                         
                     }
 
+                    //Börjar läsa på nytt
                     StartReading(u);
                 }
                 else
                 {
+                    //Tar bort användaren från servern
                     u.Client.Dispose();
+
+                    //Tar bort användaren från användarlistan
                     s.Users.Remove(u);
                 }
             }
@@ -383,34 +422,44 @@ namespace ChayServer
         }
 
         /// <summary>
-        /// 
+        /// Gör om en bytearray till ett objekt
         /// </summary>
-        /// <param name="arrBytes"></param>
+        /// <param name="arrBytes">Bytearray</param>
         /// <returns>Returnerar objektet</returns>
         static Object ByteArrayToObject(byte[] arrBytes)
         {
+            //Skapar temporär memorystream
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter binForm = new BinaryFormatter();
+
+                //Skriver till memorystreamen datan av arrBytes
                 ms.Write(arrBytes, 0, arrBytes.Length);
                 ms.Seek(0, SeekOrigin.Begin);
+
+                //Deserializar bitarna och objektkonverterar till det objektet
                 Object obj = (Object)binForm.Deserialize(ms);
+
                 return obj;
             }
         }
 
         /// <summary>
-        /// 
+        /// Uppdaterar meddelande databasen
         /// </summary>
         static async Task UpdateMessageDB()
         {
             try
             {
                 await Task.Run(() => {
+
+                    //Finns ingen meddelandelista så skapas den här
                     if (s.Messages == null)
                     {
                         s.Messages = new List<Message>();
                     }
+
+                    //Uppdatera databasen med de nya meddelandena
                     _db.UpdateOne<Server>("Servers", s.Id, s);
                 });
             }
@@ -422,18 +471,19 @@ namespace ChayServer
         }
 
         /// <summary>
-        /// 
+        /// Broadcast funktion
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Datan som ska skickas ut</param>
         static async void Broadcast(byte[] data)
         {
             try
             {
+                //För varje användare som är uppkoplad
                 foreach (User c in s.Users)
                 {
                     Console.WriteLine("");
+                    //Skicka datan
                     await c.Client.GetStream().WriteAsync(data, 0, data.Length);
-                    //Console.WriteLine("Har nu broadcastat");
                 }
             }
             catch
@@ -443,26 +493,38 @@ namespace ChayServer
         }
 
         /// <summary>
-        /// 
+        /// Inmatning till konsolen
         /// </summary>
         static void UserInputAsync()
         {
             try
             {
-                
                 Console.Write("> ");
+
+                //Läser in inmatningen
                 string data = Console.ReadLine();
+
+                //Är den tom börjar den om
                 if (string.IsNullOrEmpty(data))
                 {
                     UserInputAsync();
                 }
+
+                //Tar bort första tecknet
                 data.Remove(0, 1);
+
+                //Splittar strängen
                 string[] dataSplice = data.Split();
+
+                //De olika kommandona i en switchsats
                 switch (dataSplice[0].ToLower())
                 {
+                    //Kickar användaren
                     case "kick":
+                        //Finns det en sträng i användarnamnet
                         if (!String.IsNullOrEmpty(dataSplice[1]))
                         {
+                            //Kickar användaren om den finns
                             KickUser(dataSplice[1]);
                         }
                         else
@@ -472,24 +534,34 @@ namespace ChayServer
                         }
                         break;
 
+                    //Listar användarna
                     case "ls":
 
                         ListUsers();
                         break;
 
+                    //Rensar konsolen
                     case "clear":
 
                         Console.Clear();
                         break;
-
+                    
+                    //Rensar meddelandelistan
                     case "clean":
 
                         try
                         {
+                            //Rensar meddelande listan
                             s.Messages.Clear();
+
+                            //Uppdaterar servern
                             _db.UpdateOne<Server>("Servers", s.Id, s);
+
+                            //Skapar nytt meddelande
                             byte[] backToClient = new byte[64];
                             backToClient = Encoding.Unicode.GetBytes("newmess");
+
+                            //Skickar ut en uppdatering till alla användare
                             Broadcast(backToClient);
                         }
                         catch
@@ -500,19 +572,20 @@ namespace ChayServer
                         
                         break;
 
-
+                    //Hjälp kommando
                     case "help":
                         Console.Clear();
                         Console.WriteLine("Dessa kommandona finns tillgängliga");
                         Console.WriteLine("___________________________________________________");
                         Console.WriteLine("help - Visar de kommandon som finns tillgänliga");
-                        Console.WriteLine("kick XX- Stänger ner en uppkoppling mellan servern och en användare");
+                        Console.WriteLine("kick XX- Stänger ner en uppkoppling mellan servern och en användare.  XX = användarnamnet");
                         Console.WriteLine("ls - Visar de användare som är uppkopplade mot servern");
                         Console.WriteLine("clear - Rensar terminalens utmatning");
                         Console.WriteLine("clean - Rensar alla meddelande på servern och databasen");
                         Console.WriteLine("exit - Stänger ner programmet");
                         break;
 
+                    //Avsluta kommando
                     case "exit":
                         Console.WriteLine("Stänger ned, klicka på valfritangent för att stänga fönstret!");
                         Console.Read();
@@ -527,6 +600,7 @@ namespace ChayServer
                 Console.WriteLine("");
             }
 
+            //Börjar om läsningen när den fått någon inmatning
             UserInputAsync();
         }
 
@@ -539,18 +613,26 @@ namespace ChayServer
             try
             {
                 User usr = new User();
+                
+                //Letar igenom alla användare som är uppkopplad på servern
                 foreach (User u in s.Users)
                 {
+                    //Sätter användarnamnen överens
                     if (u.Username == us)
                     {
+                        //Skickar tillbaka till användaren att den ska lämna och blivit kickad
                         byte[] backToClient = new byte[64];
                         backToClient = Encoding.Unicode.GetBytes("kicked");
                         await u.Client.GetStream().WriteAsync(backToClient, 0, backToClient.Length);
+
+                        //Rensar resurser
                         u.Client.Dispose();
                         usr = u;
                         Console.WriteLine($"Användaren {us} är nu kickad");
                     }
                 }
+
+                //Tar bort användare från användarlistan
                 s.Users.Remove(usr);
             }
             catch
