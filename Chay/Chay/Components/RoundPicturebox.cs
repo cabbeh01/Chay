@@ -15,6 +15,7 @@ namespace Chay.Components
         /// </summary>
         protected override void OnPaint(PaintEventArgs pe)
         {
+            
             try
             {
                 //En path konstrueras

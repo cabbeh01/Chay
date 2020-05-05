@@ -85,6 +85,7 @@
             // btnUpload
             // 
             this.btnUpload.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnUpload.Enabled = false;
             this.btnUpload.FlatAppearance.BorderSize = 0;
             this.btnUpload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

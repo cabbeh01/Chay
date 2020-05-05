@@ -132,7 +132,7 @@ namespace Chay.Forms
             }
             catch
             {
-                MessageBox.Show("Det går inte ladda upp bilden");
+                MessageBox.Show("Går inte ladda upp bilden pågrund att den är för stor. Vänligen ladda upp en kvadratisk bild som är max 1000x1000 px");
             }
         }
         
@@ -193,6 +193,7 @@ namespace Chay.Forms
                     }
                     catch
                     {
+                        
                         try
                         {
                             //Standardbild
