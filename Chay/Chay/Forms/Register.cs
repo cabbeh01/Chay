@@ -74,7 +74,7 @@ namespace Chay
         /// <summary>
         /// Registreringknappen klickas på
         /// </summary>
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace Chay
         /// <summary>
         /// Tillbaka knappen klickas på
         /// </summary>
-        private void btnBack_Click(object sender, EventArgs e)
+        private void BtnBack_Click(object sender, EventArgs e)
         {
             this.Close();
             Login log = new Login();
@@ -156,7 +156,7 @@ namespace Chay
         /// <summary>
         /// Om upprepalösenords rutan ändrar text
         /// </summary>
-        private void tbxRepassword_TextChanged(object sender, EventArgs e)
+        private void TbxRepassword_TextChanged(object sender, EventArgs e)
         {
             //Ändrar färgen på textrutorna ifall dem är lika eller olika
             if (tbxRepassword.Text == tbxPassword.Text && !string.IsNullOrEmpty(tbxPassword.Text) && !string.IsNullOrEmpty(tbxRepassword.Text))
@@ -174,7 +174,7 @@ namespace Chay
         /// <summary>
         /// Om lösenords rutan ändrar text
         /// </summary>
-        private void tbxPassword_TextChanged(object sender, EventArgs e)
+        private void TbxPassword_TextChanged(object sender, EventArgs e)
         {
             //Ändrar färgen på textrutorna ifall dem är lika eller olika
             if (tbxRepassword.Text == tbxPassword.Text && !string.IsNullOrEmpty(tbxPassword.Text) && !string.IsNullOrEmpty(tbxRepassword.Text))
@@ -238,7 +238,7 @@ namespace Chay
         /// <summary>
         /// Om visa lösenord klickas på
         /// </summary>
-        private void bCbxShowPass_Click(object sender, EventArgs e)
+        private void BCbxShowPass_Click(object sender, EventArgs e)
         {
             //Ändrar så att lösenordet visas om checkboxen är ikryssad
             if (!bCbxShowPass.Check)
@@ -256,7 +256,7 @@ namespace Chay
         /// <summary>
         /// Klickar på avsluta
         /// </summary>
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             //Stänger programmet
             this.Close();

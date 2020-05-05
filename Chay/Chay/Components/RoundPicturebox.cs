@@ -30,7 +30,7 @@ namespace Chay.Components
             }
             catch
             {
-                base.OnPaint(pe);
+                MessageBox.Show("Går inte ladda upp bilden pågrund att den är för stor. Vänligen ladda upp en kvadratisk bild som är max 1000x1000 px");
             }
             
         }

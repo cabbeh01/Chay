@@ -68,8 +68,8 @@
             pHeader2.Name = "pHeader2";
             pHeader2.Size = new System.Drawing.Size(392, 63);
             pHeader2.TabIndex = 9;
-            pHeader2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseDown);
-            pHeader2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader2_MouseMove);
+            pHeader2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader2_MouseDown);
+            pHeader2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader2_MouseMove);
             // 
             // lblProfil
             // 
@@ -95,7 +95,7 @@
             this.btnUpload.TabIndex = 18;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = false;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            this.btnUpload.Click += new System.EventHandler(this.BtnUpload_Click);
             // 
             // panel2
             // 
@@ -139,7 +139,7 @@
             this.btnCancleProf.TabIndex = 23;
             this.btnCancleProf.Text = "Avbryt";
             this.btnCancleProf.UseVisualStyleBackColor = false;
-            this.btnCancleProf.Click += new System.EventHandler(this.btnCancleProf_Click);
+            this.btnCancleProf.Click += new System.EventHandler(this.BtnCancleProf_Click);
             // 
             // btnSaveProf
             // 
@@ -154,7 +154,7 @@
             this.btnSaveProf.TabIndex = 24;
             this.btnSaveProf.Text = "Spara";
             this.btnSaveProf.UseVisualStyleBackColor = false;
-            this.btnSaveProf.Click += new System.EventHandler(this.btnSaveProf_Click);
+            this.btnSaveProf.Click += new System.EventHandler(this.BtnSaveProf_Click);
             // 
             // dlgOpenImage
             // 
@@ -174,7 +174,7 @@
             this.btnLogout.TabIndex = 26;
             this.btnLogout.Text = "Logga ut";
             this.btnLogout.UseVisualStyleBackColor = false;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // rpbxImage
             // 

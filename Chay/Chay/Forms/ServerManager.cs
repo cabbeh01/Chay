@@ -74,7 +74,7 @@ namespace Chay.Forms
         /// <summary>
         /// Flyttar fönstret till den position som musen rör sig till
         /// </summary>
-        private void pHeader_MouseMove(object sender, MouseEventArgs e)
+        private void PHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -87,7 +87,7 @@ namespace Chay.Forms
         /// <summary>
         /// Musposition lagras när användaren klickar med musknappen
         /// </summary>
-        private void pHeader_MouseDown(object sender, MouseEventArgs e)
+        private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
@@ -107,7 +107,7 @@ namespace Chay.Forms
                     try
                     {
                         //Kollar så att porten som matas in är en giltlig port
-                        if(int.Parse(tbxPort.Text) > 0 && int.Parse(tbxPort.Text) < 65536) 
+                        if(ushort.Parse(tbxPort.Text) > 0 && ushort.Parse(tbxPort.Text) < 65535) 
                         {
                             //Skulle användaren inte ha en lista på databasen så skapas den nu i alla fall
                             if(_us.Servers == null)
@@ -116,7 +116,7 @@ namespace Chay.Forms
                             }
 
                             //Skapa ett temporärt serverobjekt
-                            Server temp = new Server(tbxServername.Text, ip, int.Parse(tbxPort.Text));
+                            Server temp = new Server(tbxServername.Text, ip, ushort.Parse(tbxPort.Text));
 
                             //Lägger till ObjectID
                             temp.Id = _db.GenID();
@@ -230,7 +230,7 @@ namespace Chay.Forms
         /// <summary>
         /// Sparar knappen klickas på
         /// </summary>
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             UpdateServer();
         }
@@ -238,7 +238,7 @@ namespace Chay.Forms
         /// <summary>
         /// Lägg till server knappen klickas på
         /// </summary>
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             lbxOut.Items.Add(_def);
             btnRemove.Enabled = true;
@@ -247,7 +247,7 @@ namespace Chay.Forms
         /// <summary>
         /// Ta bort server knappen klickas på
         /// </summary>
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void BtnRemove_Click(object sender, EventArgs e)
         {
             RemoveServer((Server)lbxOut.SelectedItem);
             ClearTextboxes();
@@ -266,7 +266,7 @@ namespace Chay.Forms
         /// <summary>
         /// Väljer vald server om det valda värdet skulle ändra sig
         /// </summary>
-        private void lbxOut_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbxOut_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadPickedServer();
         }
@@ -305,7 +305,7 @@ namespace Chay.Forms
         /// <summary>
         /// Flyttar upp den valda servern ett steg
         /// </summary>
-        private void btnServerUp_Click(object sender, EventArgs e)
+        private void BtnServerUp_Click(object sender, EventArgs e)
         {
             try
             {
@@ -332,7 +332,7 @@ namespace Chay.Forms
         /// <summary>
         /// Flyttar ned den valda servern ett steg
         /// </summary>
-        private void btnServerDown_Click(object sender, EventArgs e)
+        private void BtnServerDown_Click(object sender, EventArgs e)
         {
             try
             {
@@ -359,7 +359,7 @@ namespace Chay.Forms
         /// <summary>
         /// Stänger fönstret
         /// </summary>
-        private async void btnExit_Click(object sender, EventArgs e)
+        private async void BtnExit_Click(object sender, EventArgs e)
         {
             try
             {

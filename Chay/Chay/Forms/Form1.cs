@@ -111,7 +111,7 @@ namespace Chay
             }
             catch
             {
-                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+                MessageBox.Show("Det går inte ladda in resuerser");
             }
             
         }
@@ -170,7 +170,7 @@ namespace Chay
         /// <summary>
         /// Flyttar fönstret till den position som musen rör sig till
         /// </summary>
-        private void pHeader_MouseMove(object sender, MouseEventArgs e)
+        private void PHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -303,7 +303,7 @@ namespace Chay
         /// <summary>
         /// Profilknappen klickas på
         /// </summary>
-        private void btnProfile_Click(object sender, EventArgs e)
+        private void BtnProfile_Click(object sender, EventArgs e)
         {
             try
             {
@@ -397,7 +397,7 @@ namespace Chay
         /// <summary>
         /// När skicka knappen klickas på
         /// </summary>
-        private void btnSend_Click(object sender, EventArgs e)
+        private void BtnSend_Click(object sender, EventArgs e)
         {
             try
             {
@@ -427,9 +427,9 @@ namespace Chay
                 //Uppdaterar strukturen för hur objektet meddelande ska tas in i ConversationCTRL
                 UpdateMessboard();
             }
-            catch (Exception err)
+            catch
             {
-                MessageBox.Show(err.ToString());
+                MessageBox.Show("Det går inte skicka meddelande, vänligen kontrollera din nätverksanslutning");
             }
         }
 
@@ -437,7 +437,7 @@ namespace Chay
         /// <summary>
         /// Uppkopplar mot den server som användaren väljer att dubbelklicka på
         /// </summary>
-        private void twServers_DoubleClick(object sender, EventArgs e)
+        private void TwServers_DoubleClick(object sender, EventArgs e)
         {
             try
             {
@@ -940,7 +940,7 @@ namespace Chay
         /// <summary>
         /// Visar antalet bokstäver som man kan skriva
         /// </summary>
-        private void tbxSend_TextChanged(object sender, EventArgs e)
+        private void TbxSend_TextChanged(object sender, EventArgs e)
         {
             lblRemainingWords.Text = (512 - (int)tbxSend.Text.Count<Char>()).ToString();
         }
@@ -948,7 +948,7 @@ namespace Chay
         /// <summary>
         /// Klickar på maximera
         /// </summary>
-        private void btnMaxMize_Click(object sender, EventArgs e)
+        private void BtnMaxMize_Click(object sender, EventArgs e)
         {
             if (!_isMaxi)
             {
@@ -965,7 +965,7 @@ namespace Chay
         /// <summary>
         /// Klickar på minimera
         /// </summary>
-        private void btnMiniMize_Click(object sender, EventArgs e)
+        private void BtnMiniMize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
@@ -973,7 +973,7 @@ namespace Chay
         /// <summary>
         /// Klickar på avsluta
         /// </summary>
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

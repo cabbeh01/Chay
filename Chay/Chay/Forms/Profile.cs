@@ -1,4 +1,5 @@
-﻿using MongoDBLogin;
+﻿using MongoDB.Driver.Core.Events;
+using MongoDBLogin;
 using System;
 using System.Drawing;
 using System.IO;
@@ -63,7 +64,7 @@ namespace Chay.Forms
         /// <summary>
         /// Flyttar fönstret till den position som musen rör sig till
         /// </summary>
-        private void pHeader2_MouseMove(object sender, MouseEventArgs e)
+        private void PHeader2_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -76,7 +77,7 @@ namespace Chay.Forms
         /// <summary>
         /// Musposition lagras när användaren klickar med musknappen
         /// </summary>
-        private void pHeader2_MouseDown(object sender, MouseEventArgs e)
+        private void PHeader2_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
@@ -84,11 +85,11 @@ namespace Chay.Forms
         /// <summary>
         /// 
         /// </summary>
-        private void btnUpload_Click(object sender, EventArgs e)
+        private void BtnUpload_Click(object sender, EventArgs e)
         {
             try
             {
-                dlgOpenImage.Filter = "PNG files (*.png)|*.png|JPEG/JPG files (*.jpg)|*.jpg";
+                dlgOpenImage.Filter = "JPEG/JPG files (*.jpg)|*.jpg";
 
                 //Öppnar openFile dialog
                 DialogResult result = dlgOpenImage.ShowDialog();
@@ -122,7 +123,7 @@ namespace Chay.Forms
                     }
                     else
                     {
-                        MessageBox.Show("Bilden är för stor eller i fel format");
+                        MessageBox.Show("Går inte ladda upp bilden pågrund att den är för stor. Vänligen ladda upp en kvadratisk bild som är max 1000x1000 px");
                     }
 
                     //Släpper använda resurser
@@ -207,6 +208,7 @@ namespace Chay.Forms
                 }
                 else
                 {
+                    
                     try
                     {
                         //Standardbild
@@ -230,7 +232,7 @@ namespace Chay.Forms
         /// <summary>
         /// Sparar ändringar som gjorts
         /// </summary>
-        private async void btnSaveProf_Click(object sender, EventArgs e)
+        private async void BtnSaveProf_Click(object sender, EventArgs e)
         {
             try
             {
@@ -250,7 +252,7 @@ namespace Chay.Forms
         /// <summary>
         /// Avbryter och sparar inga ändringar
         /// </summary>
-        private void btnCancleProf_Click(object sender, EventArgs e)
+        private void BtnCancleProf_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
@@ -258,7 +260,7 @@ namespace Chay.Forms
         /// <summary>
         /// Klickar på logga ut
         /// </summary>
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }

@@ -78,7 +78,7 @@
             this.btnExit.TabIndex = 9;
             this.btnExit.Text = "X";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // panel2
             // 
@@ -128,7 +128,7 @@
             this.tbxPassword.PasswordChar = '•';
             this.tbxPassword.Size = new System.Drawing.Size(159, 15);
             this.tbxPassword.TabIndex = 0;
-            this.tbxPassword.TextChanged += new System.EventHandler(this.tbxPassword_TextChanged);
+            this.tbxPassword.TextChanged += new System.EventHandler(this.TbxPassword_TextChanged);
             // 
             // lblPass
             // 
@@ -159,7 +159,7 @@
             this.tbxRepassword.PasswordChar = '•';
             this.tbxRepassword.Size = new System.Drawing.Size(159, 15);
             this.tbxRepassword.TabIndex = 0;
-            this.tbxRepassword.TextChanged += new System.EventHandler(this.tbxRepassword_TextChanged);
+            this.tbxRepassword.TextChanged += new System.EventHandler(this.TbxRepassword_TextChanged);
             // 
             // lblRegPassre
             // 
@@ -196,7 +196,7 @@
             this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = false;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.btnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
             // 
             // btnBack
             // 
@@ -211,7 +211,7 @@
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // lblShpass
             // 
@@ -232,7 +232,7 @@
             this.bCbxShowPass.Name = "bCbxShowPass";
             this.bCbxShowPass.Size = new System.Drawing.Size(20, 20);
             this.bCbxShowPass.TabIndex = 3;
-            this.bCbxShowPass.Click += new System.EventHandler(this.bCbxShowPass_Click);
+            this.bCbxShowPass.Click += new System.EventHandler(this.BCbxShowPass_Click);
             // 
             // Register
             // 

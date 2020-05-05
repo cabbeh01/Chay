@@ -63,7 +63,7 @@ namespace ChayServer
             {
                 //Låter användaren välja vilken port serverna ska starta på
                 Console.Write("Vänligen välj en port: ");
-                int port = int.Parse(Console.ReadLine());
+                ushort port = ushort.Parse(Console.ReadLine());
 
                 //Skapar en lyssanre
                 listener = new TcpListener(IPAddress.Any, port);

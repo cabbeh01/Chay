@@ -97,7 +97,7 @@
             this.btnCancle.TabIndex = 10;
             this.btnCancle.Text = "Avbryt";
             this.btnCancle.UseVisualStyleBackColor = false;
-            this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
+            this.btnCancle.Click += new System.EventHandler(this.BtnCancle_Click);
             // 
             // btnSave
             // 
@@ -112,7 +112,7 @@
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Spara";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // lblTimestamp
             // 

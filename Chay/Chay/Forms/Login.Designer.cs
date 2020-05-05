@@ -55,8 +55,8 @@
             pHeader.Name = "pHeader";
             pHeader.Size = new System.Drawing.Size(521, 63);
             pHeader.TabIndex = 7;
-            pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
-            pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
+            pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseMove);
             // 
             // btnExit
             // 
@@ -73,7 +73,7 @@
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "X";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // Logo
             // 
@@ -131,7 +131,7 @@
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // lblRegister
             // 

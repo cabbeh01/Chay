@@ -67,8 +67,8 @@
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(632, 63);
             this.pHeader.TabIndex = 2;
-            this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseDown);
-            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
+            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseMove);
             // 
             // btnExit
             // 
@@ -85,7 +85,7 @@
             this.btnExit.TabIndex = 19;
             this.btnExit.Text = "X";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // lblServerhanterare
             // 
@@ -107,7 +107,7 @@
             this.lbxOut.Name = "lbxOut";
             this.lbxOut.Size = new System.Drawing.Size(217, 274);
             this.lbxOut.TabIndex = 8;
-            this.lbxOut.SelectedIndexChanged += new System.EventHandler(this.lbxOut_SelectedIndexChanged);
+            this.lbxOut.SelectedIndexChanged += new System.EventHandler(this.LbxOut_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -123,7 +123,7 @@
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "+";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnRemove
             // 
@@ -139,7 +139,7 @@
             this.btnRemove.TabIndex = 10;
             this.btnRemove.Text = "-";
             this.btnRemove.UseVisualStyleBackColor = false;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
             // 
             // panel2
             // 
@@ -243,7 +243,7 @@
             this.btnSave.TabIndex = 17;
             this.btnSave.Text = "Spara";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // gbxPickServer
             // 
@@ -298,7 +298,7 @@
             this.btnServerUp.TabIndex = 12;
             this.btnServerUp.Text = "↑";
             this.btnServerUp.UseVisualStyleBackColor = false;
-            this.btnServerUp.Click += new System.EventHandler(this.btnServerUp_Click);
+            this.btnServerUp.Click += new System.EventHandler(this.BtnServerUp_Click);
             // 
             // btnServerDown
             // 
@@ -314,7 +314,7 @@
             this.btnServerDown.TabIndex = 11;
             this.btnServerDown.Text = "↓";
             this.btnServerDown.UseVisualStyleBackColor = false;
-            this.btnServerDown.Click += new System.EventHandler(this.btnServerDown_Click);
+            this.btnServerDown.Click += new System.EventHandler(this.BtnServerDown_Click);
             // 
             // ServerManager
             // 

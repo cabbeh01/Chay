@@ -84,7 +84,7 @@
             this.pHeader.Size = new System.Drawing.Size(822, 63);
             this.pHeader.TabIndex = 0;
             this.pHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseDown);
-            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pHeader_MouseMove);
+            this.pHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PHeader_MouseMove);
             // 
             // btnMiniMize
             // 
@@ -102,7 +102,7 @@
             this.btnMiniMize.TabIndex = 12;
             this.btnMiniMize.Text = "🗕";
             this.btnMiniMize.UseVisualStyleBackColor = false;
-            this.btnMiniMize.Click += new System.EventHandler(this.btnMiniMize_Click);
+            this.btnMiniMize.Click += new System.EventHandler(this.BtnMiniMize_Click);
             // 
             // btnMaxMize
             // 
@@ -120,7 +120,7 @@
             this.btnMaxMize.TabIndex = 11;
             this.btnMaxMize.Text = "🗖";
             this.btnMaxMize.UseVisualStyleBackColor = false;
-            this.btnMaxMize.Click += new System.EventHandler(this.btnMaxMize_Click);
+            this.btnMaxMize.Click += new System.EventHandler(this.BtnMaxMize_Click);
             // 
             // btnExit
             // 
@@ -137,7 +137,7 @@
             this.btnExit.TabIndex = 10;
             this.btnExit.Text = "X";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // lblUser
             // 
@@ -168,7 +168,7 @@
             this.btnProfile.TabIndex = 9;
             this.btnProfile.Text = "Profil";
             this.btnProfile.UseVisualStyleBackColor = false;
-            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
+            this.btnProfile.Click += new System.EventHandler(this.BtnProfile_Click);
             // 
             // btnSettings
             // 
@@ -243,7 +243,7 @@
             this.twServers.ShowRootLines = false;
             this.twServers.Size = new System.Drawing.Size(200, 402);
             this.twServers.TabIndex = 1;
-            this.twServers.DoubleClick += new System.EventHandler(this.twServers_DoubleClick);
+            this.twServers.DoubleClick += new System.EventHandler(this.TwServers_DoubleClick);
             // 
             // panel1
             // 
@@ -366,7 +366,7 @@
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "Skicka";
             this.btnSend.UseVisualStyleBackColor = false;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
             // tbxSend
             // 
@@ -379,7 +379,7 @@
             this.tbxSend.Name = "tbxSend";
             this.tbxSend.Size = new System.Drawing.Size(515, 74);
             this.tbxSend.TabIndex = 4;
-            this.tbxSend.TextChanged += new System.EventHandler(this.tbxSend_TextChanged);
+            this.tbxSend.TextChanged += new System.EventHandler(this.TbxSend_TextChanged);
             // 
             // panel4
             // 

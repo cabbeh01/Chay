@@ -29,7 +29,7 @@ namespace Chay
             }
             catch
             {
-                MessageBox.Show("Ett fel har uppstått kontakta utvecklaren");
+                MessageBox.Show("Går inte ladda in resurser");
             }
             
         }
@@ -37,7 +37,7 @@ namespace Chay
         /// <summary>
         /// Musposition lagras när användaren klickar med musknappen
         /// </summary>
-        private void pHeader_MouseDown(object sender, MouseEventArgs e)
+        private void PHeader_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseLocation = new Point(-e.X, -e.Y);
         }
@@ -45,7 +45,7 @@ namespace Chay
         /// <summary>
         /// Flyttar fönstret till den position som musen rör sig till
         /// </summary>
-        private void pHeader_MouseMove(object sender, MouseEventArgs e)
+        private void PHeader_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -84,7 +84,7 @@ namespace Chay
         /// <summary>
         /// Login knappen klickas på
         /// </summary>
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             try
             {
@@ -140,7 +140,7 @@ namespace Chay
         /// <summary>
         /// Klickar på avsluta
         /// </summary>
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

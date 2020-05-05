@@ -42,7 +42,7 @@
             this.pbxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxImage.TabIndex = 0;
             this.pbxImage.TabStop = false;
-            this.pbxImage.Click += new System.EventHandler(this.pbxImage_Click);
+            this.pbxImage.Click += new System.EventHandler(this.PbxImage_Click);
             // 
             // BigCheckbox
             // 

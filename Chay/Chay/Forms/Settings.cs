@@ -43,8 +43,8 @@ namespace Chay
                 InsertDataCombobox();
                 GraphicalComponents();
 
-                cbxChatColor.SelectedItem = c;
                 cbxTimeFormat.SelectedItem = tf;
+                cbxChatColor.SelectedItem = c;
             }
             catch
             {
@@ -115,6 +115,7 @@ namespace Chay
 
                 //Skriver inställningarna
                 writer.WriteLine(cbxChatColor.SelectedItem);
+
                 writer.WriteLine(cbxTimeFormat.SelectedItem);
 
                 //Släpper resurser
@@ -156,7 +157,7 @@ namespace Chay
         /// <summary>
         /// Klickar på spara knappen
         /// </summary>
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             SaveSettings();
         }
@@ -164,7 +165,7 @@ namespace Chay
         /// <summary>
         /// Avbryter
         /// </summary>
-        private void btnCancle_Click(object sender, EventArgs e)
+        private void BtnCancle_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -20,7 +20,7 @@ namespace Chay
         public IPAddress Ip { get; set; }
 
         /// <summary>Portnummer</summary>
-        public int Port { get; set; }
+        public ushort Port { get; set; }
 
         /// <summary>Namn</summary>
         public string Name { get; set; }
@@ -42,7 +42,7 @@ namespace Chay
         /// <param name="port">Portnummer</param>
         /// <param name="users">Användarlista</param>
         /// <param name="client">Klient</param>
-        public Server(IPAddress ip, int port, List<User> users, TcpClient client)
+        public Server(IPAddress ip, ushort port, List<User> users, TcpClient client)
         {
             this.Ip = ip;
             this.Port = port;
@@ -56,7 +56,7 @@ namespace Chay
         /// <param name="name">Namn</param>
         /// <param name="ip">Ip-address</param>
         /// <param name="port">Portnummer</param>
-        public Server(string name, IPAddress ip, int port)
+        public Server(string name, IPAddress ip, ushort port)
         {
             this.Ip = ip;
             this.Port = port;
@@ -67,7 +67,7 @@ namespace Chay
         /// Specialkontruktor
         /// </summary>
         /// <param name="port">Portnummer</param>
-        public Server(int port)
+        public Server(ushort port)
         {
             //this._ip = ip;
             this.Port = port;

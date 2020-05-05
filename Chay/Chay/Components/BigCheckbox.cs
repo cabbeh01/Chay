@@ -73,7 +73,7 @@ namespace Chay
         /// <summary>
         /// Klickas bilden på ska statusen förändras
         /// </summary>
-        private void pbxImage_Click(object sender, EventArgs e)
+        private void PbxImage_Click(object sender, EventArgs e)
         {
             Switch();
         }
