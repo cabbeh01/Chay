@@ -22,7 +22,7 @@ namespace MongoDBLogin
             try
             {
                 //Skapar en uppkoppling med mongoDB genom secret key osv..
-                var client = new MongoClient("mongodb+srv://dbAdmin:Hej123@cluster-v0iz1.mongodb.net/test?retryWrites=true&w=majority");
+                var client = new MongoClient("mongodb+srv://...");
                 _db = client.GetDatabase(database);
             }
             catch
